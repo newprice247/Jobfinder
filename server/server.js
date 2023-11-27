@@ -11,11 +11,10 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+const router = require('./routes');
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-});
+app.use('/', router);
+
 
 db.once('open', () => {
   app.listen(PORT, () => {
