@@ -8,7 +8,6 @@ export default function Homepage() {
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        // Fetch data from MongoDB using your API utility
         search.fetchDataFromMongoDB()
             .then((data) => setCards(data))
             .catch((error) => console.error("Error fetching data:", error));
