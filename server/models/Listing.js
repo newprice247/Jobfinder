@@ -33,8 +33,10 @@ const listingSchema = new Schema(
             maxLength: 280
         },
         salary: {
-            type: Number,
-            required: 'A valid salary is required', 
+            type: String,
+            required: 'A valid salary is required',
+            minLength: 1,
+            maxLength: 280
         },
         company: {
             type: String,
