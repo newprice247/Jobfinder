@@ -1,27 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const {
+    getUsers,
+    getSingleUser,
+    createUser,
+    login
+} = require('../../controllers/userControllers');
 
-const User = require('../../models/User');
+const { authMiddleware } = require('../../utils/auth');
 
 
 // GET  /api/users
 
-router.get('/', async (req, res) => {
-    const users = await User.find({});
-    res.json(users);
-    });
+router.route('/').get(getUsers).post(createUser);
 
-// GET  /api/users/:id
+router.route('/:id').get(getSingleUser);
 
-router.get('/:id', async (req, res) => {
-    const user = await User.findById(req.params.id);
-    res.json(user);
-    });
+router.route('/login').post(login);
 
-//POST
-router.post('/', async (req, res) => {
-    const newUser = await User.create(req.body);
-    res.json(newUser);
-});
+
+
 
 module.exports = router;

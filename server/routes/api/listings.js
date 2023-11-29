@@ -1,19 +1,17 @@
 const express = require("express");
 const router = express.Router()
+const {
+    getListing,
+    getSingleListing,
+    createListing,
+    deleteListing,
+    updateListing
 
-const Listing = require('../../models/Listing')
+} = require('../../controllers/listingControllers');
 
 // GET  /api/profile
-router.get("/", async (req, res) => {
-    const listings = await Listing.find({})
-    res.json(listings)
-})
+router.route('/').get(getListing).post(createListing);
 
-
-//POST 
-router.post("/", async (req, res) => {
-    const newListing = await Listing.create(req.body);
-    res.json(newListing)
-})
+router.route('/:id').get(getSingleListing).delete(deleteListing).put(updateListing);
 
 module.exports = router;
