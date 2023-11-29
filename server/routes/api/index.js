@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router()
-const cardRouter = require('./cards.js')
+const listingsRouter = require('./listings.js')
 
 // All profile routes..
-router.use('/cards', cardRouter)
+router.use('/listings', listingsRouter)
 
 module.exports = router;

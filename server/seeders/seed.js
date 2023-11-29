@@ -1,49 +1,114 @@
 require('dotenv').config();
 const connection = require('../config/connection');
-const Card = require('../models/Card');
+const User = require('../models/User');
+const Listing = require('../models/Listing');
 
-const cards = [
+const users = [
     {
-        title: 'Card 1',
-        subtitle: "I'm being pulled from the cloud!",
-        text: 'This is all being mapped over with a .map() function!',
-        link: 'https://project3mernstack-c25ab63e2028.herokuapp.com/',
-        linkName: 'Heroku Deployment'
+        name: 'John Smith',
+        email: 'john@email.com',
+        password: 'password',
+        phone: '555-555-5555',
+        listings: [],
+        savedListings: [],
     },
     {
-        title: 'Card 2',
-        subtitle: "I'm being pulled from the cloud too!",
-        text: 'This is all being mapped over with a .map() function!',
-        link: 'https://github.com/newprice247/Project3',
-        linkName: 'GitHub Repository'
+        name: 'Jane Doe',
+        email: 'jane@email.com',
+        password: 'password',
+        phone: '555-555-5555',
+        listings: [],
+        savedListings: [],
+    },
+]
+
+const listings = [
+    {
+        title: 'Full Stack Developer',
+        description: 'Full Stack Developer needed for a full-time position. Must have at least 2 years of experience.',
+        requirements: 'Must have at least 2 years of experience.',
+        location: 'Remote',
+        benefits: 'Health, Dental, Vision, 401k',
+        salary: 100000,
+        company: 'ABC Company',
+        contact: '',
+        website: 'https://www.abc.com',
     },
     {
-        title: 'Card 3',
-        subtitle: "I'm being pulled from the cloud as well!",
-        text: 'This is all being mapped over with a .map() function!',
-        link: 'https://www.google.com/',
-        linkName: 'Google'
-    }
-];
+        title: 'Front End Developer',
+        description: 'Front End Developer needed for a full-time position. Must have at least 2 years of experience.',
+        requirements: 'Must have at least 2 years of experience.',
+        location: 'Remote',
+        benefits: 'Health, Dental, Vision, 401k',
+        salary: 100000,
+        company: 'ABC Company',
+        contact: '',
+        website: 'https://www.abc.com',
+    },
+    {
+        title: 'Back End Developer',
+        description: 'Back End Developer needed for a full-time position. Must have at least 2 years of experience.',
+        requirements: 'Must have at least 2 years of experience.',
+        location: 'Remote',
+        benefits: 'Health, Dental, Vision, 401k',
+        salary: 100000,
+        company: 'ABC Company',
+        contact: '',
+        website: 'https://www.abc.com',
+    },
+    {
+        title: 'Full Stack Developer',
+        description: 'Full Stack Developer needed for a full-time position. Must have at least 2 years of experience.',
+        requirements: 'Must have at least 2 years of experience.',
+        location: 'Remote',
+        benefits: 'Health, Dental, Vision, 401k',
+        salary: 100000,
+        company: 'ABC Company',
+        contact: '',
+        website: 'https://www.abc.com',
+    },
+]
 
-// Connects to the database, deletes the users and thoughts collections if they exist already, creates the users and thoughts collections, and loops through each thought and pushes the thought's _id to the appropriate user's thoughts array field
 connection.once('open', async () => {
     console.log('connected');
 
-    // Deletes the users and thoughts collections if they exist already
-    let currentCards = await Card.find({}).lean();
-    if (currentCards.length > 0) {
-        await Card.collection.drop();
+    let currentUsers = await User.find({}).lean();
+    if (currentUsers.length > 0) {
+        await User.collection.drop();
     }
-    
+    let currentListings = await Listing.find({}).lean();
+    if (currentListings.length > 0) {
+        await Listing.collection.drop();
+    }
 
-    // Creates the users and thoughts collections
-    await Card.create(cards);
-
-    // Displays the final table for the user collection
-    let finalCards = await Card.find({}).lean();
-    console.log(finalCards);
+    await User.create(users);
     
+    let listingContacts = await User.find({}).lean();
+    for (let i = 0; i < listings.length; i++) {
+
+        listings[i].contact = listingContacts[Math.floor(Math.random() * listingContacts.length)]._id;
+
+    }
+
+
+    await Listing.create(listings);
+
+    let updatedUsers = await User.find({}).lean();
+    for (let i = 0; i < updatedUsers.length; i++) {
+        let user = updatedUsers[i];
+        let userListing = await Listing.find({ contact: user._id }).lean();
+        user.listings = userListing.map(listing => listing._id);
+        await User.findByIdAndUpdate(user._id, user);
+    }
+
+
+
+    let finalUsers = await User.find({}).lean();
+    let finalListings = await Listing.find({}).lean();
+    console.log(finalUsers);
+    console.log(finalListings);
+    console.log('seeded successfully');
+
     // Exits the process
     process.exit(0);
 });

@@ -7,7 +7,8 @@ const apiURL = process.env.NODE_ENV === 'production' ? '/api' : `http://localhos
 const search = {
     fetchDataFromMongoDB: async () => {
         try {
-            const response = await axios.get(`${apiURL}/cards`);
+            const response = await axios.get(`${apiURL}/listings`);
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
