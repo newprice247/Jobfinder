@@ -1,4 +1,4 @@
-// utils/API.js
+
 import axios from 'axios';
 
 const PORT = process.env.PORT;
@@ -12,7 +12,7 @@ const search = {
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
-            throw error; // Propagate the error to the caller
+            throw error;
         }
     },
 };

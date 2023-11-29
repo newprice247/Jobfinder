@@ -7,7 +7,6 @@ export default function Homepage() {
     const [listings, setListings] = useState([]);
 
     useEffect(() => {
-        // Fetch data from MongoDB using your API utility
         search.fetchDataFromMongoDB()
             .then((data) => setListings(data))
             .catch((error) => console.error("Error fetching data:", error));
