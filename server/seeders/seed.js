@@ -2,10 +2,12 @@ require('dotenv').config();
 const connection = require('../config/connection');
 const User = require('../models/User');
 const Listing = require('../models/Listing');
+const bcrypt = require('bcrypt');
 
 const users = [
     {
         name: 'John Smith',
+        username: 'johnsmith',
         email: 'john@email.com',
         password: 'password',
         phone: '555-555-5555',
@@ -14,6 +16,7 @@ const users = [
       },
       {
         name: 'Alice Johnson',
+        username: 'alicejohnson',
         email: 'alice@email.com',
         password: 'securepass',
         phone: '555-123-4567',
@@ -22,6 +25,7 @@ const users = [
       },
       {
         name: 'Robert Davis',
+        username: 'robertdavis',
         email: 'robert@email.com',
         password: 'pass123',
         phone: '555-789-0123',
@@ -30,6 +34,7 @@ const users = [
       },
       {
         name: 'Emily White',
+        username: 'emilywhite',
         email: 'emily@email.com',
         password: 'mypassword',
         phone: '555-456-7890',
@@ -38,6 +43,7 @@ const users = [
       },
       {
         name: 'Daniel Brown',
+        username: 'danielbrown',
         email: 'daniel@email.com',
         password: 'danny123',
         phone: '555-987-6543',
@@ -46,6 +52,7 @@ const users = [
       },
       {
         name: 'Elena Martinez',
+        username: 'elenamartinez',
         email: 'elena@email.com',
         password: 'elena123',
         phone: '555-111-2222',
@@ -54,6 +61,7 @@ const users = [
       },
       {
         name: 'Samuel Turner',
+        username: 'samuelturner',
         email: 'sam@email.com',
         password: 'sammy456',
         phone: '555-333-4444',
@@ -62,6 +70,7 @@ const users = [
       },
       {
         name: 'Megan Williams',
+        username: 'meganwilliams',
         email: 'megan@email.com',
         password: 'meganpass',
         phone: '555-555-6666',
@@ -70,12 +79,14 @@ const users = [
       },
       {
         name: 'David Miller',
+        username: 'davidmiller',
         email: 'david@email.com',
         password: 'davidpass123',
         phone: '555-777-8888',
         listings: [],
         savedListings: [],
       },
+      
 ]
 
 const listings = [

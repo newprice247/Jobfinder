@@ -8,14 +8,28 @@ module.exports = {
         const users = await User.find({});
         res.json(users);
     },
-    async getSingleUser({ user = null, params }, res) {
+    async getMe({ user = null, params }, res) {
         const foundUser = await User.findOne({
             $or: [{ _id: user ? user._id : params.id }, { username: params.username }]
-        });
+        }
+        );
         if (!foundUser) {
             return res.status(400).json({ message: 'Cannot find a user with this id!' });
         }
         res.json(foundUser);
+    },
+    async getSingleUser(req, res) {
+        try {
+            const user = await User.findOne({ _id: req.params.userId })
+            if (user) {
+                res.json(user)
+            } else {
+                return res.json({ message: 'Sorry no user found with that ID' })
+            }
+        }
+        catch (err) {
+            res.json(err)
+        }
     },
     async createUser({ body }, res) {
         const user = await User.create(body);
