@@ -5,16 +5,17 @@ export default function UserProfile() {
         <div
         className=""
         >
-            <div 
-            className="w-100 h-25 bg-gray-200"
-            >
-                <h1>nothing</h1>
-            </div>
             <h1
-            className="text-center mt-5"
+            className="text-center"
+            style={{marginTop: "5rem"}}
             >
                 User Profile
             </h1>
+            <p
+            className="text-center mt-5"
+            >
+                Coming Soon!!
+            </p>
         </div>
     );
     }

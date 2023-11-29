@@ -3,6 +3,7 @@ const router = express.Router();
 
 const User = require('../../models/User');
 
+
 // GET  /api/users
 
 router.get('/', async (req, res) => {
