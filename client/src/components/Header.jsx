@@ -6,14 +6,14 @@ import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary fixed-top">
+    <Navbar expand="lg" className="bg-dark fixed-top">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home" className='text-light'>Jobfinder</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/" className="nav-link">Home</Link>
-            <Link to="/user-profile" className="nav-link">User Profile</Link>
+            <Link to="/" className="nav-link text-light">Home</Link>
+            <Link to="/user-profile" className="nav-link text-light">User Profile</Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
