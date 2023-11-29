@@ -11,12 +11,12 @@ function JobListing(props) {
             <h3>Requirements:</h3>
             <p>{props.requirements}</p>
             <h3>Salary and Benefits:</h3>
-            <p>$ {props.salary}</p>
+            <p>{props.salary}</p>
             <p>{props.benefits}</p>
             <h3>Contact:</h3>
-            <p>{props.email}</p>
-            <p>{props.phone}</p>
-            <a href={props.website}>{props.website}</a>
+            <a href={`mailto:${props.email}`}>{props.email}</a><br />
+            <a href={`tel:${props.phone}`}>{props.phone}</a><br />
+            <a href={props.website} target='_blank'>{props.website}</a>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

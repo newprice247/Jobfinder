@@ -7,8 +7,6 @@ const Listing = require('../../models/Listing')
 router.get("/", async (req, res) => {
     const listings = await Listing.find({})
     res.json(listings)
-
-    console.log(listings)
 })
 
 

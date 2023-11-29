@@ -23,6 +23,7 @@ export default function Homepage() {
         <div>
             {listings.map((listing) => (
                 <JobListing
+
                     key={listing._id}
                     title={listing.title}
                     location={listing.location}

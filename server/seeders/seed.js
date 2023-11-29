@@ -88,7 +88,7 @@ const listings = [
         salary: '$100,000 - $120,000 yearly',
         company: 'ABC Company',
         contact: '',
-        website: 'https://www.abc.com',
+        website: 'https://github.com/newprice247/Jobfinder',
       },
       {
         title: 'Construction Project Manager',
@@ -99,7 +99,7 @@ const listings = [
         salary: '$90,000 - $110,000 yearly',
         company: 'XYZ Construction',
         contact: '',
-        website: 'https://www.xyzconstruction.com',
+        website: 'https://github.com/newprice247/Jobfinder',
       },
       {
         title: 'Retail Sales Associate',
@@ -110,7 +110,7 @@ const listings = [
         salary: '$30,000 - $40,000 yearly',
         company: 'Retail Hub',
         contact: '',
-        website: 'https://www.retailhub.com',
+        website: 'https://github.com/newprice247/Jobfinder',
       },
       {
         title: 'Data Scientist',
@@ -121,7 +121,7 @@ const listings = [
         salary: '$120,000 - $140,000 yearly',
         company: 'DataTech Innovations',
         contact: '',
-        website: 'https://www.datatechinnovations.com',
+        website: 'https://github.com/newprice247/Jobfinder',
       },
       {
         title: 'Marketing Coordinator',
@@ -132,7 +132,7 @@ const listings = [
         salary: '$50,000 - $60,000 yearly',
         company: 'BrandBuilders Inc.',
         contact: '',
-        website: 'https://www.brandbuildersinc.com',
+        website: 'https://github.com/newprice247/Jobfinder',
       },
       {
         title: 'Registered Nurse',
@@ -143,7 +143,7 @@ const listings = [
         salary: '$70,000 - $90,000 yearly',
         company: 'City General Healthcare',
         contact: '',
-        website: 'https://www.citygeneralhealthcare.com',
+        website: 'https://github.com/newprice247/Jobfinder',
       },
       {
         title: 'Graphic Designer',
@@ -154,7 +154,7 @@ const listings = [
         salary: '$55,000 - $70,000 yearly',
         company: 'DesignCraft Studios',
         contact: '',
-        website: 'https://www.designcraftstudios.com',
+        website: 'https://github.com/newprice247/Jobfinder',
       },
       {
         title: 'Customer Support Specialist',
@@ -165,7 +165,7 @@ const listings = [
         salary: '$40,000 - $50,000 yearly',
         company: 'ServicePro Solutions',
         contact: '',
-        website: 'https://www.serviceprosolutions.com',
+        website: 'https://github.com/newprice247/Jobfinder',
       },
       {
         title: 'Electrical Engineer',
@@ -176,7 +176,7 @@ const listings = [
         salary: '$80,000 - $100,000 yearly',
         company: 'Tech Innovations Inc.',
         contact: '',
-        website: 'https://www.techinnovationsinc.com',
+        website: 'https://github.com/newprice247/Jobfinder',
       },
 ]
 
