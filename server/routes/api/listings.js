@@ -12,6 +12,6 @@ const {
 // GET  /api/profile
 router.route('/').get(getListing).post(createListing);
 
-router.route('/:id').get(getSingleListing).delete(deleteListing).put(updateListing);
+router.route('/:listingId').get(getSingleListing).delete(deleteListing).put(updateListing);
 
 module.exports = router;

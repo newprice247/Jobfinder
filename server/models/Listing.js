@@ -46,7 +46,7 @@ const listingSchema = new Schema(
         },
         contact: {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'user'
         },
         website: {
             type: String,

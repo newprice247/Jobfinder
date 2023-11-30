@@ -36,13 +36,13 @@ const userSchema = new Schema(
         listings: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Listing'
+                ref: 'listing'
             }
         ],
         savedListings: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Listing'
+                ref: 'listing'
             }
         ],
     },
@@ -64,6 +64,7 @@ userSchema.pre('save', async function (next) {
 
     next();
 });
+
 
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);

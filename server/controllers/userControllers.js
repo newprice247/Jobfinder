@@ -1,11 +1,13 @@
 
-const { User } = require('../models'); 
+
+const { User } = require('../models');
+const { Listing } = require('../models');
 
 const { signToken } = require('../utils/auth');
 
 module.exports = {
     async getUsers(req, res) {
-        const users = await User.find({});
+        const users = await User.find()
         res.json(users);
     },
     async getMe({ user = null, params }, res) {
@@ -20,7 +22,7 @@ module.exports = {
     },
     async getSingleUser(req, res) {
         try {
-            const user = await User.findOne({ _id: req.params.userId })
+            const user = await User.findOne({ _id: req.params.userId } ).populate('listings')
             if (user) {
                 res.json(user)
             } else {

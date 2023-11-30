@@ -2,17 +2,21 @@ const { Listing } = require('../models/');
 
 module.exports = {
     async getListing(req, res) {
-        const listings = await Listing.find({});
+        const listings = await Listing.find({})
         res.json(listings);
     },
-    async getSingleListing({ user = null, params }, res) {
-        const foundListing = await Listing.findOne({
-            $or: [{ _id: user ? user._id : params.id }, { username: params.username }]
-        });
-        if (!foundListing) {
-            return res.status(400).json({ message: 'Cannot find a listing with this id!' });
+    async getSingleListing(req, res) {
+        try {
+            const listing = await Listing.findOne({ _id: req.params.listingId }).populate('contact')
+            if (listing) {
+                res.json(listing)
+            } else {
+                return res.json({ message: 'Sorry no listing found with that ID' })
+            }
         }
-        res.json(foundListing);
+        catch (err) {
+            res.json(err)
+        }
     },
     async createListing({ body }, res) {
         const listing = await Listing.create(body);
