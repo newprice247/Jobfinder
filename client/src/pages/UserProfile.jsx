@@ -9,7 +9,7 @@ export default function UserProfile() {
             className="text-center"
             style={{marginTop: "5rem"}}
             >
-                User Profile
+                User Profiles
             </h1>
             <p
             className="text-center mt-5"
