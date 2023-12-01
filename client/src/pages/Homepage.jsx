@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import JobListing from "../components/JobListing";
 import search from "../../utils/API";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 
 export default function Homepage() {
@@ -22,29 +21,6 @@ export default function Homepage() {
     return (
         <>
             <div>
-                
-                <Container 
-                fluid
-                >
-                    <Row
-                    style={{marginTop: "5rem"}}
-                    >
-                        <Form className="d-flex mb-3">
-                            <Form.Control
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="outline-success">Search</Button>
-                        </Form>
-                    </Row>
-                    <Row>
-
-                    </Row>
-                    <Row
-                        className="flex "
-                    >
                             {listings.map((listing) => (
                                 <JobListing
 
@@ -52,7 +28,7 @@ export default function Homepage() {
                                     title={listing.title}
                                     location={listing.location}
                                     description={listing.description}
-                                    requirements={listing.requirements}
+                                    // requirements={listing.requirements}
                                     salary={listing.salary}
                                     benefits={listing.benefits}
                                     email={
@@ -70,15 +46,19 @@ export default function Homepage() {
                                             }
                                             return null;
                                         })
-                                    }
+                                     }
                                     website={listing.website}
                                 />
                             ))}
-                    </Row>
-
-                </Container>
-                {listings.length === 0 && <h2>No results found</h2>}
             </div>
         </>
     );
+
+    return (
+        <>
+            
+            <JobListing />
+
+        </>
+    )
 }
