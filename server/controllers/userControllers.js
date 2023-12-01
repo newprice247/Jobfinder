@@ -1,5 +1,3 @@
-
-
 const { User } = require('../models');
 const { Listing } = require('../models');
 
