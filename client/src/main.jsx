@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
 import './assets/styles/index.css'
 import { ThemeProvider } from "@material-tailwind/react";
+import "tw-elements-react/dist/css/tw-elements-react.min.css";
 
 const router = createBrowserRouter([
   {

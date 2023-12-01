@@ -8,7 +8,10 @@ import {
  
 export default function RegisterPage() {
   return (
-     <Card color="transparent" shadow={false}>
+    <div
+    className="flex items-center justify-center p-6 bg-gray-50"
+    >
+      <Card color="transparent" shadow={false}>
       <Typography variant="h4" color="blue-gray">
         Sign Up
       </Typography>
@@ -81,5 +84,7 @@ export default function RegisterPage() {
         </Typography>
       </form>
     </Card>
+     </div>
+     
   );
 }

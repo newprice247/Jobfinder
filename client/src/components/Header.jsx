@@ -1,28 +1,3 @@
-// import Container from 'react-bootstrap/Container';
-// import Nav from 'react-bootstrap/Nav';
-// import Navbar from 'react-bootstrap/Navbar';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
-
-
-// export default function Header() {
-//   return (
-//     <Navbar expand="lg" className="bg-dark fixed-top">
-//       <Container>
-//         <Navbar.Brand href="#home" className='text-light'>Jobfinder</Navbar.Brand>
-//         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
-
-//       </Container>
-//       <Navbar.Collapse id="basic-navbar-nav">
-//           <Nav className="me-auto">
-//             <Link to="/" className="nav-link text-light">Home</Link>
-//             <Link to="/user-profile" className="nav-link text-light">User Profile</Link>
-//             <Link to="/login" className="nav-link text-light">Login</Link>
-//           </Nav>
-//         </Navbar.Collapse>
-//     </Navbar>
-//   );
-// }
 
 import React from "react";
 import {
@@ -86,6 +61,10 @@ export default function StickyNavbar() {
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-myColor-2">
         <div className="flex items-center justify-between text-blue-gray-900">
+          <Link
+            to={'/'}
+            className="text-lg"
+          >
           <Typography
             as="a"
             href="#"
@@ -93,6 +72,7 @@ export default function StickyNavbar() {
           >
             Material Tailwind
           </Typography>
+          </Link>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
