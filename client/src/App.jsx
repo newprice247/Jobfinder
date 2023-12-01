@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
-import './App.css'
+import './assets/styles/index.css'
 
 import  Header  from './components/Header'
 import Footer from './components/Footer'

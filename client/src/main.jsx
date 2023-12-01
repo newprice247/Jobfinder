@@ -8,7 +8,7 @@ import UserProfile from './pages/UserProfile.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
-import './index.css'
+import './assets/styles/index.css'
 
 
 const router = createBrowserRouter([
