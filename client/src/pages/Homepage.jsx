@@ -28,9 +28,10 @@ export default function Homepage() {
                                     title={listing.title}
                                     location={listing.location}
                                     description={listing.description}
-                                    // requirements={listing.requirements}
+                                    requirements={listing.requirements}
                                     salary={listing.salary}
                                     benefits={listing.benefits}
+                                    company={listing.company}
                                     email={
                                         listingContact.map((contact) => {
                                             if (listing.contact === contact._id) {
@@ -53,12 +54,4 @@ export default function Homepage() {
             </div>
         </>
     );
-
-    return (
-        <>
-            
-            <JobListing />
-
-        </>
-    )
 }
