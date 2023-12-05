@@ -20,10 +20,6 @@ export default function StickyNavbar() {
       () => window.innerWidth >= 960 && setOpenNav(false),
     );
   }, []);
-function Header() {
- 
-      return <img src={client/src/assets/images/logo.png} alt="logo" />;
-      }
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -61,6 +57,10 @@ function Header() {
 
     </ul>
   );
+  function Header() {
+ 
+    return <img src={client/src/assets/images/logo.png} alt="logo" />;
+    }
 
   return (
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
@@ -75,8 +75,7 @@ function Header() {
             href="#"
             className="ml-4 cursor-pointer py-1.5 font-medium"
           >
-            <img src= "client/src/assets/images/logo.png"></img>
-            
+           logo
           </Typography>
           </Link>
           <div className="flex items-center gap-4">
