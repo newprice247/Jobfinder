@@ -57,7 +57,7 @@ export default function StickyNavbar() {
     </ul>
   );
   function header (){
-    <img src="client/src/assets/images/logo.jpg" alt="logo" />
+    return <img src="client/src/assets/images/logo.jpg" alt="logo" />
   }
   return (
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
