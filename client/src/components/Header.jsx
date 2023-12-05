@@ -1,6 +1,6 @@
 
 import React from "react";
-import logo from '.../images/logo.jpg';
+import logo from 'client\src\assets\images\logo.png'
 import {
   Navbar,
   MobileNav,
@@ -20,6 +20,12 @@ export default function StickyNavbar() {
       () => window.innerWidth >= 960 && setOpenNav(false),
     );
   }, []);
+function Header() {
+ 
+      return <img src={client/src/assets/images/logo.png} alt="logo" />;
+      
+  
+  }
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -71,7 +77,7 @@ export default function StickyNavbar() {
             href="#"
             className="ml-4 cursor-pointer py-1.5 font-medium"
           >
-            <img src={require("client\src\assets\images\logo.jpg")}/>
+            Jobfinder
           </Typography>
           </Link>
           <div className="flex items-center gap-4">
