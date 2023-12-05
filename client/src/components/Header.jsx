@@ -57,18 +57,19 @@ export default function StickyNavbar() {
       </Link>
 
     </ul>
-  );
+  )};
   
-  function Header() {
+  function Header() {}
   return (
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] overflow-scroll">
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-myColor-2">
         <div className="flex items-center justify-between text-blue-gray-900">
-       < img src={client/src/assets/images/logo.png} alt="logo" />;
+          < img src={client/src/assets/images/logo.png} alt="logo" />
           <Link
             to={'/'}
             className="text-lg"
           >
+      
           <Typography
             as="a"
             href="#"
@@ -145,4 +146,3 @@ export default function StickyNavbar() {
       </Navbar>
     </div>
   );
-}
