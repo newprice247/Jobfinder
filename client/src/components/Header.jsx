@@ -71,7 +71,7 @@ export default function StickyNavbar() {
             href="#"
             className="ml-4 cursor-pointer py-1.5 font-medium"
           >
-            <img src="import logo from 'client/src/assets/images/logo.jpg';"></img>
+            <img src="client\src\assets\images\logo.jpg"/>
           </Typography>
           </Link>
           <div className="flex items-center gap-4">
