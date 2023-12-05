@@ -9,9 +9,11 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 
+import CurrentListing from "./CurrentListing";
+
 export default function JobListing(props) {
   return (
-    <Card className="w-full max-w-[26rem] shadow-lg">
+    <Card className="w-full max-w-[26rem] shadow-lg my-5">
       <CardHeader floated={false} color="blue-gray">
         <IconButton
           size="sm"
@@ -154,10 +156,15 @@ export default function JobListing(props) {
         </div>
       </CardBody>
       <CardFooter className="pt-3">
-        <Button size="lg" fullWidth={true}>
+        <Button 
+        size="lg" 
+        fullWidth={true}
+        onClick={props.onClick}
+        >
           Find out more!
         </Button>
       </CardFooter>
     </Card>
   );
 }
+

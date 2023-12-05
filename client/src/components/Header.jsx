@@ -68,9 +68,9 @@ export default function StickyNavbar() {
           <Typography
             as="a"
             href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
+            className="ml-4 cursor-pointer py-1.5 font-medium"
           >
-            Material Tailwind
+            Jobfinder
           </Typography>
           </Link>
           <div className="flex items-center gap-4">
@@ -125,7 +125,7 @@ export default function StickyNavbar() {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
+        {/* <MobileNav open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
             <Link
@@ -137,7 +137,7 @@ export default function StickyNavbar() {
               </Button>
             </Link>
           </div>
-        </MobileNav>
+        </MobileNav> */}
       </Navbar>
     </div>
   );

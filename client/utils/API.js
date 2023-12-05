@@ -47,6 +47,17 @@ const search = {
         }
     },
 
+    fetchListingById: async (id) => {
+        try {
+            const response = await axios.get(`${apiURL}/listings/${id}`);
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
     fetchUsers: async () => {
         try {
             const response = await axios.get(`${apiURL}/users`);
