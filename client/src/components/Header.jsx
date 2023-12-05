@@ -23,9 +23,7 @@ export default function StickyNavbar() {
 function Header() {
  
       return <img src={client/src/assets/images/logo.png} alt="logo" />;
-      
-  
-  }
+      }
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -77,7 +75,8 @@ function Header() {
             href="#"
             className="ml-4 cursor-pointer py-1.5 font-medium"
           >
-            Jobfinder
+            <img src= "client/src/assets/images/logo.png"></img>
+            
           </Typography>
           </Link>
           <div className="flex items-center gap-4">
