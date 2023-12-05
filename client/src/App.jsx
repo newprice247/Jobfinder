@@ -12,6 +12,8 @@ function App() {
   return (
     <>
       <Header />
+      
+      {/* the outlet is where the child components will be rendered based on the route specified in main.jsx */}
       <Outlet />
       <Footer />
     </>

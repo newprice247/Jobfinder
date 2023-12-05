@@ -9,6 +9,7 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 
+// JobListing prototype, will be used to display job listings on home page by mapping through the database and displaying each listing as a card
 export default function JobListing(props) {
   return (
     <Card className="w-full max-w-[26rem] shadow-lg my-5">
@@ -157,6 +158,8 @@ export default function JobListing(props) {
         <Button 
         size="lg" 
         fullWidth={true}
+        
+        // sets the onclick functionality to a prop so that the logic can be handled in the parent component
         onClick={props.onClick}
         >
           Find out more!

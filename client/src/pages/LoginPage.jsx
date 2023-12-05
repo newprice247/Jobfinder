@@ -6,29 +6,29 @@ import { loginUser } from "../../utils/API";
 import { useState } from "react";
 import Auth from "../../utils/auth";
 
+// exports the login page located at '/login'
 export default function ExampleV2() {
+  // Using useState to set the userFormData to an empty object, is used to store the user's email and password when they login
   const [userFormData, setUserFormData] = useState({
     email: "",
     password: "",
   });
+  // if the userFormData is not null and is not an object, fetch the user by id and set the userFormData to the data
   const handleLogin = async () => {
-    console.log(userFormData);
     try {
       const response = await loginUser(userFormData);
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
+      // sets the token and user data to the local storage
       const { token, user } = await response.json();
-      console.log(user);
+      // uses the login function from Auth.js to login the user
       Auth.login(token);
     } catch (err) {
       console.error(err);
     }
-    // setUserFormData({
-    //   email: "",
-    //   password: "",
-    // });
   };
+  // Returning the login page as html
   return (
     <section className="h-full bg-neutral-200 dark:bg-neutral-700">
       <div className="container h-full p-10">
@@ -63,6 +63,7 @@ export default function ExampleV2() {
                         labelProps={{
                           className: "before:content-none after:content-none",
                         }}
+                        // sets the userFormData to the user's email when they type in the email input
                         onChange={(e) =>
                           setUserFormData({
                             ...userFormData,
@@ -79,6 +80,7 @@ export default function ExampleV2() {
                         labelProps={{
                           className: "before:content-none after:content-none",
                         }}
+                        // sets the userFormData to the user's password when they type in the password input
                         onChange={(e) =>
                           setUserFormData({
                             ...userFormData,
@@ -97,19 +99,19 @@ export default function ExampleV2() {
                               background:
                                 "linear-gradient(to right, #606c38,#283618,#fefae0, #dda15e)",
                             }}
+                            // when the user clicks the login button, the userFormData is set to the user's email and password, and the handleLogin function is called
                             onClick={() => {
-                              // handle login
+                              // sets the form data to the user's email and password as variables
                               let emailVal = document.getElementById("email").value;
-                              console.log(emailVal);
                               let passwordVal = document.getElementById("password").value;
-                              console.log(passwordVal);
+                              // sets the userFormData to the user's email and password
                               setUserFormData({
                                 email: emailVal,
                                 password: passwordVal,
                               
                               });
+                              // calls the handleLogin function
                               handleLogin();
-                              
                             }}
                           >
                             Log in

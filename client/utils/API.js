@@ -1,7 +1,9 @@
-
+// imports axios to make requests to the server
 import axios from 'axios';
 
 const PORT = process.env.PORT;
+
+// sets the base URL for API calls depending on the environment
 const apiURL = process.env.NODE_ENV === 'production' ? '/api' : `http://localhost:${PORT}/api`;
 
 export const getMe = (token) => {
@@ -35,7 +37,7 @@ export const loginUser = (userData) => {
 
 const search = {
 
-
+    // fetches all listings
     fetchListings: async () => {
         try {
             const response = await axios.get(`${apiURL}/listings`);
@@ -47,6 +49,8 @@ const search = {
         }
     },
 
+
+    // fetches a single listing by id
     fetchListingById: async (id) => {
         try {
             const response = await axios.get(`${apiURL}/listings/${id}`);
@@ -58,6 +62,8 @@ const search = {
         }
     },
 
+
+    // fetches all listings by category
     fetchUsers: async () => {
         try {
             const response = await axios.get(`${apiURL}/users`);
@@ -69,6 +75,8 @@ const search = {
         }
     },
 
+
+    // fetches a single user by id
     fetchUser: async (id) => {
         try {
             const response = await axios.get(`${apiURL}/users/${id}`);
