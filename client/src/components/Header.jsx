@@ -9,6 +9,7 @@ import {
   Card,
 } from "@material-tailwind/react";
 import { Link, useLocation } from 'react-router-dom';
+import Auth from "../../utils/auth";
 
 export default function StickyNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -34,22 +35,6 @@ export default function StickyNavbar() {
         >
           <p className="flex items-center">
             Home
-          </p>
-        </Typography>
-      </Link>
-
-      <Link
-        to={'/user-profile'}
-        className="text-lg"
-      >
-        <Typography
-          as="li"
-          variant="small"
-          color="blue-gray"
-          className="p-1 font-normal"
-        >
-          <p className="flex items-center">
-            User Profile
           </p>
         </Typography>
       </Link>
@@ -81,7 +66,67 @@ export default function StickyNavbar() {
             className=""
             >
               <Button fullWidth variant="text" size="sm" className="">
-                <span>Log In</span>
+                <span>
+                  {Auth.loggedIn() ? (
+                    <>
+                      <Link to="/profile">
+                        <Button
+                          color="blue-gray"
+                          buttonType="link"
+                          size="sm"
+                          rounded={false}
+                          block={false}
+                          iconOnly={false}
+                          ripple="light"
+                        >
+                          Profile
+                        </Button>
+                      </Link>
+                      <Button
+                        color="blue-gray"
+                        buttonType="link"
+                        size="sm"
+                        rounded={false}
+                        block={false}
+                        iconOnly={false}
+                        ripple="light"
+                        onClick={Auth.logout}
+                      >
+                        Logout
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/register">
+                        <Button
+                          color="blue-gray"
+                          buttonType="link"
+                          size="sm"
+                          rounded={false}
+                          block={false}
+                          iconOnly={false}
+                          ripple="light"
+                        >
+                          Sign Up
+                        </Button>
+                      </Link>
+                      <Link to="/login">
+                        <Button
+                          color="blue-gray"
+                          buttonType="link"
+                          size="sm"
+                          rounded={false}
+                          block={false}
+                          iconOnly={false}
+                          ripple="light"
+                        >
+                          Login
+                        </Button>
+                      </Link>
+                    </>
+                  )}
+
+                </span>
               </Button>
             </Link>
               

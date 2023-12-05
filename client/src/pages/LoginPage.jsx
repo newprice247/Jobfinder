@@ -2,8 +2,33 @@ import React from "react";
 import { TEInput, TERipple } from "tw-elements-react";
 import { Input } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { loginUser } from "../../utils/API";
+import { useState } from "react";
+import Auth from "../../utils/auth";
 
 export default function ExampleV2() {
+  const [userFormData, setUserFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleLogin = async () => {
+    console.log(userFormData);
+    try {
+      const response = await loginUser(userFormData);
+      if (!response.ok) {
+        throw new Error("something went wrong!");
+      }
+      const { token, user } = await response.json();
+      console.log(user);
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+    }
+    // setUserFormData({
+    //   email: "",
+    //   password: "",
+    // });
+  };
   return (
     <section className="h-full bg-neutral-200 dark:bg-neutral-700">
       <div className="container h-full p-10">
@@ -31,21 +56,34 @@ export default function ExampleV2() {
                       {/* <!--Username input--> */}
                       <Input
                         size="lg"
+                        type="email"
+                        id="email"
                         placeholder="name@mail.com"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         labelProps={{
                           className: "before:content-none after:content-none",
                         }}
+                        onChange={(e) =>
+                          setUserFormData({
+                            ...userFormData,
+                            email: e.target.value,
+                          })}
                       />
                       {/* <!--Password input--> */}
                       <Input
                         size="lg"
                         type="password"
+                        id="password"
                         placeholder="Password"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         labelProps={{
                           className: "before:content-none after:content-none",
                         }}
+                        onChange={(e) =>
+                          setUserFormData({
+                            ...userFormData,
+                            password: e.target.value,
+                          })}
                       />
 
                         {/* <!--Submit button--> */}
@@ -54,9 +92,24 @@ export default function ExampleV2() {
                           <button
                             className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
                             type="button"
+                            
                             style={{
                               background:
                                 "linear-gradient(to right, #606c38,#283618,#fefae0, #dda15e)",
+                            }}
+                            onClick={() => {
+                              // handle login
+                              let emailVal = document.getElementById("email").value;
+                              console.log(emailVal);
+                              let passwordVal = document.getElementById("password").value;
+                              console.log(passwordVal);
+                              setUserFormData({
+                                email: emailVal,
+                                password: passwordVal,
+                              
+                              });
+                              handleLogin();
+                              
                             }}
                           >
                             Log in
