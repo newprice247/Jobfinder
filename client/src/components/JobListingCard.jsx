@@ -9,8 +9,6 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 
-import CurrentListing from "./CurrentListing";
-
 export default function JobListing(props) {
   return (
     <Card className="w-full max-w-[26rem] shadow-lg my-5">

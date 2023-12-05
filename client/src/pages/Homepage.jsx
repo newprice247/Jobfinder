@@ -7,8 +7,7 @@ import CurrentListing from "../components/CurrentListing";
 export default function Homepage() {
     const [listings, setListings] = useState([]);
     const [listingContact, setListingContact] = useState([]);
-    const [currentListing, setCurrentListing] = useState([]);
-    const [showListing, setShowListing] = useState(false);
+    const [currentListing, setCurrentListing] = useState(null);
 
     useEffect(() => {
         search.fetchListings()
@@ -23,13 +22,13 @@ export default function Homepage() {
     }, []);
 
     useEffect(() => {
-        if (showListing === true) {
+        if (currentListing !== null && typeof currentListing !== "object") {
             search.fetchListingById(currentListing)
                 .then((data) => setCurrentListing(data))
                 .catch((error) => console.error("Error fetching data:", error));
         }
-    }
-        , [showListing]);
+    }, [currentListing]);
+ 
 
 
     return (
@@ -41,9 +40,9 @@ export default function Homepage() {
                 viewport={{ once: true }}
                 animate={{ y: 10 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
-                className="flex flex-wrap mt-40 justify-center items-center">
+                className="flex flex-wrap mt-20 justify-center items-center">
                 <div
-                    className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center"
+                    className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center overflow-y-auto  h-[80vh] no-scrollbar"
                 >
                     {listings.map((listing) => (
                         <JobListing
@@ -75,16 +74,17 @@ export default function Homepage() {
                             website={listing.website}
                             onClick={() => {
                                 console.log(listing._id);
+
                                 setCurrentListing(listing._id);
-                                setShowListing(true);
                             }}
                         />
                     ))}
                 </div>
                 <div
-                 className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center"
+                 className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center"
+                 style={{ zIndex: 1 }}
                 >
-                    {showListing === true ? (
+                    {currentListing !== null ? (
                         <CurrentListing
                             title={currentListing.title}
                             location={currentListing.location}
