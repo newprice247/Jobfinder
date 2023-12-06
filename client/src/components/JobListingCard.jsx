@@ -182,7 +182,7 @@ export default function JobListing(props) {
         <Button
           size="lg"
           fullWidth={true}
-          className="text-black"
+          className="text-white"
 
           // sets the onclick functionality to a prop so that the logic can be handled in the parent component
           onClick={props.onClick}
@@ -193,7 +193,7 @@ export default function JobListing(props) {
           <Button
             size="lg"
             fullWidth={true}
-            className="mt-4 text-black"
+            className="mt-4 text-white"
             onClick={(event) => {
               event.preventDefault();
               const userId = Auth.getProfile().data._id;
