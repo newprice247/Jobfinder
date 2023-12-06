@@ -5,7 +5,8 @@ const {
     getMe,
     getSingleUser,
     createUser,
-    login
+    login,
+    saveListing,
 } = require('../../controllers/userControllers');
 
 const { authMiddleware } = require('../../utils/auth');
@@ -17,9 +18,13 @@ router.route('/').get(getUsers).post(createUser);
 
 router.route('/login').post(login);
 
-router.route('/me').get(authMiddleware, getMe);
+router.route('/me').get(authMiddleware, getMe)
+
+router.route('/me/listings/:listingId').put(authMiddleware, saveListing);
 
 router.route('/:userId').get(getSingleUser);
+
+router.route('/:userId/listings/:listingId').put(saveListing);
 
 
 
