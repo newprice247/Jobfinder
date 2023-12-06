@@ -10,12 +10,28 @@ import {
 } from "@material-tailwind/react";
 
 import Auth from "../../utils/auth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { saveListing } from "../../utils/API";
+import search from "../../utils/API";
 
 // JobListing prototype, will be used to display job listings on home page by mapping through the database and displaying each listing as a card
 export default function JobListing(props) {
-  const [saveJob, setSaveJob] = useState({ id: "" });
+  const [jobSaved, setJobSaved] = useState(false);
+  const [savedListings, setSavedListings] = useState([]);
+  const findUserSavedListings = () => {
+    const userId = Auth.getProfile().data._id;
+    console.log('here is the joblisting userid', userId);
+    search.fetchUser(userId)
+      .then((data) => {
+        console.log('here is the user data', data);
+        setSavedListings(data.savedListings);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  };
+  useEffect(() => {
+    findUserSavedListings();
+  }, []);
+
   
   return (
     <Card className="w-full max-w-[26rem] shadow-lg my-5">
@@ -174,9 +190,6 @@ export default function JobListing(props) {
         {Auth.loggedIn() && (
           <Button
             size="lg"
-            color="lightBlue"
-            buttonType="filled"
-            ripple="light"
             fullWidth={true}
             className="mt-4 text-black"
             onClick={(event) => {
@@ -185,9 +198,12 @@ export default function JobListing(props) {
               console.log('here is the joblisting userid', userId);
               const listingId = props.id;
               saveListing(userId, listingId);
+              setJobSaved(true);
+              setSavedListings([...savedListings, listingId]);
             }}
+            disabled={savedListings.includes(props.id)}
           >
-            Save Job
+            {savedListings.includes(props.id) ? "Job saved!" : "Save Job"}
           </Button>
         )}
       </CardFooter>
