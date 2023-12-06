@@ -1,10 +1,11 @@
 import React from "react";
 import { TEInput, TERipple } from "tw-elements-react";
-import { Input } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { Input } from "@material-tailwind/react";
 import { loginUser } from "../../utils/API";
 import { useState } from "react";
 import Auth from "../../utils/auth";
+import RegisterBox from "../components/RegisterBox";
 
 // exports the login page located at '/login'
 export default function ExampleV2() {
@@ -28,6 +29,8 @@ export default function ExampleV2() {
       console.error(err);
     }
   };
+
+  const [registerButtonClicked, setRegisterButtonClicked] = useState(false);
   // Returning the login page as html
   return (
     <section className="h-full bg-neutral-200 dark:bg-neutral-700">
@@ -125,19 +128,15 @@ export default function ExampleV2() {
                       {/* <!--Register button--> */}
                       <div className="flex items-center justify-between pb-6">
                         <p className="mb-0 mr-2">Don't have an account?</p>
-                        <Link
-                        to={"/register"}
-                        
-                        >
                         <TERipple rippleColor="light">
                           <button
                             type="button"
                             className="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                            onClick={() => { setRegisterButtonClicked(true)} }
                           >
                             Register
                           </button>
                         </TERipple>
-                        </Link>
                         
                       </div>
                     </form>
@@ -145,6 +144,7 @@ export default function ExampleV2() {
                 </div>
 
                 {/* <!-- Right column container with background and description--> */}
+                {registerButtonClicked ? <RegisterBox /> : 
                 <div
                   className="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
                   style={{
@@ -164,6 +164,7 @@ export default function ExampleV2() {
                     </p>
                   </div>
                 </div>
+                }
               </div>
             </div>
           </div>

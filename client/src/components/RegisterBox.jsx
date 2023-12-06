@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
  
-export default function RegisterPage() {
+export default function RegisterBox() {
   return (
     <div
     className="flex items-center justify-center p-6 bg-gray-50"

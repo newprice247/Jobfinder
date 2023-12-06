@@ -11,7 +11,6 @@ import Homepage from './pages/Homepage.jsx'
 import UserProfile from './pages/UserProfile.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
-import RegisterPage from './pages/RegisterPage.jsx'
 // creates the router for the app, the router is used to navigate between pages on the client side
 const router = createBrowserRouter([
   {
@@ -30,10 +29,6 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginPage />,
-      },
-      {
-        path: '/register',
-        element: <RegisterPage />,
       },
     ],
   },
