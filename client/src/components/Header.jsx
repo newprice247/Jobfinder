@@ -1,5 +1,6 @@
 
 import React from "react";
+import logo from "../assets/images/joblogo.png"
 import {
   Navbar,
   MobileNav,
@@ -29,7 +30,7 @@ export default function Header() {
   // Returns the html for the header component
   return (
     <div>
-      <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-myColor-2">
+      <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-myColor-1">
 
         {/* The following code is for the logo and the nav bar links */}
         <div className="flex items-center justify-between text-blue-gray-900">
@@ -37,13 +38,11 @@ export default function Header() {
             to={'/'}
             className="text-lg"
           >
-            <Typography
-              as="a"
-              href="#"
-              className="ml-4 cursor-pointer py-1.5 font-medium"
-            >
-              Jobfinder
-            </Typography>
+           <img 
+           style={{
+            width:"10rem"
+          }}
+           src={logo} />
           </Link>
           
           {/* Checks if the user is logged in or not and displays the appropriate welcome message */}
@@ -310,4 +309,4 @@ export default function Header() {
       </Navbar>
     </div>
   );
-}
+  }
