@@ -52,4 +52,19 @@ module.exports = {
         const token = signToken(user);
         res.json({ token, user });
     },
+    async saveListing({params}, res) {
+        console.log('here is the server controller', params.userId, params.listingId)
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: params.userId },
+            { $addToSet: { savedListings: params.listingId } },
+            { new: true, runValidators: true }
+        );
+        if (!updatedUser) {
+            return res.status(400).json({ message: "Couldn't find user with this id!" });
+        }
+        return res.json(updatedUser);
+    },
+
 };
+
+

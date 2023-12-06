@@ -56,7 +56,7 @@ export default function Homepage() {
                     {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
                     {listings.map((listing) => (
                         <JobListing
-                            key={listing._id}
+                            id={listing._id}
                             title={listing.title}
                             location={listing.location}
                             description={listing.description}

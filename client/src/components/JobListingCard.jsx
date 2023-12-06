@@ -9,8 +9,14 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 
+import Auth from "../../utils/auth";
+import { useState } from "react";
+import { saveListing } from "../../utils/API";
+
 // JobListing prototype, will be used to display job listings on home page by mapping through the database and displaying each listing as a card
 export default function JobListing(props) {
+  const [saveJob, setSaveJob] = useState({ id: "" });
+  
   return (
     <Card className="w-full max-w-[26rem] shadow-lg my-5">
       <CardHeader floated={false} color="blue-gray">
@@ -155,16 +161,35 @@ export default function JobListing(props) {
         </div>
       </CardBody>
       <CardFooter className="pt-3">
-        <Button 
-        size="lg" 
-        fullWidth={true}
-        className="text-black"
-        
-        // sets the onclick functionality to a prop so that the logic can be handled in the parent component
-        onClick={props.onClick}
+        <Button
+          size="lg"
+          fullWidth={true}
+          className="text-black"
+
+          // sets the onclick functionality to a prop so that the logic can be handled in the parent component
+          onClick={props.onClick}
         >
           Find out more!
         </Button>
+        {Auth.loggedIn() && (
+          <Button
+            size="lg"
+            color="lightBlue"
+            buttonType="filled"
+            ripple="light"
+            fullWidth={true}
+            className="mt-4 text-black"
+            onClick={(event) => {
+              event.preventDefault();
+              const userId = Auth.getProfile().data._id;
+              console.log('here is the joblisting userid', userId);
+              const listingId = props.id;
+              saveListing(userId, listingId);
+            }}
+          >
+            Save Job
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

@@ -1,4 +1,5 @@
 // imports axios to make requests to the server
+import { list } from '@material-tailwind/react';
 import axios from 'axios';
 
 const PORT = process.env.PORT;
@@ -32,6 +33,16 @@ export const loginUser = (userData) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
+    });
+};
+
+export const saveListing = (userId, listingID) => {
+    console.log('here is the client api call', userId, listingID)
+    return fetch(`/api/users/${userId}/listings/${listingID}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });
 };
 
