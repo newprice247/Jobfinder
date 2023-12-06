@@ -29,7 +29,9 @@ export default function JobListing(props) {
       .catch((error) => console.error("Error fetching data:", error));
   };
   useEffect(() => {
-    findUserSavedListings();
+    if (Auth.loggedIn()) {
+      findUserSavedListings();
+    }
   }, []);
 
   
