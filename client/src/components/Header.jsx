@@ -1,5 +1,6 @@
 
 import React from "react";
+import logo from "../assets/images/logo.png"
 import {
   Navbar,
   MobileNav,
@@ -37,13 +38,11 @@ export default function Header() {
             to={'/'}
             className="text-lg"
           >
-            <Typography
-              as="a"
-              href="#"
-              className="ml-4 cursor-pointer py-1.5 font-medium"
-            >
-              Jobfinder
-            </Typography>
+           <img 
+           style={{
+            width:"10rem"
+          }}
+           src={logo} />
           </Link>
           
           {/* Checks if the user is logged in or not and displays the appropriate welcome message */}
