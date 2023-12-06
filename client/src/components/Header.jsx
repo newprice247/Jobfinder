@@ -34,6 +34,7 @@ export default function Header() {
 
         {/* The following code is for the logo and the nav bar links */}
         <div className="flex items-center justify-between text-blue-gray-900">
+          < img src={client/src/assets/images/logo.png} alt="logo" />
           <Link
             to={'/'}
             className="text-lg"
@@ -309,4 +310,3 @@ export default function Header() {
       </Navbar>
     </div>
   );
-}
