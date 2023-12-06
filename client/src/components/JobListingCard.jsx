@@ -158,6 +158,7 @@ export default function JobListing(props) {
         <Button 
         size="lg" 
         fullWidth={true}
+        className="text-black"
         
         // sets the onclick functionality to a prop so that the logic can be handled in the parent component
         onClick={props.onClick}
