@@ -9,6 +9,8 @@ import { motion } from "framer-motion"
 // imports the current listing and job listing prototypes from the components folder
 import CurrentListing from "../components/CurrentListing";
 import JobListing from "../components/JobListingCard";
+import CreateListingModal from "../components/CreateListingModal";
+import Auth from "../../utils/auth";
 
 // Exporting the Homepage, located at '/'
 export default function Homepage() {
@@ -36,11 +38,11 @@ export default function Homepage() {
                 .catch((error) => console.error("Error fetching data:", error));
         }
     }, [currentListing]);
- 
+
 
     // Returning the homepage as html
     return (
-        <>  
+        <>
             {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
             <motion.div
                 initial={{ opacity: 0 }}
@@ -49,10 +51,18 @@ export default function Homepage() {
                 animate={{ y: 10 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="flex flex-wrap mt-20 justify-center items-center">
+                {Auth.loggedIn() ? (
+                    <CreateListingModal />
+                ) : (
+                    <div>
+                        <h1>Log in to create a listing!</h1>
+                    </div>
+                )}
                 {/* container for the job listings, current listing, and search bar */}
                 <div
                     className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center overflow-y-auto  h-[80vh] no-scrollbar"
                 >
+
                     {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
                     {listings.map((listing) => (
                         <JobListing
@@ -93,8 +103,8 @@ export default function Homepage() {
 
                 {/* container for the current listing, displays the current listing when a user clicks on a listing */}
                 <div
-                 className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center"
-                 style={{ zIndex: 1 }}
+                    className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center"
+                    style={{ zIndex: 1 }}
                 >
                     {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
                     {currentListing !== null ? (

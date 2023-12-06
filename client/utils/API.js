@@ -46,6 +46,25 @@ export const saveListing = (userId, listingID) => {
     });
 };
 
+export const deleteListing = (userId, listingID) => {
+    return fetch(`/api/users/${userId}/listings/${listingID}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+};
+
+export const newListing = (listingData) => {
+    return fetch('/api/listings', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(listingData),
+    });
+};
+
 const search = {
 
     // fetches all listings
