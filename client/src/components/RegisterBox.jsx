@@ -5,8 +5,33 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import { useState } from "react";
+import Auth from "../../utils/auth";
+import { createUser } from "../../utils/API";
+
  
 export default function RegisterBox() {
+  const [userFormData, setUserFormData] = useState({
+    name: "",
+    username: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
+  const handleRegister = async () => {
+    try {
+      const response = await createUser(userFormData);
+      if (!response.ok) {
+        throw new Error("something went wrong!");
+      }
+      const { token, user } = await response.json();
+      console.log(user);
+      Auth.register(token);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div
     className="flex items-center justify-center p-6 bg-gray-50"
@@ -20,7 +45,7 @@ export default function RegisterBox() {
       </Typography>
       <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
         <div className="mb-1 flex flex-col gap-6">
-          <Typography variant="h6" color="blue-gray" className="-mb-3">
+          <Typography variant="h6" color="blue-gray" className="-mb-5">
             Your Name
           </Typography>
           <Input
@@ -30,8 +55,25 @@ export default function RegisterBox() {
             labelProps={{
               className: "before:content-none after:content-none",
             }}
+            onChange={(e) =>
+              setUserFormData({ ...userFormData, name: e.target.value })
+            }
           />
-          <Typography variant="h6" color="blue-gray" className="-mb-3">
+          <Typography variant="h6" color="blue-gray" className="-mb-5">
+            Username
+          </Typography>
+          <Input
+            size="lg"
+            placeholder="Ex: johndoe"
+            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+            onChange={(e) =>
+              setUserFormData({ ...userFormData, username: e.target.value })
+            }
+          />
+          <Typography variant="h6" color="blue-gray" className="-mb-5">
             Your Email
           </Typography>
           <Input
@@ -41,8 +83,25 @@ export default function RegisterBox() {
             labelProps={{
               className: "before:content-none after:content-none",
             }}
+            onChange={(e) =>
+              setUserFormData({ ...userFormData, email: e.target.value })
+            }
           />
-          <Typography variant="h6" color="blue-gray" className="-mb-3">
+          <Typography variant="h6" color="blue-gray" className="-mb-5">
+            Phone Number
+          </Typography>
+          <Input
+            size="lg"
+            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+            placeholder="(555) 555-5555"
+            onChange={(e) =>
+              setUserFormData({ ...userFormData, phone: e.target.value })
+            }
+          />
+          <Typography variant="h6" color="blue-gray" className="-mb-5">
             Password
           </Typography>
           <Input
@@ -53,35 +112,21 @@ export default function RegisterBox() {
             labelProps={{
               className: "before:content-none after:content-none",
             }}
+            onChange={(e) =>
+              setUserFormData({ ...userFormData, password: e.target.value })
+            }
           />
         </div>
-        <Checkbox
-          label={
-            <Typography
-              variant="small"
-              color="gray"
-              className="flex items-center font-normal"
-            >
-              I agree the
-              <a
-                href="#"
-                className="font-medium transition-colors hover:text-gray-900"
-              >
-                &nbsp;Terms and Conditions
-              </a>
-            </Typography>
-          }
-          containerProps={{ className: "-ml-2.5" }}
-        />
-        <Button className="mt-6" fullWidth>
+        <Button 
+        className="mt-6 text-black" 
+        fullWidth
+        onClick={() => {
+          handleRegister();
+        }}
+        >
           sign up
         </Button>
-        <Typography color="gray" className="mt-4 text-center font-normal">
-          Already have an account?{" "}
-          <a href="/login" className="font-medium text-gray-900">
-            Sign In
-          </a>
-        </Typography>
+        
       </form>
     </Card>
      </div>
