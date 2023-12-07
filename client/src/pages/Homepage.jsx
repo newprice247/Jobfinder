@@ -42,7 +42,7 @@ export default function Homepage() {
 
     // Returning the homepage as html
     return (
-        <>
+        <div className="bg-myColor-3">
             {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
             <motion.div
                 initial={{ opacity: 0 }}
@@ -142,6 +142,6 @@ export default function Homepage() {
                     )}
                 </div>
             </motion.div>
-        </>
+        </div>
     );
 }
