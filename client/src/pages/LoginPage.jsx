@@ -1,7 +1,15 @@
 import React from "react";
 import { TEInput, TERipple } from "tw-elements-react";
 import { Link } from "react-router-dom";
-import { Input } from "@material-tailwind/react";
+import { 
+  Input, 
+  Alert, 
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter, 
+} from "@material-tailwind/react";
 import { loginUser } from "../../utils/API";
 import { useState } from "react";
 import Auth from "../../utils/auth";
@@ -15,6 +23,9 @@ export default function ExampleV2() {
     email: "",
     password: "",
   });
+  const [open, setOpen] = React.useState(false);
+ 
+  const handleOpen = () => setOpen(!open);
   // if the userFormData is not null and is not an object, fetch the user by id and set the userFormData to the data
   const handleLogin = async () => {
     try {
@@ -35,14 +46,34 @@ export default function ExampleV2() {
   // Returning the login page as html
   return (
     <section className="h-full bg-myColor-3 items-center justify-center flex">
-      <div className="container h-full p-10 items-center">
+      <div className="container h-full p-0 md:p-10 items-center mt-5">
         <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
           <div className="w-full">
             <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
               <div className="g-0 lg:flex lg:flex-wrap">
                 {/* <!-- Left column container--> */}
-                <div className="px-4 md:px-0 lg:w-6/12">
-                  <div className="md:mx-6 md:p-12">
+                {/* Dialog for login error, only shows if user doesn't fill out all form fields */}
+                <Dialog size="sm" open={open} handler={handleOpen}>
+                  <DialogHeader>
+                    <h5 className="text-myColor-2">Oops!</h5>
+                  </DialogHeader>
+                  <DialogBody>
+                    <p className="text-myColor-2">Please enter your email and password to login.</p>
+                  </DialogBody>
+                  <DialogFooter>
+                    <Button
+                      color="red"
+                      buttonType="link"
+                      onClick={(e) => setOpen(false)}
+                      ripple="dark"
+                    >
+                      Close
+                    </Button>
+                  </DialogFooter>
+                </Dialog>
+                {/* Login form */}
+                <div className="px-4 md:px-0 lg:w-6/12 w-full md:w-auto">
+                  <div className="md:mx-6 md:p-12 text-xxs sm:text-sm md:text-base">
                     {/* <!--Logo--> */}
                     <div className="text-center">
                       <img
@@ -54,7 +85,6 @@ export default function ExampleV2() {
                         Welcome to Jobfinder
                       </h4>
                     </div>
-
                     <form>
                       <p className="mb-4">Please login to your account</p>
                       {/* <!--Username input--> */}
@@ -62,7 +92,7 @@ export default function ExampleV2() {
                         size="lg"
                         type="email"
                         id="email"
-                        placeholder="name@mail.com"
+                        placeholder="name@email.com"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         labelProps={{
                           className: "before:content-none after:content-none",
@@ -90,6 +120,21 @@ export default function ExampleV2() {
                             ...userFormData,
                             password: e.target.value,
                           })}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            // sets the form data to the user's email and password as variables
+                            let emailVal = document.getElementById("email").value;
+                            let passwordVal = document.getElementById("password").value;
+                            // sets the userFormData to the user's email and password
+                            setUserFormData({
+                              email: emailVal,
+                              password: passwordVal,
+                            
+                            });
+                            // calls the handleLogin function
+                            handleLogin();
+                          }}
+                        }
                       />
 
                         {/* <!--Submit button--> */}
@@ -105,6 +150,10 @@ export default function ExampleV2() {
                             }}
                             // when the user clicks the login button, the userFormData is set to the user's email and password, and the handleLogin function is called
                             onClick={() => {
+                              if (userFormData.email === "" || userFormData.password === "") {
+                                handleOpen();
+                                return;
+                              }
                               // sets the form data to the user's email and password as variables
                               let emailVal = document.getElementById("email").value;
                               let passwordVal = document.getElementById("password").value;
@@ -116,6 +165,21 @@ export default function ExampleV2() {
                               });
                               // calls the handleLogin function
                               handleLogin();
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                // sets the form data to the user's email and password as variables
+                                let emailVal = document.getElementById("email").value;
+                                let passwordVal = document.getElementById("password").value;
+                                // sets the userFormData to the user's email and password
+                                setUserFormData({
+                                  email: emailVal,
+                                  password: passwordVal,
+                                
+                                });
+                                // calls the handleLogin function
+                                handleLogin();
+                              }
                             }}
                           >
                             Log in
