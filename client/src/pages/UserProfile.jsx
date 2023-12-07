@@ -1,12 +1,31 @@
 import React, { useState, useEffect } from "react";
 
 export default function UserProfile() {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  // Handle file selection
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+
+  // Handle file upload logic (you can replace this with your actual upload logic)
+  useEffect(() => {
+    if (selectedFile) {
+      // Simulate file upload by pushing the file to the uploadedFiles state
+      setUploadedFiles((prevFiles) => [...prevFiles, selectedFile]);
+      // Clear the selectedFile state
+      setSelectedFile(null);
+    }
+  }, [selectedFile]);
+
   return (
     <div className="">
       <div class="flex items-center justify-center w-full">
         <label
           for="dropzone-file"
-          class="flex flex-col items-center justify-center w-90% h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+          class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
         >
           <div class="flex flex-col items-center justify-center pt-5 pb-6">
             <svg
@@ -25,17 +44,38 @@ export default function UserProfile() {
               />
             </svg>
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              <span class="font-semibold">Click to upload Resume</span> or drag and
-              drop
+              <span class="font-semibold">Click to upload Resume</span> or drag
+              and drop
             </p>
             <p class="text-xs text-gray-500 dark:text-gray-400">
               PDF, DOCX, PNG, JPG
             </p>
           </div>
-          <input id="dropzone-file" type="file" class="hidden" />
+          <input
+            id="dropzone-file"
+            type="file"
+            className="hidden"
+            onChange={handleFileChange}
+          />
         </label>
       </div>
-
+      {/* Display the list of uploaded files */}
+      <div>
+        <h2>Uploaded Files:</h2>
+        <ul>
+          {uploadedFiles.map((file, index) => (
+            <li key={index}>
+              <a
+                href={`${file.name}`}  
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {file.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
       <h1 className="text-center" style={{ marginTop: "5rem" }}>
         User Profiles
       </h1>
