@@ -34,24 +34,28 @@ export default function RegisterBox() {
 
   return (
     <div
-    className="flex items-center justify-center p-6 bg-gray-50"
+    className="flex items-center justify-center p-6 lg:w-6/12"
+    style={{
+      background:
+        "linear-gradient(to right,#262626, #283618,#606c38)",
+    }}
     >
-      <Card color="transparent" shadow={false}>
-      <Typography variant="h4" color="blue-gray">
+      <Card color="transparent" shadow={false} className="w-full items-center">
+      <Typography variant="h4" color="white">
         Sign Up
       </Typography>
-      <Typography color="gray" className="mt-1 font-normal">
+      <Typography color="white" className="mt-1 font-normal">
         Nice to meet you! Enter your details to register.
       </Typography>
       <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
         <div className="mb-1 flex flex-col gap-6">
-          <Typography variant="h6" color="blue-gray" className="-mb-5">
+          <Typography variant="h6" color="white" className="-mb-5">
             Your Name
           </Typography>
           <Input
             size="lg"
             placeholder="Ex: John Doe"
-            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            className=" !border-t-myColor-3 focus:!border-t-gray-900"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
@@ -59,7 +63,7 @@ export default function RegisterBox() {
               setUserFormData({ ...userFormData, name: e.target.value })
             }
           />
-          <Typography variant="h6" color="blue-gray" className="-mb-5">
+          <Typography variant="h6" color="white" className="-mb-5">
             Username
           </Typography>
           <Input
@@ -73,7 +77,7 @@ export default function RegisterBox() {
               setUserFormData({ ...userFormData, username: e.target.value })
             }
           />
-          <Typography variant="h6" color="blue-gray" className="-mb-5">
+          <Typography variant="h6" color="white" className="-mb-5">
             Your Email
           </Typography>
           <Input
@@ -87,7 +91,7 @@ export default function RegisterBox() {
               setUserFormData({ ...userFormData, email: e.target.value })
             }
           />
-          <Typography variant="h6" color="blue-gray" className="-mb-5">
+          <Typography variant="h6" color="white" className="-mb-5">
             Phone Number
           </Typography>
           <Input
@@ -101,7 +105,7 @@ export default function RegisterBox() {
               setUserFormData({ ...userFormData, phone: e.target.value })
             }
           />
-          <Typography variant="h6" color="blue-gray" className="-mb-5">
+          <Typography variant="h6" color="white" className="-mb-5">
             Password
           </Typography>
           <Input
@@ -118,7 +122,7 @@ export default function RegisterBox() {
           />
         </div>
         <Button 
-        className="mt-6 text-black" 
+        className="mt-6 text-myColor-3 bg-neutral-600 hover:bg-neutral-200 hover:text-myColor-4" 
         fullWidth
         onClick={() => {
           handleRegister();
