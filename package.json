@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/newprice247/Project3#readme",
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "axios": "^1.6.2",
     "bootstrap": "^5.3.2",
     "framer-motion": "^10.16.12",
