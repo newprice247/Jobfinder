@@ -24,6 +24,8 @@ export default function ExampleV2() {
     password: "",
   });
   const [open, setOpen] = React.useState(false);
+  const [error, setError] = useState(false);
+  const handleLoginError = () => setError(!error);
  
   const handleOpen = () => setOpen(!open);
   // if the userFormData is not null and is not an object, fetch the user by id and set the userFormData to the data
@@ -39,6 +41,7 @@ export default function ExampleV2() {
       Auth.login(token);
     } catch (err) {
       console.error(err);
+      handleLoginError();
     }
   };
 
@@ -52,7 +55,7 @@ export default function ExampleV2() {
             <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
               <div className="g-0 lg:flex lg:flex-wrap">
                 {/* <!-- Left column container--> */}
-                {/* Dialog for login error, only shows if user doesn't fill out all form fields */}
+                {/* Dialog for login error, only shows if user doesn't fill out all form fields or enters the wrong credentials */}
                 <Dialog size="sm" open={open} handler={handleOpen}>
                   <DialogHeader>
                     <h5 className="text-myColor-2">Oops!</h5>
@@ -65,6 +68,24 @@ export default function ExampleV2() {
                       color="red"
                       buttonType="link"
                       onClick={(e) => setOpen(false)}
+                      ripple="dark"
+                    >
+                      Close
+                    </Button>
+                  </DialogFooter>
+                </Dialog>
+                <Dialog size="sm" open={error} handler={handleLoginError}>
+                  <DialogHeader>
+                    <h5 className="text-myColor-2">Oops!</h5>
+                  </DialogHeader>
+                  <DialogBody>
+                    <p className="text-myColor-2">Please enter your correct email and password!</p>
+                  </DialogBody>
+                  <DialogFooter>
+                    <Button
+                      color="red"
+                      buttonType="link"
+                      onClick={(e) => setError(false)}
                       ripple="dark"
                     >
                       Close
@@ -122,6 +143,10 @@ export default function ExampleV2() {
                           })}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
+                            if (userFormData.email === "" || userFormData.password === "") {
+                              handleOpen();
+                              return;
+                            }
                             // sets the form data to the user's email and password as variables
                             let emailVal = document.getElementById("email").value;
                             let passwordVal = document.getElementById("password").value;
@@ -167,6 +192,10 @@ export default function ExampleV2() {
                               handleLogin();
                             }}
                             onKeyDown={(e) => {
+                              if (userFormData.email === "" || userFormData.password === "") {
+                                handleOpen();
+                                return;
+                              }
                               if (e.key === "Enter") {
                                 // sets the form data to the user's email and password as variables
                                 let emailVal = document.getElementById("email").value;
