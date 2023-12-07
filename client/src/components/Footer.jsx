@@ -1,28 +1,53 @@
-import { Container, Row, Col } from 'react-bootstrap';
-
-const currentYear = new Date().getFullYear();
-
-// Footer component
+import { Typography } from "@material-tailwind/react";
+ 
 export default function Footer() {
   return (
-    <footer className="w-full bg-dark fixed-bottom">
-      <Container>
-        <Row className="justify-content-center align-items-center text-center py-3">
-          <Col md={6}>
-             
-             <a href="#" className="text-light"> &copy; {currentYear} Jobfinder. All Rights Reserved.</a>
-             
-          </Col>
-            <Col md={6}>
-                <div className="social-media">
-                <a href="#" className="twitter mx-3">Twitter<i className="bi bi-twitter"></i></a>
-                <a href="#" className="facebook mx-3">Facebook<i className="bi bi-facebook"></i></a>
-                <a href="#" className="instagram mx-3">Instagram<i className="bi bi-instagram"></i></a>
-                <a href="#" className="linkedin mx-3">Linked-In<i className="bi bi-linkedin"></i></a>
-                </div>
-            </Col>
-        </Row>
-      </Container>
+    <footer className="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between">
+      <Typography color="blue-gray" className="font-normal">
+        &copy; 2023 Material Tailwind
+      </Typography>
+      <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
+        <li>
+          <Typography
+            as="a"
+            href="#"
+            color="blue-gray"
+            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+          >
+            About Us
+          </Typography>
+        </li>
+        <li>
+          <Typography
+            as="a"
+            href="#"
+            color="blue-gray"
+            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+          >
+            License
+          </Typography>
+        </li>
+        <li>
+          <Typography
+            as="a"
+            href="#"
+            color="blue-gray"
+            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+          >
+            Contribute
+          </Typography>
+        </li>
+        <li>
+          <Typography
+            as="a"
+            href="#"
+            color="blue-gray"
+            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+          >
+            Contact Us
+          </Typography>
+        </li>
+      </ul>
     </footer>
   );
 }
