@@ -63,7 +63,7 @@ export default function JobListing(props) {
             color="blue-gray"
             className="flex items-center gap-1.5 font-normal"
           >
-            <svg
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
@@ -75,7 +75,7 @@ export default function JobListing(props) {
                 clipRule="evenodd"
               />
             </svg>
-            5.0
+            5.0 */}
           </Typography>
         </div>
         <Typography color="gray">{props.description}</Typography>
