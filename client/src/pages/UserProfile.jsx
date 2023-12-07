@@ -1,8 +1,32 @@
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PaperClipIcon } from '@heroicons/react/20/solid';
+import {
+  faYoutube,
+  faFacebook,
+  faTwitter,
+  faInstagram
+} from "@fortawesome/free-brands-svg-icons";
 
 export default function UserProfile() {
   return (
+    <div>
+    <a href="https://www.youtube.com/c/jamesqquick"
+        className="youtube social">
+        <FontAwesomeIcon icon={faYoutube} size="2x" />
+      </a>
+      <a href="https://www.facebook.com/learnbuildteach/"
+        className="facebook social">
+        <FontAwesomeIcon icon={faFacebook} size="2x" />
+      </a>
+      <a href="https://www.twitter.com/jamesqquick" className="twitter social">
+        <FontAwesomeIcon icon={faTwitter} size="2x" />
+      </a>
+      <a href="https://www.instagram.com/learnbuildteach"
+        className="instagram social">
+        <FontAwesomeIcon icon={faInstagram} size="2x" />
+      </a>
+      
     <div>
       <div className="px-4 sm:px-0">
         <h3 className="text-base font-semibold leading-7 text-gray-900">Users profile</h3>
@@ -72,9 +96,10 @@ export default function UserProfile() {
         </dl>
       </div>
     </div>
-    // <div className="">
+    </div>
+    // {/* // <div className="">
     //   <div class="flex items-center justify-center w-full">
-    //     <label
+    //     <label */}
     //       for="dropzone-file"
     //       class="flex flex-col items-center justify-center w-90% h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
     //     >
