@@ -1,16 +1,23 @@
 import { PaperClipIcon } from '@heroicons/react/20/solid';
 import React, { useEffect, useState } from "react";
+import ProfilePicture from "./profile-pic"; // Adjust the import path based on your project structure
 
 
 export default function Bio(props) {
   const UserProfile = () => {
     const [user, setUser] = useState({});
+    const [newProfilePicture, setNewProfilePicture] = useState(null); //allows me to update the state of new profile pic using setnewprofilepicture function
+
     const [editMode, setEditMode] = useState(false);
     const [editedUser, setEditedUser] = useState({});
   
     useEffect(() => {
       setUser(props.user);
     }, [props.user]);
+
+    const handleImageChange = (imageUrl) => {
+      setNewProfilePicture(imageUrl);
+    };
   
     const handleUpdateClick = () => {
       // Copy the user information to the editedUser state
