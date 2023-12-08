@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { storage } from "../../utils/gsBucket";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
-export default function UserProfile() {
+export default function UserResume() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   // Handle file selection
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setSelectedFile(file);
+
+    const storageRef = ref(storage, "resumes");
+
+    // 'file' comes from the Blob or File API
+    console.log("upload");
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+      getDownloadURL(snapshot).then((url) => {
+        setSelectedFile(url);
+      });
+    });
+    // setSelectedFile(file);
   };
 
   // Handle file upload logic (you can replace this with your actual upload logic)
@@ -67,7 +80,7 @@ export default function UserProfile() {
             <li key={index}>
               {/* need to add where file is being pulled from */}
               <a
-                href={`${file.name}`}  
+                href={`gs://jobfinder-5711e.appspot.com${file.name}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -77,10 +90,6 @@ export default function UserProfile() {
           ))}
         </ul>
       </div>
-      <h1 className="text-center" style={{ marginTop: "5rem" }}>
-        User Profiles
-      </h1>
-      <p className="text-center mt-5">Coming Soon!!</p>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { PaperClipIcon } from '@heroicons/react/20/solid';
+import UserResume from './ResumeUploader';
 
 
 export default function Bio(props) {
@@ -41,7 +42,10 @@ export default function Bio(props) {
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">Resume</dt>
-              <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              <dd>
+                
+              </dd>
+              {/* <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
                   <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                     <div className="flex w-0 flex-1 items-center">
@@ -72,7 +76,7 @@ export default function Bio(props) {
                     </div>
                   </li>
                 </ul>
-              </dd>
+              </dd> */}
             </div>
           </dl>
         </div>
