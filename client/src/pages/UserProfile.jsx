@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   Tabs,
   TabsHeader,
@@ -6,17 +8,17 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { FontAwesomeIcon } from "../../node_modules/@fortawesome/react-fontawesome";
 import {
   faYoutube,
   faFacebook,
   faTwitter,
-  faInstagram
+  faInstagram 
 } from "@fortawesome/free-brands-svg-icons";
 import {
   Square3Stack3DIcon,
   UserCircleIcon,
   Cog6ToothIcon,
+  // pencil
 } from "@heroicons/react/24/solid";
 
 import Bio from "../components/Bio";
@@ -35,23 +37,6 @@ export default function UserProfile() {
 
   return (
     <>
-      <div>
-        <a href="https://www.youtube.com/c/jamesqquick"
-          className="youtube social">
-          <FontAwesomeIcon icon={faYoutube} size="2x" />
-        </a>
-        <a href="https://www.facebook.com/learnbuildteach/"
-          className="facebook social">
-          <FontAwesomeIcon icon={faFacebook} size="2x" />
-        </a>
-        <a href="https://www.twitter.com/jamesqquick" className="twitter social">
-          <FontAwesomeIcon icon={faTwitter} size="2x" />
-        </a>
-        <a href="https://www.instagram.com/learnbuildteach"
-          className="instagram social">
-          <FontAwesomeIcon icon={faInstagram} size="2x" />
-        </a>
-      </div>
       <Tabs value="bio" orientation="vertical">
         <TabsHeader className="w-40">
           <Tab value="bio" className="place-items-start">
@@ -92,6 +77,24 @@ export default function UserProfile() {
           </TabPanel>
         </TabsBody>
       </Tabs>
+      <div>
+        <a href="https://www.youtube.com/c/jamesqquick"
+          className="youtube social">
+          <FontAwesomeIcon icon={faYoutube} size="2x" />
+        </a>
+        <a href="https://www.facebook.com/learnbuildteach/"
+          className="facebook social">
+          <FontAwesomeIcon icon={faFacebook} size="2x" />
+        </a>
+        <a href="https://www.twitter.com/jamesqquick" className="twitter social">
+          <FontAwesomeIcon icon={faTwitter} size="2x" />
+        </a>
+        <a href="https://www.instagram.com/learnbuildteach"
+          className="instagram social">
+          <FontAwesomeIcon icon={faInstagram} size="2x" />
+        </a>
+      </div>
     </>
+    
   );
 }
