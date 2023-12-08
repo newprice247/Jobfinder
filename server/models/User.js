@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-
+//can we add profilePictureUrl here im including it also in the user profile pic 
 const userSchema = new Schema(
     {
         name: {
@@ -33,6 +33,9 @@ const userSchema = new Schema(
             minLength: 1,
             maxLength: 280
         },
+        profilePictureUrl: {  //we need this 
+            type: String,
+          },
         listings: [
             {
                 type: Schema.Types.ObjectId,

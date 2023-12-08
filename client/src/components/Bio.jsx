@@ -1,7 +1,8 @@
 import { PaperClipIcon } from '@heroicons/react/20/solid';
 import React, { useEffect, useState } from "react";
 import ProfilePicture from "./profile-pic"; // Adjust the import path based on your project structure
-
+const defaultUserImage = '../../client/src/assets/images/Screenshot(384).png'; // Replace with the path to your default image
+//need correct pathing
 
 export default function Bio(props) {
   const UserProfile = () => {
@@ -47,7 +48,9 @@ export default function Bio(props) {
           <h3 className="text-base font-semibold leading-7 text-gray-900">Users profile</h3>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and resumes.</p>
         </div>
-        <div className="mt-6 border-t border-gray-100">
+        <div className="mt-6 border-t border-gray-100"> {/*we need profilePicUrl in user model user.profilePictureUrl*/}
+        <ProfilePicture imageUrl={newProfilePicture || defaultUserImage} alt="Profile Picture" className="rounded-full" onImageChange={handleImageChange} />
+
         {editMode ? (
           <form>
             <label>
