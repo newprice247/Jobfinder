@@ -46,7 +46,7 @@ export default function CollapseDefault() {
     <>
       <Button onClick={toggleOpen}>New Listing</Button>
       <Collapse open={open}>
-        <Card className="mx-auto w-full w-full">
+        <Card className="mx-auto w-full">
           <CardBody className="flex flex-col gap-4">
             <Typography variant="h4" color="blue-gray">
               New Listing
