@@ -14,35 +14,64 @@ export default function searchBar() {
   const toggleOpen = (section) => setOpenSection((prevOpenSection) => (prevOpenSection === section ? null : section));
 
   return (
-    <div>
-      {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
+    <div className='flex flex-wrap items-center justify-center'>
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         animate={{ y: 70 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap gap-3 justify-center items-center">
+        transition={{ delay: 0.5, duration: 0.5 }}>
   
-        <Button>Search Here</Button>
 
-        <Button onClick={() => toggleOpen(1)}>Job Category 1</Button>
-        <Collapse open={openSection === 1}>
+        <div className="flex justify-evenly mb-8">
+          {/* SEARCH BAR WILL BE ADDED HERE */}
+        <Button className='bg-green-800'>Search Here</Button>
+        </div>
+        
+
+
+ {/* BUTTONS FOR FILTER CATEGORY - These will display after user types in search bar */}
+        <div className='flex justify-center gap-3 mb-4'>
+         
+        <Button onClick={() => toggleOpen(1)}>Job Category</Button>
+
+
+        <Button onClick={() => toggleOpen(2)}>Location</Button>
+
+        <Button onClick={() => toggleOpen(3)}>Pay</Button>
+        </div>
+        <div className='mb-4'>
+        <Collapse open={openSection === 3}>
           <Card className="my-4 mx-auto w-8/12">
             <CardBody>
-              <Typography>Job category 1 listings: food/beverage, retail, etc.</Typography>
+              <Typography>pay rates</Typography>
             </CardBody>
           </Card>
         </Collapse>
 
-        <Button onClick={() => toggleOpen(2)}>Job Category 2</Button>
         <Collapse open={openSection === 2}>
           <Card className="my-4 mx-auto w-8/12">
             <CardBody>
-              <Typography>Job category 2 listings: technology, healthcare, etc.</Typography>
+              <Typography>checkbox with remote</Typography>
             </CardBody>
           </Card>
         </Collapse>
+
+
+        <Collapse open={openSection === 1}>
+          <Card className="my-4 mx-auto w-8/12">
+            <CardBody>
+              <Typography>Job category 1 listings: food/beverage, retail, healthcare, technology, etc.</Typography>
+            </CardBody>
+          </Card>
+        </Collapse>
+        </div>
+
+
+
+  
+
+    
       </motion.div>
     </div>
   );
