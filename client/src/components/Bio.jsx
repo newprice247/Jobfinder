@@ -1,7 +1,38 @@
 import { PaperClipIcon } from '@heroicons/react/20/solid';
+import React, { useEffect, useState } from "react";
 
 
 export default function Bio(props) {
+  const UserProfile = () => {
+    const [user, setUser] = useState({});
+    const [editMode, setEditMode] = useState(false);
+    const [editedUser, setEditedUser] = useState({});
+  
+    useEffect(() => {
+      setUser(props.user);
+    }, [props.user]);
+  
+    const handleUpdateClick = () => {
+      // Copy the user information to the editedUser state
+      setEditedUser({ ...user });
+      setEditMode(true);
+    };
+  
+    const handleCancelClick = () => {
+      // Cancel the edit and switch back to view mode
+      setEditMode(false);
+    };
+  
+    const handleSaveClick = () => {
+      // Save the edited user information and switch back to view mode
+      setUser(editedUser);
+      setEditMode(false);
+    };
+  
+    const handleInputChange = (e) => {
+      // Update the editedUser state as the user types in the form
+      setEditedUser({ ...editedUser, [e.target.name]: e.target.value });
+    };
   
     return (
         <div>
@@ -10,7 +41,34 @@ export default function Bio(props) {
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and resumes.</p>
         </div>
         <div className="mt-6 border-t border-gray-100">
+        {editMode ? (
+          <form>
+            <label>
+              Full Name:
+              <input
+                type="text"
+                name="fullName"
+                value={editedUser.fullName}
+                onChange={handleInputChange}
+              />
+            </label>
+            <button type="button" onClick={handleCancelClick}>
+              Cancel
+            </button>
+            <button type="button" onClick={handleSaveClick}>
+              Save
+            </button>
+          </form>
+        ) : (
           <dl className="divide-y divide-gray-100">
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm font-medium leading-6 text-gray-900">Bio</dt>
+              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur
+                qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud
+                pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
+              </dd>
+            </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">Full name</dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{props.name}</dd>
@@ -19,6 +77,7 @@ export default function Bio(props) {
               <dt className="text-sm font-medium leading-6 text-gray-900">Username</dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{props.username}</dd>
             </div>
+            
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">Phone number</dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{props.phone}</dd>
@@ -31,14 +90,10 @@ export default function Bio(props) {
               <dt className="text-sm font-medium leading-6 text-gray-900">Salary expectation</dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">$120,000</dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">Bio</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur
-                qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud
-                pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-              </dd>
-            </div>
+            
+            <button type="button" onClick={handleUpdateClick}>
+                Update profile
+              </button>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 text-gray-900">Resume</dt>
               <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -75,8 +130,12 @@ export default function Bio(props) {
               </dd>
             </div>
           </dl>
-        </div>
+        )}
+       </div>
+        
       </div>
         )
+        }
+        return <UserProfile />;
 
-}
+        }
