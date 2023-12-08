@@ -20,9 +20,19 @@ import {
 } from "@heroicons/react/24/solid";
 
 import Bio from "../components/Bio";
+import search from "../../utils/API";
+import Auth from "../../utils/auth";
 
 export default function UserProfile() {
-  
+  const [user, setUser] = useState({});
+  const userId = Auth.getProfile().data._id;
+  useEffect(() => {
+    search.fetchUser(userId)
+      .then((data) => setUser(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, [userId]);
+
+
   return (
     <>
       <div>
@@ -65,7 +75,14 @@ export default function UserProfile() {
         </TabsHeader>
         <TabsBody>
           <TabPanel value="bio" className="py-0">
-            <Bio />
+            <Bio 
+            id={user._id}
+            name={user.name}
+            username={user.username}
+            email={user.email}
+            phone={user.phone}
+
+            />
           </TabPanel>
           <TabPanel value="jobListing" className="py-0">
             Job Listing
