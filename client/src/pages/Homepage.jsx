@@ -53,6 +53,7 @@ export default function Homepage() {
                 animate={{ y: 10 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="flex flex-wrap mt-20 justify-center items-center">
+                    
                 {Auth.loggedIn() ? (
                     
                     <CreateListingModal />
