@@ -11,6 +11,7 @@ import CurrentListing from "../components/CurrentListing";
 import JobListing from "../components/JobListingCard";
 import CreateListingModal from "../components/CreateListingModal";
 import Auth from "../../utils/auth";
+import Searchbar from  "../components/Searchbar";
 
 // Exporting the Homepage, located at '/'
 export default function Homepage() {
@@ -43,6 +44,7 @@ export default function Homepage() {
     // Returning the homepage as html
     return (
         <div className="bg-myColor-3">
+            <Searchbar />
             {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
             <motion.div
                 initial={{ opacity: 0 }}
@@ -51,7 +53,9 @@ export default function Homepage() {
                 animate={{ y: 10 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="flex flex-wrap mt-20 justify-center items-center">
+                    
                 {Auth.loggedIn() ? (
+                    
                     <CreateListingModal />
                 ) : (
                     <div>
