@@ -28,7 +28,7 @@ const handleImageChange = (e) => {
         Edit
       </button>
       <input
-        id="fileInput"
+        id="fileInput" 
         type="file"
         accept="image/*"
         className="hidden"

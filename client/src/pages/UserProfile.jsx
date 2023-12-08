@@ -66,6 +66,7 @@ export default function UserProfile() {
             username={user.username}
             email={user.email}
             phone={user.phone}
+           
 
             />
           </TabPanel>
