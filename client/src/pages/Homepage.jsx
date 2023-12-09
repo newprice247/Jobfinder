@@ -11,6 +11,7 @@ import CurrentListing from "../components/CurrentListing";
 import JobListing from "../components/JobListingCard";
 import CreateListingModal from "../components/CreateListingModal";
 import Auth from "../../utils/auth";
+import Searchbar from  "../components/Searchbar";
 
 // Exporting the Homepage, located at '/'
 export default function Homepage() {
@@ -43,26 +44,30 @@ export default function Homepage() {
     // Returning the homepage as html
     return (
         <div className="bg-myColor-3">
+            <Searchbar />
+
             {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                animate={{ y: 10 }}
+                animate={{ y: 20 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="flex flex-wrap mt-20 justify-center items-center">
+                
+                    
                 {Auth.loggedIn() ? (
+                    
                     <CreateListingModal />
                 ) : (
                     <div>
-                        <h1>Log in to create a listing!</h1>
+                        <h1 className="overflow-y-auto h-[80vh]">Log in to create a listing!</h1>
                     </div>
                 )}
                 {/* container for the job listings, current listing, and search bar */}
                 <div
-                    className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center overflow-y-auto  h-[80vh] no-scrollbar"
+                    className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-10 overflow-y-auto  h-[95vh] no-scrollbar"
                 >
-
                     {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
                     {listings.map((listing) => (
                         <JobListing
@@ -103,10 +108,11 @@ export default function Homepage() {
 
                 {/* container for the current listing, displays the current listing when a user clicks on a listing */}
                 <div
-                    className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center"
+                    className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-20 overflow-y-auto h-[80vh] no-scrollbar mt-20"
                     style={{ zIndex: 1 }}
                 >
                     {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
+                    
                     {currentListing !== null ? (
                         <CurrentListing
                             title={currentListing.title}
@@ -135,6 +141,7 @@ export default function Homepage() {
                             }
                             website={currentListing.website}
                         />
+
                     ) : ( // if the current listing is null, display a message prompting the user to click on a listing
                         <div>
                             <h1>Click on a job listing to see more details!</h1>

@@ -14,11 +14,13 @@ import {
 
 } from '@material-tailwind/react';
 
+
 // prototype for current listing, will be used to display current listing on home page
 export default function CurrentListing(props) {
     return (
         <>
-            <div>
+            <div className='border-2 p-4 rounded-md bg-myColor-1 opacity-85 text-myColor-3'>
+            
                 <h1>{props.title}</h1><br />
                 <h2>Location:</h2>
                 <p>{props.location}</p>
