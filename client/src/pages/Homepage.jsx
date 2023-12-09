@@ -45,6 +45,7 @@ export default function Homepage() {
     return (
         <div className="bg-myColor-3">
             <Searchbar />
+
             {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
             <motion.div
                 initial={{ opacity: 0 }}
@@ -60,14 +61,13 @@ export default function Homepage() {
                     <CreateListingModal />
                 ) : (
                     <div>
-                        <h1 className="overflow-y-auto h-[75vh]">Log in to create a listing!</h1>
+                        <h1 className="overflow-y-auto h-[80vh]">Log in to create a listing!</h1>
                     </div>
                 )}
                 {/* container for the job listings, current listing, and search bar */}
                 <div
-                    className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-10 overflow-y-auto  h-[100vh] no-scrollbar"
+                    className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-10 overflow-y-auto  h-[95vh] no-scrollbar"
                 >
-
                     {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
                     {listings.map((listing) => (
                         <JobListing
@@ -108,7 +108,7 @@ export default function Homepage() {
 
                 {/* container for the current listing, displays the current listing when a user clicks on a listing */}
                 <div
-                    className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-6 overflow-y-auto h-[75vh]"
+                    className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-20 overflow-y-auto h-[80vh] no-scrollbar mt-20"
                     style={{ zIndex: 1 }}
                 >
                     {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
