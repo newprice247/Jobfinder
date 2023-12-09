@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ProfilePicture from "./profile-pic"; // Adjust the import path based on your project structure
 const defaultUserImage = '../../client/src/assets/images/Screenshot(384).png'; // Replace with the path to your default image
 //need correct pathing
+import { Button } from "@material-tailwind/react";
 
 export default function Bio(props) {
   const UserProfile = () => {
@@ -108,12 +109,14 @@ export default function Bio(props) {
                   onChange={handleInputChange}
                 />
               </label>
-              <button type="button" onClick={handleCancelClick}>
+              <div className="flex w-max items-end gap-4 float-right">
+              <Button type="button" size="sm" variant="outlined" onClick={handleCancelClick}>
                 Cancel
-              </button>
-              <button type="button" onClick={handleSaveClick}>
+              </Button>
+              <Button type="button" size="sm" onClick={handleSaveClick}>
                 Save
-              </button>
+              </Button>
+              </div>
             </form>
           ) : (
             <dl className="divide-y divide-gray-100">
