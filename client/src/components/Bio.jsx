@@ -56,7 +56,7 @@ export default function Bio(props) {
               {/* <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Bio:
                 <input
-                 class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
+                 class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
 
                   type="text"
                   name="bio"
@@ -67,7 +67,7 @@ export default function Bio(props) {
               <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Full Name:
                 <input
-                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
+                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder="John Doe"
                   type="text"
                   name="fullName"
@@ -78,7 +78,7 @@ export default function Bio(props) {
               <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Username:
                 <input
-                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
+                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder="username321"
                   type="text"
                   name="username"
@@ -89,7 +89,7 @@ export default function Bio(props) {
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Email address:
                 <input
-                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
+                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder="johndoe321@email.com"
                   type="text"
                   name="email"
@@ -100,7 +100,7 @@ export default function Bio(props) {
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Phone number:
                 <input
-                  class="block mb-2 text-sm font-medium bg-gray-50 border text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300"
+                  class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder="555-555-5555"
                   type="text"
                   name="phone number"
@@ -108,20 +108,6 @@ export default function Bio(props) {
                   onChange={handleInputChange}
                 />
               </label>
-
-              {/* <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
-            
-              <input id="email" class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="elonmusk@email.com"  type="text"
-                  name="email"
-                  value={editedUser.email}
-                  onChange={handleInputChange}/>
-              <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Username:
-                <input id="username" class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-900 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="elonmusk"  type="text"
-                  name="username"
-                  value={editedUser.username}
-                  onChange={handleInputChange}/>
-                  </label> */}
               <button type="button" onClick={handleCancelClick}>
                 Cancel
               </button>
