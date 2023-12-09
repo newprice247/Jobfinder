@@ -79,6 +79,7 @@ export default function Bio(props) {
                 Username:
                 <input
                   class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
+                  placeholder="username321"
                   type="text"
                   name="username"
                   value={editedUser.username}
@@ -89,6 +90,7 @@ export default function Bio(props) {
                 Email address:
                 <input
                   class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
+                  placeholder="johndoe321@email.com"
                   type="text"
                   name="email"
                   value={editedUser.email}
@@ -99,8 +101,9 @@ export default function Bio(props) {
                 Phone number:
                 <input
                   class="block mb-2 text-sm font-medium bg-gray-50 border text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300"
+                  placeholder="555-555-5555"
                   type="text"
-                  name="fullName"
+                  name="phone number"
                   value={editedUser.phone}
                   onChange={handleInputChange}
                 />
