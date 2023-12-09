@@ -54,7 +54,7 @@ export default function Bio(props) {
 
           {editMode ? (
             <form>
-              {/* <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              {/* <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Bio:
                 <input
                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
