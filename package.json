@@ -36,6 +36,7 @@
     "firebase": "^10.7.1",
     "framer-motion": "^10.16.12",
     "react-bootstrap": "^2.9.1",
-    "tw-elements-react": "^1.0.0-alpha2"
+    "tw-elements-react": "^1.0.0-alpha2",
+    "uuid": "^9.0.1"
   }
 }

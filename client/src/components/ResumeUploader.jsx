@@ -1,37 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { storage } from "../../utils/gsBucket";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { storage, db } from "../../utils/gsBucket";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
+import { push, onValue, ref as dbRef } from "firebase/database";
 
-export default function UserResume() {
-  const [selectedFile, setSelectedFile] = useState(null);
+const ResumeUploader = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   // Handle file selection
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    const storageRef = ref(storage, `resumes/${v4()}`);
 
-    const storageRef = ref(storage, "resumes");
-
-    // 'file' comes from the Blob or File API
-    console.log("upload");
     uploadBytes(storageRef, file).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
-      getDownloadURL(snapshot).then((url) => {
-        setSelectedFile(url);
+      console.log(snapshot);
+      getDownloadURL(snapshot.ref).then((url) => {
+        const newFile = { name: file.name, url: url };
+        setUploadedFiles((prevFiles) => [...prevFiles, newFile]);
+
+        push(dbRef(db, "uploadedFiles"), newFile);
       });
     });
-    // setSelectedFile(file);
   };
 
-  // Handle file upload logic (you can replace this with your actual upload logic)
+  // Load files from Firebase Realtime Database on component mount
   useEffect(() => {
-    if (selectedFile) {
-      // Simulate file upload by pushing the file to the uploadedFiles state
-      setUploadedFiles((prevFiles) => [...prevFiles, selectedFile]);
-      // Clear the selectedFile state
-      setSelectedFile(null);
-    }
-  }, [selectedFile]);
+    const filesRef = dbRef(db, "uploadedFiles");
+    onValue(filesRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const files = Object.values(data);
+        setUploadedFiles(files);
+      }
+    });
+
+    return () => {
+      // Unsubscribe from the database updates when the component unmounts
+      filesRef.off("value");
+    };
+  }, []);
 
   return (
     <div className="">
@@ -78,12 +85,7 @@ export default function UserResume() {
         <ul>
           {uploadedFiles.map((file, index) => (
             <li key={index}>
-              {/* need to add where file is being pulled from */}
-              <a
-                href={`gs://jobfinder-5711e.appspot.com${file.name}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={file.url} target="_blank" rel="noopener noreferrer">
                 {file.name}
               </a>
             </li>
@@ -92,4 +94,6 @@ export default function UserResume() {
       </div>
     </div>
   );
-}
+};
+
+export default ResumeUploader;
