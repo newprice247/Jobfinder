@@ -18,6 +18,7 @@ import {
   Square3Stack3DIcon,
   UserCircleIcon,
   Cog6ToothIcon,
+  BriefcaseIcon,
   // pencil
 } from "@heroicons/react/24/solid";
 
@@ -53,7 +54,7 @@ export default function UserProfile() {
           </Tab>
           <Tab value="savedJobs" className="place-items-start">
             <div className="flex items-center gap-2">
-              {React.createElement(Cog6ToothIcon, { className: "w-5 h-5" })}
+              {React.createElement(BriefcaseIcon, { className: "w-5 h-5" })}
               Saved Jobs
             </div>
           </Tab>
