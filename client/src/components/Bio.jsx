@@ -56,7 +56,7 @@ export default function Bio(props) {
               {/* <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Bio:
                 <input
-                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white rounded-none"
+                 class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
 
                   type="text"
                   name="bio"
@@ -67,7 +67,7 @@ export default function Bio(props) {
               <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Full Name:
                 <input
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300"
+                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
                   placeholder="John Doe"
                   type="text"
                   name="fullName"
@@ -78,7 +78,7 @@ export default function Bio(props) {
               <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Username:
                 <input
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300"
+                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
                   type="text"
                   name="username"
                   value={editedUser.username}
@@ -88,7 +88,7 @@ export default function Bio(props) {
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Email address:
                 <input
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300"
+                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300"
                   type="text"
                   name="email"
                   value={editedUser.email}
@@ -98,7 +98,7 @@ export default function Bio(props) {
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Phone number:
                 <input
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300"
+                  class="block mb-2 text-sm font-medium bg-gray-50 border text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300"
                   type="text"
                   name="fullName"
                   value={editedUser.phone}
