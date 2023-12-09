@@ -80,6 +80,34 @@ export default function Bio(props) {
                   onChange={handleInputChange}
                 />
               </label>
+              <label>
+                Phone number:
+                <input
+                  type="text"
+                  name="phone number"
+                  value={editedUser.phone}
+                  onChange={handleInputChange}
+                />
+                
+              </label>
+              <label>
+                Email address:
+                <input
+                  type="text"
+                  name="email"
+                  value={editedUser.email}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label>
+                Phone number:
+                <input
+                  type="text"
+                  name="fullName"
+                  value={editedUser.fullName}
+                  onChange={handleInputChange}
+                />
+              </label>
               <button type="button" onClick={handleCancelClick}>
                 Cancel
               </button>
