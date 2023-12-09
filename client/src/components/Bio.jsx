@@ -53,12 +53,30 @@ export default function Bio(props) {
 
           {editMode ? (
             <form>
+              {/* <label>
+                Bio:
+                <input
+                  type="text"
+                  name="bio"
+                  value={editedUser.bio}
+                  onChange={handleInputChange}
+                />
+              </label> */}
               <label>
                 Full Name:
                 <input
                   type="text"
                   name="fullName"
                   value={editedUser.fullName}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label>
+                Username:
+                <input
+                  type="text"
+                  name="username"
+                  value={editedUser.username}
                   onChange={handleInputChange}
                 />
               </label>
