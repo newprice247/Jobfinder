@@ -58,7 +58,7 @@ export default function Bio(props) {
                 Bio:
                 <input
                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
-
+                 placeholder="Hello, looking for job that catch my interest..."
                   type="text"
                   name="bio"
                   value={editedUser.bio}
