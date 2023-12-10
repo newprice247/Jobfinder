@@ -36,6 +36,18 @@ export const loginUser = (userData) => {
     });
 };
 
+export const updateUser = (userID, userData) => {
+    console.log('here is the client api call', userID, userData)
+    return fetch(`/api/users/${userID}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+        
+    });
+};
+
 export const saveListing = (userId, listingID) => {
     console.log('here is the client api call', userId, listingID)
     return fetch(`/api/users/${userId}/listings/${listingID}`, {

@@ -4,18 +4,38 @@ import ProfilePicture from "./profile-pic"; // Adjust the import path based on y
 const defaultUserImage = '../../client/src/assets/images/Screenshot(384).png'; // Replace with the path to your default image
 //need correct pathing
 import { Button } from "@material-tailwind/react";
+import Auth from "../../utils/auth";
+import {updateUser} from "../../utils/API";
 
 export default function Bio(props) {
   const UserProfile = () => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+      _id: "",
+      bio: "",
+      fullName: "",
+      username: "",
+      email: "",
+      phone: "",
+      salaryExpectation: "",
+      profilePictureUrl: "",
+    });
     const [newProfilePicture, setNewProfilePicture] = useState(null); //allows me to update the state of new profile pic using setnewprofilepicture function
 
     const [editMode, setEditMode] = useState(false);
     const [editedUser, setEditedUser] = useState({});
 
     useEffect(() => {
-      setUser(props.user);
-    }, [props.user]);
+      setUser({
+        _id: props.id,
+        bio: props.bio,
+        fullName: props.name,
+        username: props.username,
+        email: props.email,
+        phone: props.phone,
+        salaryExpectation: props.salaryExpectation,
+        profilePictureUrl: props.profilePictureUrl,
+      });
+    }, [props]);
 
     const handleImageChange = (imageUrl) => {
       setNewProfilePicture(imageUrl);
@@ -23,7 +43,9 @@ export default function Bio(props) {
 
     const handleUpdateClick = () => {
       // Copy the user information to the editedUser state
-      setEditedUser({ ...user });
+      setEditedUser({ 
+        ...user
+      });
       setEditMode(true);
     };
 
@@ -33,9 +55,18 @@ export default function Bio(props) {
     };
 
     const handleSaveClick = () => {
-      // Save the edited user information and switch back to view mode
-      setUser(editedUser);
-      setEditMode(false);
+      // Save the changes
+      console.log(editedUser);
+      updateUser(editedUser._id, editedUser)
+        .then((data) => {
+          // Update the user state
+          setUser(data);
+          // Switch back to view mode
+          setEditMode(false);
+
+          window.location.reload();
+        })
+        .catch((err) => console.error(err));
     };
 
     const handleInputChange = (e) => {
@@ -49,90 +80,84 @@ export default function Bio(props) {
           <h3 className="text-base font-semibold leading-7 text-gray-900">Users profile</h3>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and resumes.</p>
         </div>
-        <div className="mt-6 border-t border-gray-100"> {/*we need profilePicUrl in user model user.profilePictureUrl*/}
+         <div className="mt-6 border-t border-gray-100"> {/*we need profilePicUrl in user model user.profilePictureUrl */}
           <ProfilePicture imageUrl={newProfilePicture || defaultUserImage} alt="Profile Picture" className="rounded-full" onImageChange={handleImageChange} />
 
           {editMode ? (
             <form>
-              Bio:
-              <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                
+
+              <label for="bio" class="block mb-2 text-sm font-medium text-black">
+                Bio:
                 <input
-                 class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
-                 placeholder={props.bio}
+                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  placeholder={props.bio}
                   type="text"
                   name="bio"
-                  value={editedUser.bio}
                   onChange={handleInputChange}
                 />
               </label>
-              Full Name:
-              <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                
+
+              <label for="fullname" class="block mb-2 text-sm font-medium text-black">
+                Full Name:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.name}
                   type="text"
                   name="fullName"
-                  value={editedUser.fullName}
                   onChange={handleInputChange}
                 />
               </label>
-              Username:
-              <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                
+
+              <label for="username" class="block mb-2 text-sm font-medium text-black">
+                Username:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.username}
                   type="text"
                   name="username"
-                  value={editedUser.username}
                   onChange={handleInputChange}
                 />
               </label>
-              Email address:
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                
+
+              <label class="block mb-2 text-sm font-medium text-black">
+                Email address:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.email}
                   type="text"
                   name="email"
-                  value={editedUser.email}
                   onChange={handleInputChange}
                 />
               </label>
-              Phone number:
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                
+
+              <label class="block mb-2 text-sm font-medium text-black">
+                Phone number:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.phone}
                   type="text"
                   name="phone number"
-                  value={editedUser.phone}
                   onChange={handleInputChange}
                 />
               </label>
-              Salary expectation:
-              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                
+
+              <label class="block mb-2 text-sm font-medium text-black">
+                Salary expectation:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.salaryExpectation}
                   type="text"
                   name="salary expectation"
-                  value={editedUser.salaryExpectation}
                   onChange={handleInputChange}
                 />
               </label>
               <div className="flex w-max items-end gap-4 float-right">
-              <Button type="button" size="sm" variant="outlined" onClick={handleCancelClick}>
-                Cancel
-              </Button>
-              <Button type="button" size="sm" onClick={handleSaveClick}>
-                Save
-              </Button>
+                <Button type="button" size="sm" variant="outlined" onClick={handleCancelClick}>
+                  Cancel
+                </Button>
+                <Button type="button" size="sm" onClick={handleSaveClick}>
+                  Save
+                </Button>
               </div>
             </form>
           ) : (
