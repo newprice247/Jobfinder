@@ -105,7 +105,7 @@ export default function Bio(props) {
                   class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.name}
                   type="text"
-                  name="fullName"
+                  name="name"
                   onChange={handleInputChange}
                 />
               </label>
