@@ -23,7 +23,7 @@ export default function searchBar() {
         <div className="flex justify-evenly mb-8">
           {/* SEARCH BAR WILL BE ADDED HERE */}
           {/* <Button className='bg-green-800'>Search Here</Button> */}
-          <div className="search-bar-container">
+          <div className="search-bar-container flex flex-col justify-center items-center">
             <div className="input-wrapper">
               <FaSearch id="search-icon" />
             </div>
