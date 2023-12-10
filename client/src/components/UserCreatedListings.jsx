@@ -47,12 +47,12 @@ export default function UserCreatedListings() {
         );
     } else {
         return (
-            <>
-                {listings.map((listing, i) => (
-                    <div key={listing.id}>
+            <div className="bg-myColor-3">
+                {listings.map((listing) => (
+                    <div key={listing._id}>
 
-                        <Accordion open={open === listing[i]}>
-                            <AccordionHeader onClick={() => handleOpen(listing[i])}>
+                        <Accordion open={open === listing._id}>
+                            <AccordionHeader onClick={() => handleOpen(listing._id)}>
                                 {listing.title}
                             </AccordionHeader>
                             <AccordionBody>
@@ -169,7 +169,7 @@ export default function UserCreatedListings() {
                         </Accordion>
                     </div>
                 ))}
-            </>
+            </div>
         );
     }
 }
