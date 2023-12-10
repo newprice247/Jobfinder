@@ -38,6 +38,14 @@ export default function Homepage() {
         console.log(searchResults);
     }
 
+    function handleLocationFilter(event) {
+        setSearchTerm(event.target.name);
+        setSearchResults(listings.filter((listing) => listing.location.toLowerCase().includes(searchTerm.toLowerCase())));
+        console.log(searchTerm);
+        console.log(searchResults);
+        setSearchStarted(true);
+    }
+
     // Handles the current Contact information for each listing
     const [listingContact, setListingContact] = useState([]);
     useEffect(() => {
@@ -86,6 +94,11 @@ export default function Homepage() {
                                         type="text"
                                         placeholder="Search for a job..."
                                         onChange={handleSearch}
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter") {
+                                                handleSearch(e);
+                                            }
+                                        }}
                                         className="w-full h-10 pl-10 pr-3 text-md text-myColor-2 bg-white border rounded-full focus:outline-none shadow-lg"
                                     />
                                 </div>
@@ -119,15 +132,11 @@ export default function Homepage() {
                                 <CardBody>
                                     {listings.map((listing) => (
                                         <button
+                                            key={listing._id}
                                             name={listing.location}
                                             className="text-myColor-2 hover:text-myColor-1"
                                             onClick={(e) => {
-                                                e.preventDefault()
-                                                setSearchTerm(e.target.name)
-                                                setSearchResults(listings.filter((listing) => listing.location === searchTerm))
-                                                setSearchStarted(true)
-                                                console.log(`search term: ${searchTerm}`)
-                                                console.log(`searchResults: ${searchResults}`)
+                                                handleLocationFilter(e)
                                             }}>{listing.location}</button>
                                     ))}
                                 </CardBody>
