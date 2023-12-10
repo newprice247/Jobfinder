@@ -67,6 +67,8 @@ export default function UserProfile() {
             username={user.username}
             email={user.email}
             phone={user.phone}
+            bio={user.bio}
+            salaryExpectation={user.salaryExpectation}
            
 
             />

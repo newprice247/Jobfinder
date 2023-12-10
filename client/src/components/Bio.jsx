@@ -54,58 +54,75 @@ export default function Bio(props) {
 
           {editMode ? (
             <form>
-              {/* <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Bio:
+              Bio:
+              <label for="bio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                
                 <input
                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
-                 placeholder="Hello, looking for job that catch my interest..."
+                 placeholder={props.bio}
                   type="text"
                   name="bio"
                   value={editedUser.bio}
                   onChange={handleInputChange}
                 />
-              </label> */}
+              </label>
+              Full Name:
               <label for="fullname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Full Name:
+                
                 <input
                   class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
-                  placeholder="John Doe"
+                  placeholder={props.name}
                   type="text"
                   name="fullName"
                   value={editedUser.fullName}
                   onChange={handleInputChange}
                 />
               </label>
+              Username:
               <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Username:
+                
                 <input
                   class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
-                  placeholder="username321"
+                  placeholder={props.username}
                   type="text"
                   name="username"
                   value={editedUser.username}
                   onChange={handleInputChange}
                 />
               </label>
+              Email address:
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Email address:
+                
                 <input
                   class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
-                  placeholder="johndoe321@email.com"
+                  placeholder={props.email}
                   type="text"
                   name="email"
                   value={editedUser.email}
                   onChange={handleInputChange}
                 />
               </label>
+              Phone number:
               <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Phone number:
+                
                 <input
                   class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
-                  placeholder="555-555-5555"
+                  placeholder={props.phone}
                   type="text"
                   name="phone number"
                   value={editedUser.phone}
+                  onChange={handleInputChange}
+                />
+              </label>
+              Salary expectation:
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                
+                <input
+                  class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 dark:text-white rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  placeholder={props.salaryExpectation}
+                  type="text"
+                  name="salary expectation"
+                  value={editedUser.salaryExpectation}
                   onChange={handleInputChange}
                 />
               </label>
@@ -123,9 +140,7 @@ export default function Bio(props) {
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                 <dt className="text-sm font-medium leading-6 text-gray-900">Bio</dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur
-                  qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud
-                  pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
+                  {props.bio}
                 </dd>
               </div>
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -147,7 +162,7 @@ export default function Bio(props) {
               </div>
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                 <dt className="text-sm font-medium leading-6 text-gray-900">Salary expectation</dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">$120,000</dd>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{props.salaryExpectation}</dd>
               </div>
               <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleUpdateClick}>
                 Update profile

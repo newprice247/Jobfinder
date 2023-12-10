@@ -33,6 +33,16 @@ const userSchema = new Schema(
             minLength: 1,
             maxLength: 280
         },
+        bio: {
+            type: String,
+            minLength: 1,
+            maxLength: 280
+        },
+        salaryExpectation: {
+            type: String,
+            minLength: 1,
+            maxLength: 280
+        },
         profilePictureUrl: {  //we need this 
             type: String,
           },
