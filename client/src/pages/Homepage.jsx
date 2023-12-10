@@ -159,7 +159,6 @@ export default function Homepage() {
                       onClick={(e) => {
                         handleCategoryFilter(e);
                       }}>
-                      *Category Name will be here instead*
                       {listing.category}
                     </button>
                   ))}
@@ -265,6 +264,7 @@ export default function Homepage() {
                 <JobListing
                   id={listing._id}
                   title={listing.title}
+                  category={listing.category}
                   location={listing.location}
                   description={listing.description}
                   requirements={listing.requirements}
@@ -304,6 +304,7 @@ export default function Homepage() {
           {currentListing !== null ? (
             <CurrentListing
               title={currentListing.title}
+              category={currentListing.category}
               location={currentListing.location}
               description={currentListing.description}
               requirements={currentListing.requirements}

@@ -58,7 +58,6 @@ export default function JobListing(props) {
             {props.title}
           </Typography>
           <Typography variant="small" color="gray">
-            *Category Name will be here instead*
             {props.category}
           </Typography>
           <Typography
