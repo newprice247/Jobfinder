@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import { Collapse, Card, Typography, CardBody } from "@material-tailwind/react";
-import {}
+import { FaSearch } from "react-icons/fa";
 
 export default function searchBar() {
   const [openSection, setOpenSection] = useState(null);
@@ -24,7 +24,9 @@ export default function searchBar() {
           {/* SEARCH BAR WILL BE ADDED HERE */}
           {/* <Button className='bg-green-800'>Search Here</Button> */}
           <div className="search-bar-container">
-            <div className="input-wrapper">SearchBar</div>
+            <div className="input-wrapper">
+              <FaSearch id="search-icon" />
+            </div>
             <div>SearchResults</div>
           </div>
         </div>
