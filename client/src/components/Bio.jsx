@@ -1,11 +1,12 @@
-import { PaperClipIcon } from '@heroicons/react/20/solid';
+import { PaperClipIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 import ProfilePicture from "./profile-pic"; // Adjust the import path based on your project structure
-const defaultUserImage = '../../client/src/assets/images/Screenshot(384).png'; // Replace with the path to your default image
+const defaultUserImage = "../../client/src/assets/images/Screenshot(384).png"; // Replace with the path to your default image
 //need correct pathing
 import { Button } from "@material-tailwind/react";
 import Auth from "../../utils/auth";
-import {updateUser} from "../../utils/API";
+import { updateUser } from "../../utils/API";
+import ResumeUploader from "./ResumeUploader";
 
 export default function Bio(props) {
   const UserProfile = () => {
@@ -44,8 +45,8 @@ export default function Bio(props) {
     const handleUpdateClick = () => {
       // Copy the user information to the editedUser state
       console.log(user);
-      setEditedUser({ 
-        ...user
+      setEditedUser({
+        ...user,
       });
       console.log(editedUser);
       setEditMode(true);
@@ -79,16 +80,28 @@ export default function Bio(props) {
     return (
       <div>
         <div className="px-4 sm:px-0">
-          <h3 className="text-base font-semibold leading-7 text-gray-900">Users profile</h3>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and resumes.</p>
+          <h3 className="text-base font-semibold leading-7 text-gray-900">
+            Users profile
+          </h3>
+          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+            Personal details and resumes.
+          </p>
         </div>
-         <div className="mt-6 border-t border-gray-100"> {/*we need profilePicUrl in user model user.profilePictureUrl */}
-          <ProfilePicture imageUrl={newProfilePicture || defaultUserImage} alt="Profile Picture" className="rounded-full" onImageChange={handleImageChange} />
-
+        <div className="mt-6 border-t border-gray-100">
+          {" "}
+          {/*we need profilePicUrl in user model user.profilePictureUrl */}
+          <ProfilePicture
+            imageUrl={newProfilePicture || defaultUserImage}
+            alt="Profile Picture"
+            className="rounded-full"
+            onImageChange={handleImageChange}
+          />
           {editMode ? (
             <form>
-
-              <label for="bio" class="block mb-2 text-sm font-medium text-black">
+              <label
+                for="bio"
+                class="block mb-2 text-sm font-medium text-black"
+              >
                 Bio:
                 <input
                   class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
@@ -99,7 +112,10 @@ export default function Bio(props) {
                 />
               </label>
 
-              <label for="fullname" class="block mb-2 text-sm font-medium text-black">
+              <label
+                for="fullname"
+                class="block mb-2 text-sm font-medium text-black"
+              >
                 Full Name:
                 <input
                   class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
@@ -110,7 +126,10 @@ export default function Bio(props) {
                 />
               </label>
 
-              <label for="username" class="block mb-2 text-sm font-medium text-black">
+              <label
+                for="username"
+                class="block mb-2 text-sm font-medium text-black"
+              >
                 Username:
                 <input
                   class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
@@ -154,7 +173,12 @@ export default function Bio(props) {
                 />
               </label>
               <div className="flex w-max items-end gap-4 float-right">
-                <Button type="button" size="sm" variant="outlined" onClick={handleCancelClick}>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outlined"
+                  onClick={handleCancelClick}
+                >
                   Cancel
                 </Button>
                 <Button type="button" size="sm" onClick={handleSaveClick}>
@@ -165,38 +189,66 @@ export default function Bio(props) {
           ) : (
             <dl className="divide-y divide-gray-100">
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">Bio</dt>
+                <dt className="text-sm font-medium leading-6 text-gray-900">
+                  Bio
+                </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                   {props.bio}
                 </dd>
               </div>
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">Full name</dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{props.name}</dd>
+                <dt className="text-sm font-medium leading-6 text-gray-900">
+                  Full name
+                </dt>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  {props.name}
+                </dd>
               </div>
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">Username</dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{props.username}</dd>
+                <dt className="text-sm font-medium leading-6 text-gray-900">
+                  Username
+                </dt>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  {props.username}
+                </dd>
               </div>
 
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">Phone number</dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{props.phone}</dd>
+                <dt className="text-sm font-medium leading-6 text-gray-900">
+                  Phone number
+                </dt>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  {props.phone}
+                </dd>
               </div>
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">Email address</dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{props.email}</dd>
+                <dt className="text-sm font-medium leading-6 text-gray-900">
+                  Email address
+                </dt>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  {props.email}
+                </dd>
               </div>
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">Salary expectation</dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{props.salaryExpectation}</dd>
+                <dt className="text-sm font-medium leading-6 text-gray-900">
+                  Salary expectation
+                </dt>
+                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                  {props.salaryExpectation}
+                </dd>
               </div>
-              <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleUpdateClick}>
+              <button
+                type="button"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={handleUpdateClick}
+              >
                 Update profile
               </button>
+              <dd>
+                <ResumeUploader />
+              </dd>
 
-
-              <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                 <dt className="text-sm font-medium leading-6 text-gray-900">Resume</dt>
                 <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                   <ul role="list" className="divide-y divide-gray-100 rounded-md border border-gray-200">
@@ -230,14 +282,12 @@ export default function Bio(props) {
                     </li>
                   </ul>
                 </dd>
-              </div>
+              </div> */}
             </dl>
           )}
         </div>
-
       </div>
-    )
-  }
+    );
+  };
   return <UserProfile />;
-
 }
