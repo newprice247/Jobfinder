@@ -41,22 +41,123 @@ if (!listings.length) {
                         {listing.title}
                     </AccordionHeader>
                     <AccordionBody>
-                        <div className="flex flex-col gap-2">
-                            <h3 className="text-myColor-2 text-lg">Description:</h3>
-                            <p className="text-myColor-2">{listing.description}</p>
-                            <h3 className="text-myColor-2 text-lg">Requirements:</h3>
-                            <p className="text-myColor-2">{listing.requirements}</p>
-                            <h3 className="text-myColor-2 text-lg">Location:</h3>
-                            <p className="text-myColor-2">{listing.location}</p>
-                            <h3 className="text-myColor-2 text-lg">Salary:</h3>
-                            <p className="text-myColor-2">{listing.salary}</p>
-                            <h3 className="text-myColor-2 text-lg">Benefits:</h3>
-                            <p className="text-myColor-2">{listing.benefits}</p>
-                            <h3 className="text-myColor-2 text-lg">Company:</h3>
-                            <p className="text-myColor-2">{listing.company}</p>
-                            <h3 className="text-myColor-2 text-lg">Website:</h3>
-                            <p className="text-myColor-2">{listing.website}</p>
-                        </div>
+                        <form>
+                            <div className="flex flex-col gap-4">
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="title">Title</label>
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        id="title"
+                                        placeholder={listing.title}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="description">Description</label>
+                                    <textarea
+                                        name="description"
+                                        id="description"
+                                        placeholder={listing.description}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="requirements">Requirements</label>
+                                    <textarea
+                                        name="requirements"
+                                        id="requirements"
+                                        placeholder={listing.requirements}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="location">Location</label>
+                                    <input
+                                        type="text"
+                                        name="location"
+                                        id="location"
+                                        placeholder={listing.location}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="salary">Salary</label>
+                                    <input
+                                        type="text"
+                                        name="salary"
+                                        id="salary"
+                                        placeholder={listing.salary}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="benefits">Benefits</label>
+                                    <textarea
+                                        name="benefits"
+                                        id="benefits"
+                                        placeholder={listing.benefits}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="company">Company</label>
+                                    <input
+                                        type="text"
+                                        name="company"
+                                        id="company"
+                                        placeholder={listing.company}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="website">Website</label>
+                                    <input
+                                        type="text"
+                                        name="website"
+                                        id="website"
+                                        placeholder={listing.website}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="email">Email</label>
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        id="email"
+                                        placeholder={listing.email}
+                                        value={listing.email}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="phone">Phone</label>
+                                    <input
+                                        type="text"
+                                        name="phone"
+                                        id="phone"
+                                        placeholder={listing.phone}
+                                        value={listing.phone}
+                                        className="border border-gray-300 rounded-md p-2"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex justify-end gap-2 mt-2">
+                                <button
+                                    type="submit"
+                                    className="bg-neutral-800 text-white rounded-md px-2 py-1"
+                                >
+                                    Save
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="bg-red-500 text-white rounded-md px-2 py-1"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </form>
                     </AccordionBody>
                 </Accordion>
             </div>
