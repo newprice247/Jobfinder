@@ -40,7 +40,7 @@ export default function Header() {
           >
            <img 
            style={{
-            width:"15rem"
+            width:"10rem"
           }}
            src={logo} />
           </Link>
