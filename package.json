@@ -37,8 +37,12 @@
     "bootstrap": "^5.3.2",
     "firebase": "^10.7.1",
     "framer-motion": "^10.16.12",
+    "hrc": "^1.0.0",
+    "hrs": "^1.0.0",
     "react-bootstrap": "^2.9.1",
     "react-icons": "^4.12.0",
+    "run": "^1.4.0",
+    "start": "^5.1.0",
     "tw-elements-react": "^1.0.0-alpha2",
     "uuid": "^9.0.1"
   }
