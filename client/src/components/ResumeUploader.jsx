@@ -34,10 +34,13 @@ const ResumeUploader = () => {
       }
     });
 
-    return () => {
-      // Unsubscribe from the database updates when the component unmounts
-      filesRef.off("value");
-    };
+    // return () => {
+    //   // Unsubscribe from the database updates when the component unmounts
+    //   // if (filesRef) {
+    //   //   filesRef.off("value");
+    //   // }
+      
+    // };
   }, []);
 
   return (
@@ -63,7 +66,7 @@ const ResumeUploader = () => {
                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
               />
             </svg>
-            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+            <p class="mb-2 text-sm  m-auto text-gray-500 dark:text-gray-400">
               <span class="font-semibold">Click to upload Resume</span> or drag
               and drop
             </p>
@@ -85,8 +88,11 @@ const ResumeUploader = () => {
         <ul>
           {uploadedFiles.map((file, index) => (
             <li key={index}>
-              <a href={file.url} target="_blank" rel="noopener noreferrer">
-                {file.name}
+              <a href={file.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              >           
+              {file.name}
               </a>
             </li>
           ))}
