@@ -7,14 +7,20 @@ import {
 import { useState, useEffect } from "react";
 import search from "../../utils/API";
 import Auth from "../../utils/auth";
+import { updateListing } from "../../utils/API";
  
 export default function UserCreatedListings() {
   const [open, setOpen] = React.useState(1);
  
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
     const [listings, setListings] = useState([]);
+    const [updatedListing, setUpdatedListing] = useState({});
     const [user, setUser] = useState({});
-    const userId = Auth.getProfile().data._id;
+    const userId = Auth.getProfile().data._id;    
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setUpdatedListing({ ...updatedListing, [name]: value });
+    };
     useEffect(() => {
         search.fetchUser(userId)
             .then((data) => setUser(data))
@@ -29,13 +35,16 @@ export default function UserCreatedListings() {
             .catch((error) => console.error("Error fetching data:", error));
     }, [user]);
 
+
+
 if (!listings.length) {
     return <h3 className="text-myColor-2">You haven't created any listings yet!</h3>;
 } else {
     return (
     <>
         {listings.map((listing, i) => (
-            <div key={i}>
+            <div key={listing.id}>
+                
                 <Accordion open={open === listing[i]}>
                     <AccordionHeader onClick={() => handleOpen(listing[i])}>
                         {listing.title}
@@ -51,6 +60,7 @@ if (!listings.length) {
                                         id="title"
                                         placeholder={listing.title}
                                         className="border border-gray-300 rounded-md p-2"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -60,6 +70,7 @@ if (!listings.length) {
                                         id="description"
                                         placeholder={listing.description}
                                         className="border border-gray-300 rounded-md p-2"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -69,6 +80,7 @@ if (!listings.length) {
                                         id="requirements"
                                         placeholder={listing.requirements}
                                         className="border border-gray-300 rounded-md p-2"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -79,6 +91,7 @@ if (!listings.length) {
                                         id="location"
                                         placeholder={listing.location}
                                         className="border border-gray-300 rounded-md p-2"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -89,6 +102,7 @@ if (!listings.length) {
                                         id="salary"
                                         placeholder={listing.salary}
                                         className="border border-gray-300 rounded-md p-2"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -98,6 +112,7 @@ if (!listings.length) {
                                         id="benefits"
                                         placeholder={listing.benefits}
                                         className="border border-gray-300 rounded-md p-2"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -108,6 +123,7 @@ if (!listings.length) {
                                         id="company"
                                         placeholder={listing.company}
                                         className="border border-gray-300 rounded-md p-2"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
@@ -118,28 +134,7 @@ if (!listings.length) {
                                         id="website"
                                         placeholder={listing.website}
                                         className="border border-gray-300 rounded-md p-2"
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <label htmlFor="email">Email</label>
-                                    <input
-                                        type="text"
-                                        name="email"
-                                        id="email"
-                                        placeholder={listing.email}
-                                        value={listing.email}
-                                        className="border border-gray-300 rounded-md p-2"
-                                    />
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <label htmlFor="phone">Phone</label>
-                                    <input
-                                        type="text"
-                                        name="phone"
-                                        id="phone"
-                                        placeholder={listing.phone}
-                                        value={listing.phone}
-                                        className="border border-gray-300 rounded-md p-2"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                             </div>
@@ -147,6 +142,9 @@ if (!listings.length) {
                                 <button
                                     type="submit"
                                     className="bg-neutral-800 text-white rounded-md px-2 py-1"
+                                    onClick={() => {
+                                        updateListing(listing._id, updatedListing);
+                                     }}
                                 >
                                     Save
                                 </button>

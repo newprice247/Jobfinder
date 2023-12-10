@@ -77,6 +77,16 @@ export const newListing = (listingData) => {
     });
 };
 
+export const updateListing = (listingID, listingData) => {
+    return fetch(`/api/listings/${listingID}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(listingData),
+    });
+};
+
 const search = {
 
     // fetches all listings

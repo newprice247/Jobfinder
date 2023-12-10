@@ -32,11 +32,15 @@ module.exports = {
         }
         res.json(listing);
     },
-    async updateListing({ params }, res) {
-        const listing = await Listing.findOneAndUpdate({ _id: params.id });
-        if (!listing) {
-            return res.status(400).json({ message: 'Cannot find a listing with this id!' });
+    async updateListing({ params, body }, res) {
+        const updatedListing = await Listing.findOneAndUpdate(
+            { _id: params.listingId },
+            { $set: body },
+            { new: true, runValidators: true }
+        );
+        if (!updatedListing) {
+            return res.status(400).json({ message: "Couldn't find listing with this id!" });
         }
-        res.json(listing);
+        return res.json(updatedListing);
     }
 };
