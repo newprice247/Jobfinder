@@ -40,7 +40,25 @@ export default function searchBar() {
 
         <Button onClick={() => toggleOpen(3)}>Pay</Button>
         </div>
+
+
         <div className='mb-4'>
+        <Collapse open={openSection === 1}>
+          <Card className="my-4 mx-auto w-8/12">
+            <CardBody>
+              <Typography>Job category 1 listings: food/beverage, retail, healthcare, technology, etc.</Typography>
+            </CardBody>
+          </Card>
+        </Collapse>
+
+        <Collapse open={openSection === 2}>
+          <Card className="my-4 mx-auto w-8/12">
+            <CardBody>
+              <Typography>checkbox with remote</Typography>
+            </CardBody>
+          </Card>
+        </Collapse>
+
         <Collapse open={openSection === 3}>
           <Card className="my-4 mx-auto w-8/12">
             <CardBody>
@@ -49,7 +67,7 @@ export default function searchBar() {
           </Card>
         </Collapse>
 
-        <Collapse open={openSection === 2}>
+        {/* <Collapse open={openSection === 2}>
           <Card className="my-4 mx-auto w-8/12">
             <CardBody>
               <Typography>checkbox with remote</Typography>
@@ -64,7 +82,7 @@ export default function searchBar() {
               <Typography>Job category 1 listings: food/beverage, retail, healthcare, technology, etc.</Typography>
             </CardBody>
           </Card>
-        </Collapse>
+        </Collapse> */}
         </div>
 
 
