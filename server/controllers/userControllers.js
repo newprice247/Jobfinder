@@ -38,6 +38,17 @@ module.exports = {
         const token = signToken(user);
         res.json({ token, user });
     },
+    async updateUser({ params, body }, res) {
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: params.userId },
+            { $set: body },
+            { new: true, runValidators: true }
+        );
+        if (!updatedUser) {
+            return res.status(400).json({ message: "Couldn't find user with this id!" });
+        }
+        return res.json(updatedUser);
+    },
     async login({ body }, res) {
         const user = await User.findOne({ $or: [{ username: body.username }, { email: body.email }] });
         if (!user) {

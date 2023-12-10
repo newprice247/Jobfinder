@@ -54,6 +54,12 @@ const listingSchema = new Schema(
             minLength: 1,
             maxLength: 280
         },
+        savedBy: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'user'
+            }
+        ],
         },
     {
         toJSON: {
@@ -63,6 +69,18 @@ const listingSchema = new Schema(
         id: false
     }
 )
+
+listingSchema.pre('remove', async function (next) {
+    await this.model('user').updateMany(
+        { listings: this._id },
+        { $pull: { listings: this._id } }
+    );
+    await this.model('user').updateMany(
+        { savedListings: this._id },
+        { $pull: { savedListings: this._id } }
+    );
+    next();
+});
 
 listingSchema
     .virtual('contactCount')

@@ -36,6 +36,18 @@ export const loginUser = (userData) => {
     });
 };
 
+export const updateUser = (userID, userData) => {
+    console.log('here is the client api call', userID, userData)
+    return fetch(`/api/users/${userID}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+        
+    });
+};
+
 export const saveListing = (userId, listingID) => {
     console.log('here is the client api call', userId, listingID)
     return fetch(`/api/users/${userId}/listings/${listingID}`, {
@@ -46,8 +58,8 @@ export const saveListing = (userId, listingID) => {
     });
 };
 
-export const deleteListing = (userId, listingID) => {
-    return fetch(`/api/users/${userId}/listings/${listingID}`, {
+export const deleteListing = (listingID) => {
+    return fetch(`/api/listings/${listingID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -55,9 +67,21 @@ export const deleteListing = (userId, listingID) => {
     });
 };
 
+
+
 export const newListing = (listingData) => {
     return fetch('/api/listings', {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(listingData),
+    });
+};
+
+export const updateListing = (listingID, listingData) => {
+    return fetch(`/api/listings/${listingID}`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
