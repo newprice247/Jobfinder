@@ -43,6 +43,11 @@ const userSchema = new Schema(
             minLength: 1,
             maxLength: 280
         },
+        resumeUrl: {
+            type: String,
+            minLength: 1,
+            maxLength: 280
+        },
         profilePictureUrl: {  //we need this 
             type: String,
           },

@@ -36,7 +36,7 @@ const ResumeUploader = () => {
 
     return () => {
       // Unsubscribe from the database updates when the component unmounts
-      filesRef.off("value");
+      // filesRef.off("value");
     };
   }, []);
 
