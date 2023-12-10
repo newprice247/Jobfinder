@@ -67,7 +67,16 @@ export const deleteListing = (listingID) => {
     });
 };
 
-
+export const addUserResume = (userID, userData) => {
+    console.log('here is the client api call', userID, userData)
+    return fetch(`/api/users/${userID}/resume`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+    });
+}
 
 export const newListing = (listingData) => {
     return fetch('/api/listings', {

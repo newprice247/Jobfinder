@@ -8,6 +8,7 @@ const {
     updateUser,
     login,
     saveListing,
+    updateUserResume,
 } = require('../../controllers/userControllers');
 
 const { authMiddleware } = require('../../utils/auth');
@@ -23,6 +24,8 @@ router.route('/me').get(authMiddleware, getMe)
 router.route('/me/listings/:listingId').put(authMiddleware, saveListing);
 
 router.route('/:userId').get(getSingleUser).put(updateUser)
+
+router.route('/:userId/resume').put(updateUserResume)
 
 router.route('/:userId/listings/:listingId').put(saveListing);
 

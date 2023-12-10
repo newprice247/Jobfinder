@@ -34,13 +34,10 @@ const ResumeUploader = () => {
       }
     });
 
-    // return () => {
-    //   // Unsubscribe from the database updates when the component unmounts
-    //   // if (filesRef) {
-    //   //   filesRef.off("value");
-    //   // }
-      
-    // };
+    return () => {
+      // Unsubscribe from the database updates when the component unmounts
+      // filesRef.off("value");
+    };
   }, []);
 
   return (
