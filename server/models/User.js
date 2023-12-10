@@ -78,13 +78,19 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-userSchema.pre('updateOne', async function (next) {
-    if (this.isModified('savedListings')) {
-        await this.model('listing').updateOne(
-            { _id: this._id },
-            { $push: { savedListings: this._id } }
+userSchema.post('updateOne', async function (result, next) {
+    const { savedListings } = this._update;
+
+    if (savedListings) {
+        const listingModel = this.model('listing');
+
+        // Update the corresponding listings
+        await listingModel.updateMany(
+            { _id: { $in: savedListings } },
+            { $push: { savedBy: this._id } }
         );
     }
+
     next();
 });
 
