@@ -43,9 +43,11 @@ export default function Bio(props) {
 
     const handleUpdateClick = () => {
       // Copy the user information to the editedUser state
+      console.log(user);
       setEditedUser({ 
         ...user
       });
+      console.log(editedUser);
       setEditMode(true);
     };
 
@@ -136,7 +138,7 @@ export default function Bio(props) {
                   class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.phone}
                   type="text"
-                  name="phone number"
+                  name="phone"
                   onChange={handleInputChange}
                 />
               </label>
@@ -147,7 +149,7 @@ export default function Bio(props) {
                   class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.salaryExpectation}
                   type="text"
-                  name="salary expectation"
+                  name="salaryExpectation"
                   onChange={handleInputChange}
                 />
               </label>
