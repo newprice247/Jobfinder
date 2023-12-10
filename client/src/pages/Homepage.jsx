@@ -42,6 +42,18 @@ export default function Homepage() {
     console.log(searchResults);
   }
 
+  function handleCategoryFilter(event) {
+    setSearchTerm(event.target.name);
+    setSearchResults(
+      listings.filter((listing) =>
+        listing.category.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+    console.log(searchTerm);
+    console.log(searchResults);
+    setSearchStarted(true);
+  }
+
   function handleLocationFilter(event) {
     setSearchTerm(event.target.name);
     setSearchResults(
@@ -137,24 +149,31 @@ export default function Homepage() {
 
           <div className="mb-4">
             <Collapse open={openSection === 1}>
-              <Card className="my-4 mx-auto w-8/12">
+              <Card className="flex items-center justify-center my-4 mx-auto w-6/12">
                 <CardBody>
-                  <Typography>
-                    Job category 1 listings: food/beverage, retail, healthcare,
-                    technology, etc.
-                  </Typography>
+                  {listings.map((listing) => (
+                    <button
+                      key={listing._id}
+                      name={listing.category}
+                      className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
+                      onClick={(e) => {
+                        handleCategoryFilter(e);
+                      }}>
+                      {listing.category}
+                    </button>
+                  ))}
                 </CardBody>
               </Card>
             </Collapse>
 
             <Collapse open={openSection === 2}>
-              <Card className="my-4 mx-auto w-8/12">
+              <Card className="flex items-center justify-center my-4 mx-auto w-6/12">
                 <CardBody>
                   {listings.map((listing) => (
                     <button
                       key={listing._id}
                       name={listing.location}
-                      className="text-myColor-2 hover:text-myColor-1"
+                      className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
                       onClick={(e) => {
                         handleLocationFilter(e);
                       }}>
@@ -166,13 +185,13 @@ export default function Homepage() {
             </Collapse>
 
             <Collapse open={openSection === 3}>
-              <Card className="my-4 mx-auto w-8/12">
+              <Card className="flex items-center justify-center my-4 mx-auto w-6/12">
                 <CardBody>
                   {listings.map((listing) => (
                     <button
                       key={listing._id}
                       name={listing.salary}
-                      className="text-myColor-2 hover:text-myColor-1"
+                      className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
                       onClick={(e) => {
                         handleSalaryFilter(e);
                       }}>
@@ -245,6 +264,7 @@ export default function Homepage() {
                 <JobListing
                   id={listing._id}
                   title={listing.title}
+                  category={listing.category}
                   location={listing.location}
                   description={listing.description}
                   requirements={listing.requirements}
@@ -284,6 +304,7 @@ export default function Homepage() {
           {currentListing !== null ? (
             <CurrentListing
               title={currentListing.title}
+              category={currentListing.category}
               location={currentListing.location}
               description={currentListing.description}
               requirements={currentListing.requirements}

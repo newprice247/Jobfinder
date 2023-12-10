@@ -23,6 +23,8 @@ export default function CurrentListing(props) {
             {props.title}
           </h1>
           <br />
+          <h2>Category:</h2>
+          <p className="indent-8 mb-3">{props.category}</p>
           <h2>Location:</h2>
           <p className="indent-8 mb-3">{props.location}</p>
           <h2>Description:</h2>

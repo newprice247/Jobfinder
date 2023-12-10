@@ -136,9 +136,31 @@ const search = {
         }
     },
 
+    fetchListingByCategory: async (category) => {
+        try {
+            const response = await axios.get(`${apiURL}/listings/category/${category}`);
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
     fetchListingByLocation: async (location) => {
         try {
             const response = await axios.get(`${apiURL}/listings/location/${location}`);
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
+    fetchListingBySalary: async (salary) => {
+        try {
+            const response = await axios.get(`${apiURL}/listings/salary/${salary}`);
             console.log(response.data);
             return response.data;
         } catch (error) {

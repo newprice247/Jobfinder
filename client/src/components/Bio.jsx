@@ -100,11 +100,10 @@ export default function Bio(props) {
             <form>
               <label
                 for="bio"
-                class="block mb-2 text-sm font-medium text-black"
-              >
+                class="block mb-2 text-sm font-medium text-black">
                 Bio:
                 <input
-                  class="block mb-2 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.bio}
                   type="text"
                   name="bio"
@@ -114,11 +113,10 @@ export default function Bio(props) {
 
               <label
                 for="fullname"
-                class="block mb-2 text-sm font-medium text-black"
-              >
+                class="block mb-2 text-sm font-medium text-black">
                 Full Name:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8 font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.name}
                   type="text"
                   name="name"
@@ -128,11 +126,10 @@ export default function Bio(props) {
 
               <label
                 for="username"
-                class="block mb-2 text-sm font-medium text-black"
-              >
+                class="block mb-2 text-sm font-medium text-black">
                 Username:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8 font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.username}
                   type="text"
                   name="username"
@@ -143,7 +140,7 @@ export default function Bio(props) {
               <label class="block mb-2 text-sm font-medium text-black">
                 Email address:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8 font-medium text-gray-900 bg-gray-50 border rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.email}
                   type="text"
                   name="email"
@@ -154,7 +151,7 @@ export default function Bio(props) {
               <label class="block mb-2 text-sm font-medium text-black">
                 Phone number:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8  font-medium bg-gray-50 border text-gray-900 rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.phone}
                   type="text"
                   name="phone"
@@ -165,7 +162,7 @@ export default function Bio(props) {
               <label class="block mb-2 text-sm font-medium text-black">
                 Salary expectation:
                 <input
-                  class="block mb-2 h-8 text-sm font-medium bg-gray-50 border text-gray-900 rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
+                  class="block mb-2 h-8 font-medium bg-gray-50 border text-gray-900 rounded-none w-full text-sm border-gray-300 dark:placeholder-gray-400 p-2.5"
                   placeholder={props.salaryExpectation}
                   type="text"
                   name="salaryExpectation"
@@ -177,8 +174,7 @@ export default function Bio(props) {
                   type="button"
                   size="sm"
                   variant="outlined"
-                  onClick={handleCancelClick}
-                >
+                  onClick={handleCancelClick}>
                   Cancel
                 </Button>
                 <Button type="button" size="sm" onClick={handleSaveClick}>
@@ -240,8 +236,7 @@ export default function Bio(props) {
               <button
                 type="button"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={handleUpdateClick}
-              >
+                onClick={handleUpdateClick}>
                 Update profile
               </button>
               <dd>

@@ -55,6 +55,8 @@ export default function UserSavedListings() {
               {listing.title}
             </AccordionHeader>
             <AccordionBody>
+              <h2 className="text-myColor-2 text-xl">Job Category:</h2>
+              <p className="text-myColor-2">{listing.category}</p>
               <h2 className="text-myColor-2 text-xl">Job Description:</h2>
               <p className="text-myColor-2">{listing.description}</p>
               <h2 className="text-myColor-2 text-xl">Salary:</h2>
