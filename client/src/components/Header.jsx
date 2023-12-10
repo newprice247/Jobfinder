@@ -1,6 +1,6 @@
 
 import React from "react";
-import logo from "../assets/images/joblogo.png"
+import logo from "../assets/images/logo2.png"
 import {
   Navbar,
   MobileNav,
