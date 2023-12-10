@@ -12,6 +12,8 @@ export default function searchBar() {
       prevOpenSection === section ? null : section
     );
 
+  function handleSearch() {}
+
   return (
     <div className="flex flex-wrap items-center justify-center">
       <motion.div
@@ -20,14 +22,18 @@ export default function searchBar() {
         viewport={{ once: true }}
         animate={{ y: 70 }}
         transition={{ delay: 0.5, duration: 0.5 }}>
-        <div className="flex justify-evenly mb-8">
-          {/* SEARCH BAR WILL BE ADDED HERE */}
-          {/* <Button className='bg-green-800'>Search Here</Button> */}
-          <div className="search-bar-container flex flex-col justify-center items-center">
-            <div className="input-wrapper">
-              <FaSearch id="search-icon" />
+        <div className="w-full">
+          <div className="w-[80%] mx-auto text-black">
+            <div className="w-full">
+              <div className="flex justify-center items-center mb-6">
+                <input
+                  type="text"
+                  placeholder="Search for a job..."
+                  onChange={handleSearch}
+                  className="w-full h-10 pl-3 pr-10 text-sm bg-white border rounded-full focus:outline-none"
+                />
+              </div>
             </div>
-            <div>SearchResults</div>
           </div>
         </div>
 
