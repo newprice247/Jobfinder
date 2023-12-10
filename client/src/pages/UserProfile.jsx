@@ -23,6 +23,7 @@ import {
 } from "@heroicons/react/24/solid";
 
 import Bio from "../components/Bio";
+import UserCreatedListings from "../components/UserCreatedListings";
 import search from "../../utils/API";
 import Auth from "../../utils/auth";
 
@@ -74,7 +75,8 @@ export default function UserProfile() {
             />
           </TabPanel>
           <TabPanel value="jobListing" className="py-0">
-            Job Listing
+            <h2 className="text-myColor-2 text-xl">My Job Listings:</h2>
+            <UserCreatedListings />
           </TabPanel>
           <TabPanel value="savedJobs" className="py-0">
             Saved Jobs
