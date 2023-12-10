@@ -25,12 +25,13 @@ export default function searchBar() {
         <div className="w-full">
           <div className="w-[80%] mx-auto text-black">
             <div className="w-full">
-              <div className="flex justify-center items-center mb-6">
+              <div className="relative flex items-center mb-6">
+                <FaSearch className="absolute left-3 text-gray-500" />
                 <input
                   type="text"
                   placeholder="Search for a job..."
                   onChange={handleSearch}
-                  className="w-full h-10 pl-3 pr-10 text-sm bg-white border rounded-full focus:outline-none"
+                  className="w-full h-10 pl-10 pr-3 text-sm bg-white border rounded-full focus:outline-none"
                 />
               </div>
             </div>
