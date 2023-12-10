@@ -22,6 +22,7 @@ export default function CollapseDefault() {
   const [newJobListing, setNewJobListing] = useState({
     contact: Auth.getProfile().data._id,
     title: "",
+    category: "",
     description: "",
     requirements: "",
     location: "",
@@ -54,8 +55,7 @@ export default function CollapseDefault() {
             <Typography
               className="mb-3 font-normal"
               variant="paragraph"
-              color="gray"
-            >
+              color="gray">
               Give us some details about the job:
             </Typography>
             <Typography className="-mb-2" variant="h6">
@@ -64,6 +64,18 @@ export default function CollapseDefault() {
             <Input
               label="Title"
               id="title"
+              size="lg"
+              onChange={(event) => {
+                const { id, value } = event.target;
+                setNewJobListing({ ...newJobListing, [id]: value });
+              }}
+            />
+            <Typography className="-mb-2" variant="h6">
+              Category
+            </Typography>
+            <Input
+              label="Category"
+              id="category"
               size="lg"
               onChange={(event) => {
                 const { id, value } = event.target;
@@ -163,8 +175,7 @@ export default function CollapseDefault() {
                 toggleOpen();
                 window.location.reload();
               }}
-              fullWidth
-            >
+              fullWidth>
               Post New Listing
             </Button>
           </CardFooter>
