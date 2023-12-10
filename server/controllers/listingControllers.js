@@ -50,4 +50,11 @@ module.exports = {
         }
         res.json(listing);
     },
+    async getListingByLocation({ params }, res) { 
+        const listing = await Listing.findOne({ location: params.location })
+        if (!listing) {
+            return res.status(400).json({ message: 'Cannot find a listing with this location!' });
+        }
+        res.json(listing);
+    },
 };

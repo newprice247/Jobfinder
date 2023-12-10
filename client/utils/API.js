@@ -127,6 +127,17 @@ const search = {
         }
     },
 
+    fetchListingByLocation: async (location) => {
+        try {
+            const response = await axios.get(`${apiURL}/listings/location/${location}`);
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
 
     // fetches all listings by category
     fetchUsers: async () => {
