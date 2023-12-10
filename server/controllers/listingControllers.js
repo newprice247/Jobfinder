@@ -42,5 +42,12 @@ module.exports = {
             return res.status(400).json({ message: "Couldn't find listing with this id!" });
         }
         return res.json(updatedListing);
-    }
+    },
+    async getListingByTitle({ params }, res) {
+        const listing = await Listing.findOne({ title: params.title })
+        if (!listing) {
+            return res.status(400).json({ message: 'Cannot find a listing with this title!' });
+        }
+        res.json(listing);
+    },
 };
