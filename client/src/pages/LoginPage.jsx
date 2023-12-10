@@ -14,7 +14,7 @@ import { loginUser } from "../../utils/API";
 import { useState } from "react";
 import Auth from "../../utils/auth";
 import RegisterBox from "../components/RegisterBox";
-import joblogo from "../assets/images/joblogo.png";
+import joblogo from "../assets/images/logo2.png";
 
 // exports the login page located at '/login'
 export default function ExampleV2() {
