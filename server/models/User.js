@@ -78,6 +78,16 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
+userSchema.pre('updateOne', async function (next) {
+    if (this.isModified('savedListings')) {
+        await this.model('listing').updateOne(
+            { _id: this._id },
+            { $push: { savedListings: this._id } }
+        );
+    }
+    next();
+});
+
 
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);

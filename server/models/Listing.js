@@ -54,6 +54,12 @@ const listingSchema = new Schema(
             minLength: 1,
             maxLength: 280
         },
+        savedBy: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'user'
+            }
+        ],
         },
     {
         toJSON: {

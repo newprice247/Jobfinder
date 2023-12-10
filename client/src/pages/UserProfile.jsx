@@ -24,6 +24,7 @@ import {
 
 import Bio from "../components/Bio";
 import UserCreatedListings from "../components/UserCreatedListings";
+import UserSavedListings from "../components/UserSavedListings";
 import search from "../../utils/API";
 import Auth from "../../utils/auth";
 
@@ -79,7 +80,8 @@ export default function UserProfile() {
             <UserCreatedListings />
           </TabPanel>
           <TabPanel value="savedJobs" className="py-0">
-            Saved Jobs
+            <h2 className="text-myColor-2 text-xl">My Saved Jobs:</h2>
+            <UserSavedListings />
           </TabPanel>
         </TabsBody>
       </Tabs>
