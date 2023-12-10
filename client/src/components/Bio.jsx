@@ -6,7 +6,7 @@ const defaultUserImage = '../../client/src/assets/images/Screenshot(384).png'; /
 import { Button } from "@material-tailwind/react";
 import Auth from "../../utils/auth";
 import {updateUser} from "../../utils/API";
-import ResumeUploader from ResumeUploader;
+import ResumeUploader from "./ResumeUploader";
 
 export default function Bio(props) {
   const UserProfile = () => {
