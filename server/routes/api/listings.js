@@ -5,7 +5,8 @@ const {
     getSingleListing,
     createListing,
     deleteListing,
-    updateListing
+    updateListing,
+    getListingByTitle
 
 } = require('../../controllers/listingControllers');
 
@@ -13,5 +14,7 @@ const {
 router.route('/').get(getListing).post(createListing);
 
 router.route('/:listingId').get(getSingleListing).delete(deleteListing).put(updateListing);
+
+router.route('/title/:title').get(getListingByTitle);
 
 module.exports = router;
