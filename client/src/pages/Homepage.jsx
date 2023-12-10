@@ -277,7 +277,7 @@ export default function Homepage() {
 
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
         <div
-          className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-24  h-[90vh] no-scrollbar mt-20"
+          className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-24 h-[90vh] no-scrollbar"
           style={{ zIndex: 1 }}>
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
 
