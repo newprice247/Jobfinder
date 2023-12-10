@@ -44,6 +44,7 @@ export default function Homepage() {
     // Returning the homepage as html
     return (
         <div className="bg-myColor-3">
+            {/* imports the searchbar component */}
             <Searchbar />
 
             {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
