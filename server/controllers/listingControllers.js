@@ -26,7 +26,7 @@ module.exports = {
         res.json(listing);
     },
     async deleteListing({ params }, res) {
-        const listing = await Listing.findOneAndDelete({ _id: params.id });
+        const listing = await Listing.findOneAndDelete({ _id: params.listingId });
         if (!listing) {
             return res.status(400).json({ message: 'Cannot find a listing with this id!' });
         }

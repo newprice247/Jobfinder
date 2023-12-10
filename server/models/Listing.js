@@ -64,6 +64,18 @@ const listingSchema = new Schema(
     }
 )
 
+listingSchema.pre('remove', async function (next) {
+    await this.model('user').updateMany(
+        { listings: this._id },
+        { $pull: { listings: this._id } }
+    );
+    await this.model('user').updateMany(
+        { savedListings: this._id },
+        { $pull: { savedListings: this._id } }
+    );
+    next();
+});
+
 listingSchema
     .virtual('contactCount')
     .get(function () {
