@@ -94,7 +94,7 @@ export default function Homepage() {
     });
     setUniqueSalaries(uniqueSalaries);
   }, [listings]);
-  
+
   // if the currentListing is not null and is not an object, fetch the listing by id and set the currentListing to the data
   useEffect(() => {
     if (currentListing !== null && typeof currentListing !== "object") {
@@ -209,7 +209,7 @@ export default function Homepage() {
                       {salary}
                     </button>
                   ))}
-                  
+
                 </CardBody>
               </Card>
             </Collapse>
@@ -321,7 +321,13 @@ export default function Homepage() {
           {currentListing !== null ? (
             <CurrentListing
               title={currentListing.title}
-              category={currentListing.category}
+              category={categories.map((category) => {
+                if (currentListing.category === category._id) {
+                  return category.name;
+                }
+                return null;
+                })
+              }
               location={currentListing.location}
               description={currentListing.description}
               requirements={currentListing.requirements}

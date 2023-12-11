@@ -263,19 +263,6 @@ export default function Header() {
                     Home
                   </Button>
                 </Link>
-                <Link to="/register">
-                  <Button
-                    color="blue-gray"
-                    buttonType="link"
-                    size="sm"
-                    rounded={false}
-                    block={false}
-                    iconOnly={false}
-                    ripple="light"
-                  >
-                    Sign Up
-                  </Button>
-                </Link>
                 <Link to="/login">
                   <Button
                     color="blue-gray"

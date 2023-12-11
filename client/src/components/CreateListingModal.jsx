@@ -13,12 +13,26 @@ import {
 } from "@material-tailwind/react";
 
 import Auth from "../../utils/auth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { newListing } from "../../utils/API";
+import search from "../../utils/API";
+
 export default function CollapseDefault() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const toggleOpen = () => setOpen((cur) => !cur);
+  const [possibleCategories, setPossibleCategories] = useState([]);
+  useEffect(() => {
+    search
+      .fetchCategories()
+      .then((data) => {
+        setPossibleCategories(data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+
+
   const [newJobListing, setNewJobListing] = useState({
     contact: Auth.getProfile().data._id,
     title: "",
@@ -73,15 +87,26 @@ export default function CollapseDefault() {
             <Typography className="-mb-2" variant="h6">
               Category
             </Typography>
-            <Input
-              label="Category"
-              id="category"
-              size="lg"
-              onChange={(event) => {
-                const { id, value } = event.target;
-                setNewJobListing({ ...newJobListing, [id]: value });
-              }}
-            />
+            {possibleCategories ? (
+              <select
+                id="category"
+                className="border-2 border-gray-300 rounded-md w-full p-2"
+                onChange={(event) => {
+                  const { id, value } = event.target;
+                  setNewJobListing({ ...newJobListing, [id]: value });
+                }}>
+                {possibleCategories.map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <select>
+                <option>Loading...</option>
+              </select>
+            )}
+
             <Typography className="-mb-2" variant="h6">
               Description
             </Typography>
