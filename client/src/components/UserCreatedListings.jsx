@@ -103,19 +103,19 @@ export default function UserCreatedListings() {
     );
   } else {
     return (
-      <div 
-      className="bg-myColor-3 rounded-md shadow-md p-4 border border-gray-300"
+      <div
+        className="bg-myColor-3 rounded-md shadow-md p-4 border border-gray-300"
       >
         {listings.map((listing) => (
           <div key={listing._id}>
-            <Accordion 
-            open={open === listing._id}
+            <Accordion
+              open={open === listing._id}
             >
-              <AccordionHeader 
-              onClick={() => 
-              handleOpen(listing._id)
-              }
-              className="bg-myColor-2 text-myColor-1 rounded-md p-2"
+              <AccordionHeader
+                onClick={() =>
+                  handleOpen(listing._id)
+                }
+                className="bg-myColor-2 text-myColor-1 rounded-md p-2"
               >
                 {listing.title}
               </AccordionHeader>
@@ -135,11 +135,11 @@ export default function UserCreatedListings() {
                     </div>
                     <div className="flex flex-col gap-2">
                       <label htmlFor="category">Category</label>
-                      <select 
-                      name="category" 
-                      id="category" 
-                      className="border border-gray-300 rounded-md p-2"
-                      onChange={handleInputChange}>
+                      <select
+                        name="category"
+                        id="category"
+                        className="border border-gray-300 rounded-md p-2"
+                        onChange={handleInputChange}>
                         {categories.map((category) => (
                           <option value={category.name} key={category._id}>
                             {category.name}
@@ -222,13 +222,46 @@ export default function UserCreatedListings() {
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <ul className="flex flex-col gap-2">
-                        <label htmlFor="savedBy">Saved By:</label>
-                        {savedByUsers.map((user) => (
-                          <li key={user._id}>{user.username}</li>
-                        ))
-                        }
-                      </ul>
+                      <label 
+                          className="text-myColor-2 text-xl"
+                          htmlFor="savedBy">
+                            Saved By:
+                            </label>
+                      {savedByUsers.map((user) => (
+                        <ol className="flex flex-col gap-4 border-2 border-gray-300 rounded-md p-4 bg-white">
+                        <li className="text-myColor-1 text-lg" key={user._id}>
+                          <span className="font-bold">UserName:</span> {user.username}
+                        </li>
+                        <li className="text-myColor-1 text-lg" key={user._id}>
+                          <span className="font-bold">Email:</span>{" "}
+                          <a className="text-blue-500 hover:underline" href={`mailto:${user.email}`}>
+                            {user.email}
+                          </a>
+                        </li>
+                        <li className="text-myColor-1 text-lg" key={user._id}>
+                          <span className="font-bold">Phone Number:</span>{" "}
+                          <a className="text-blue-500 hover:underline" href={`tel:${user.phone}`}>
+                            {user.phone}
+                          </a>
+                        </li>
+                        <li className="text-myColor-1 text-lg" key={user._id}>
+                          <span className="font-bold">Bio:</span> {user.bio}
+                        </li>
+                        <li className="text-myColor-1 text-lg" key={user._id}>
+                          <span className="font-bold">Resume:</span>{" "}
+                          <a
+                            className="text-blue-500 hover:underline"
+                            href={user.resumeUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {user.resumeUrl}
+                          </a>
+                        </li>
+                      </ol>
+                      
+                      ))}
+
                     </div>
                   </div>
                   <div className="flex justify-end gap-2 mt-2">
