@@ -109,6 +109,18 @@ const users = [
       listings: [],
       savedListings: [],
     },
+    {
+      name: "test",
+      username: "test",
+      email: "test@email.com",
+      password: "asdf",
+      phone: "555-555-5555",
+      bio: "test",
+      salaryExpectation: "test",
+      profilePictureUrl: "./client/src/assets/images/pre-profile-pic1.jpg",
+      listings: [],
+      savedListings: [],
+    }
   ];
 
   module.exports = users;
