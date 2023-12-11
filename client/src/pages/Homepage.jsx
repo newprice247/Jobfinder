@@ -234,7 +234,7 @@ export default function Homepage() {
         viewport={{ once: true }}
         animate={{ y: 20 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap justify-evenly items-center mt-20">
+        className="flex flex-wrap justify-evenly items-center mt-16">
         {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
