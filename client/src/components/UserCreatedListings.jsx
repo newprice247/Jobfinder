@@ -245,17 +245,17 @@ export default function UserCreatedListings() {
                           </a>
                         </li>
                         <li className="text-myColor-1 text-lg" key={user._id}>
-                          <span className="font-bold">Bio:</span> {user.bio}
+                          <span className="font-bold">Bio:</span> {user.bio ? user.bio : user.username + " has not yet written a bio."}
                         </li>
                         <li className="text-myColor-1 text-lg" key={user._id}>
                           <span className="font-bold">Resume:</span>{" "}
                           <a
                             className="text-blue-500 hover:underline"
-                            href={user.resumeUrl}
+                            href={user.resumeUrl ? user.resumeUrl : "#"}
                             target="_blank"
                             rel="noreferrer"
                           >
-                            {user.resumeUrl}
+                            {user.resumeUrl ? "View Resume" : "No Resume Uploaded"}
                           </a>
                         </li>
                       </ol>

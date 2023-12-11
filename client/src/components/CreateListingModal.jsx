@@ -94,7 +94,9 @@ export default function CollapseDefault() {
                 onChange={(event) => {
                   const { id, value } = event.target;
                   setNewJobListing({ ...newJobListing, [id]: value });
-                }}>
+                }}
+              >
+                <option value="">Select a category</option>
                 {possibleCategories.map((category) => (
                   <option key={category._id} value={category._id}>
                     {category.name}
