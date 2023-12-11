@@ -17,9 +17,10 @@ export default function UserCreatedListings() {
 
   const [listings, setListings] = useState([]);
   const [updatedListing, setUpdatedListing] = useState({});
-  const [savedByUsers, setSavedByUsers] = useState([]);
   const [categories, setCategories] = useState([]);
   const [user, setUser] = useState({});
+  const [savedByUsers, setSavedByUsers] = useState([]);
+
   const userId = Auth.getProfile().data._id;
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -49,6 +50,21 @@ export default function UserCreatedListings() {
             (listing) => listing.contact === user._id
           );
           setListings(userCreatedListings);
+
+          const savedByUsersPromises = userCreatedListings.map((listing) => {
+            return Promise.all(
+              listing.savedBy.map((userId) => search.fetchUser(userId))
+            );
+          });
+
+          Promise.all(savedByUsersPromises)
+            .then((savedByUsers) => {
+              setSavedByUsers(savedByUsers);
+            })
+            .catch((error) =>
+              console.error("Error fetching saved by users:", error)
+            );
+
           const updatedCategory = userCreatedListings.map((listing) => {
             return {
               ...listing,
@@ -63,23 +79,8 @@ export default function UserCreatedListings() {
     }
   }, [categories, user._id]);
 
-  useEffect(() => {
-    if (listings.length) {
-      for (let i = 0; i < listings.length; i++) {
-        const saveByUserIDs = listings[i].savedBy;
-        const saveByUsers = [];
-        for (let j = 0; j < saveByUserIDs.length; j++) {
-          search
-            .fetchUser(saveByUserIDs[j])
-            .then((data) => {
-              saveByUsers.push(data);
-              setSavedByUsers(saveByUsers);
-            })
-            .catch((error) => console.error("Error fetching data:", error));
-        }
-      }
-    }
-  }, [listings]);
+
+
 
   useEffect(() => {
     if (categories.length) {
@@ -106,7 +107,7 @@ export default function UserCreatedListings() {
       <div
         className="bg-myColor-3 rounded-md shadow-md p-4 border border-gray-300"
       >
-        {listings.map((listing) => (
+        {listings.map((listing, index) => (
           <div key={listing._id}>
             <Accordion
               open={open === listing._id}
@@ -222,46 +223,49 @@ export default function UserCreatedListings() {
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label 
-                          className="text-myColor-2 text-xl"
-                          htmlFor="savedBy">
-                            Saved By:
-                            </label>
-                      {savedByUsers.map((user) => (
+                      <label
+                        className="text-myColor-2 text-xl"
+                        htmlFor="savedBy">
+                        Saved By:
+                      </label>
+                      {savedByUsers[index]?.map((sbUser) => (
                         <ol className="flex flex-col gap-4 border-2 border-gray-300 rounded-md p-4 bg-white">
-                        <li className="text-myColor-1 text-lg" key={user._id}>
-                          <span className="font-bold">UserName:</span> {user.username}
-                        </li>
-                        <li className="text-myColor-1 text-lg" key={user._id}>
-                          <span className="font-bold">Email:</span>{" "}
-                          <a className="text-blue-500 hover:underline" href={`mailto:${user.email}`}>
-                            {user.email}
-                          </a>
-                        </li>
-                        <li className="text-myColor-1 text-lg" key={user._id}>
-                          <span className="font-bold">Phone Number:</span>{" "}
-                          <a className="text-blue-500 hover:underline" href={`tel:${user.phone}`}>
-                            {user.phone}
-                          </a>
-                        </li>
-                        <li className="text-myColor-1 text-lg" key={user._id}>
-                          <span className="font-bold">Bio:</span> {user.bio ? user.bio : user.username + " has not yet written a bio."}
-                        </li>
-                        <li className="text-myColor-1 text-lg" key={user._id}>
-                          <span className="font-bold">Resume:</span>{" "}
-                          <a
-                            className="text-blue-500 hover:underline"
-                            href={user.resumeUrl ? user.resumeUrl : "#"}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {user.resumeUrl ? "View Resume" : "No Resume Uploaded"}
-                          </a>
-                        </li>
-                      </ol>
-                      
+                          <li className="text-myColor-1 text-lg" key={sbUser._id}>
+                            <span className="font-bold">UserName:</span> {sbUser.username}
+                          </li>
+                          <li className="text-myColor-1 text-lg" key={sbUser._id}>
+                            <span className="font-bold">Email:</span>{" "}
+                            <a className="text-blue-500 hover:underline" href={`mailto:${sbUser.email}`}>
+                              {sbUser.email}
+                            </a>
+                          </li>
+                          <li className="text-myColor-1 text-lg" key={sbUser._id}>
+                            <span className="font-bold">Phone Number:</span>{" "}
+                            <a className="text-blue-500 hover:underline" href={`tel:${sbUser.phone}`}>
+                              {sbUser.phone}
+                            </a>
+                          </li>
+                          <li className="text-myColor-1 text-lg" key={sbUser._id}>
+                            <span className="font-bold">Bio:</span> {sbUser.bio ? sbUser.bio : sbUser.username + " has not yet written a bio."}
+                          </li>
+                          <li className="text-myColor-1 text-lg" key={sbUser._id}>
+                            <span className="font-bold">Resume:</span>{" "}
+                            <a
+                              className="text-blue-500 hover:underline"
+                              href={sbUser.resumeUrl ? sbUser.resumeUrl : "#"}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {sbUser.resumeUrl ? "View Resume" : "No Resume Uploaded"}
+                            </a>
+                          </li>
+                        </ol>
                       ))}
-
+                      {savedByUsers[index]?.length === 0 && (
+                        <h3 className="text-myColor-2">
+                          No one has saved this listing yet!
+                        </h3>
+                      )}
                     </div>
                   </div>
                   <div className="flex justify-end gap-2 mt-2">
