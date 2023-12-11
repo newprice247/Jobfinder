@@ -11,7 +11,10 @@ import {
 
 import Auth from "../../utils/auth";
 import { useState, useEffect } from "react";
-import { saveListing } from "../../utils/API";
+import { 
+  saveListing,
+  updateListing
+} from "../../utils/API";
 import search from "../../utils/API";
 
 // JobListing prototype, will be used to display job listings on home page by mapping through the database and displaying each listing as a card
@@ -20,11 +23,9 @@ export default function JobListing(props) {
   const [savedListings, setSavedListings] = useState([]);
   const findUserSavedListings = () => {
     const userId = Auth.getProfile().data._id;
-    console.log("here is the joblisting userid", userId);
     search
       .fetchUser(userId)
       .then((data) => {
-        console.log("here is the user data", data);
         setSavedListings(data.savedListings);
       })
       .catch((error) => console.error("Error fetching data:", error));
@@ -161,7 +162,7 @@ export default function JobListing(props) {
               </svg>
             </span>
           </Tooltip>
-          <Tooltip content={props.website}>
+          <Tooltip content={props.website} href={props.website}>
             <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-60">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +179,7 @@ export default function JobListing(props) {
               </svg>
             </span>
           </Tooltip>
-          <Tooltip content={props.phone}>
+          <Tooltip content={props.phone} phone={props.phone}>
             <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-60">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +196,7 @@ export default function JobListing(props) {
               </svg>
             </span>
           </Tooltip>
-          <Tooltip content={props.email}>
+          <Tooltip content={props.email} email={props.email}>
             <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-60">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -231,9 +232,10 @@ export default function JobListing(props) {
             onClick={(event) => {
               event.preventDefault();
               const userId = Auth.getProfile().data._id;
-              console.log("here is the joblisting userid", userId);
               const listingId = props.id;
               saveListing(userId, listingId);
+              setSavedBy([...savedBy, userId]);
+              updateListing(listingId, { savedBy: userId });
               setJobSaved(true);
               setSavedListings([...savedListings, listingId]);
             }}

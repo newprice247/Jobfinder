@@ -83,24 +83,6 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-userSchema.post('updateOne', async function (result, next) {
-    const savedListings = this._update.savedListings;
-
-    if (Array.isArray(savedListings) && savedListings.length > 0) {
-        const listingModel = this.model('listing');
-
-        // Update the corresponding listings
-        await listingModel.updateMany(
-            { _id: { $in: savedListings } },
-            { $push: { savedBy: this._id } }
-        );
-    }
-
-    next();
-});
-
-
-
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };

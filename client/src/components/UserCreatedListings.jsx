@@ -17,6 +17,7 @@ export default function UserCreatedListings() {
 
   const [listings, setListings] = useState([]);
   const [updatedListing, setUpdatedListing] = useState({});
+  const [savedByUsers, setSavedByUsers] = useState([]);
   const [categories, setCategories] = useState([]);
   const [user, setUser] = useState({});
   const userId = Auth.getProfile().data._id;
@@ -37,26 +38,33 @@ export default function UserCreatedListings() {
         setCategories(data);
       })
       .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
-    search
-      .fetchListings()
-      .then((data) => {
-        const userCreatedListings = data.filter(
-          (listing) => listing.contact === user._id
-        );
-        setListings(userCreatedListings);
-        const updatedCategory = userCreatedListings.map((listing) => {
-          return {
-            ...listing,
-            category: categories.find(
-              (category) => category._id === listing.category
-            ).name,
-          };
-        });
-        setListings(updatedCategory);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, [categories, user]);
+  useEffect(() => {
+    if (categories.length && user._id) {
+      search
+        .fetchListings()
+        .then((data) => {
+          const userCreatedListings = data.filter(
+            (listing) => listing.contact === user._id
+          );
+          setListings(userCreatedListings);
+          const updatedCategory = userCreatedListings.map((listing) => {
+            return {
+              ...listing,
+              category: categories.find(
+                (category) => category._id === listing.category
+              ).name,
+            };
+          });
+          setListings(updatedCategory);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+  }, [categories, user._id]);
+
+
+
   useEffect(() => {
     if (categories.length) {
       for (let i = 0; i < categories.length; i++) {

@@ -61,11 +61,15 @@ export default function Homepage() {
           setSearchResults((searchResults) => [...searchResults, listing]);
         }
       });
+    } else {
+      setSearchResults([]);
     }
   }, [searchTerm]);
 
   function handleSearch(event) {
+    setSearchResults([]);
     setSearchTerm(event.target.value);
+    setSearchStarted(true);
   }
   function handleCategoryFilter(event) {
     setSearchResults([]);
