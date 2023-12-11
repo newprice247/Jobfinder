@@ -234,11 +234,11 @@ export default function Homepage() {
         viewport={{ once: true }}
         animate={{ y: 20 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap justify-evenly items-center mt-16">
+        className="flex flex-wrap justify-evenly items-center mt-12">
         {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
-          <div className="justify-center items-center mt-30 mb-10 md:h-[95vh]">
+          <div className="justify-center items-center mt-30 mb-10 mx-5 md:h-[95vh]">
             <h1 className="tracking-wider">Log in to create a listing!</h1>
           </div>
         )}
@@ -322,7 +322,7 @@ export default function Homepage() {
 
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
         <div
-          className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-20 overflow-y-auto  h-[90vh] no-scrollbar"
+          className=" sm:w-full md:w-full lg:w-1/3 xl:w-5/12 justify-center items-center mb-20 overflow-y-auto  h-[90vh] no-scrollbar"
           style={{ zIndex: 1 }}>
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
 
