@@ -87,7 +87,7 @@ export default function RegisterBox() {
             <Input
               size="lg"
               placeholder="Ex: John Doe"
-              className=" !border-t-myColor-3 focus:!border-t-gray-900"
+              className=" !border-t-myColor-3 focus:!border-t-gray-900 text-myColor-3"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
@@ -101,7 +101,7 @@ export default function RegisterBox() {
             <Input
               size="lg"
               placeholder="Ex: johndoe"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-myColor-3"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
@@ -115,7 +115,7 @@ export default function RegisterBox() {
             <Input
               size="lg"
               placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-myColor-3"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
@@ -128,7 +128,7 @@ export default function RegisterBox() {
             </Typography>
             <Input
               size="lg"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-myColor-3"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
@@ -144,18 +144,28 @@ export default function RegisterBox() {
               type="password"
               size="lg"
               placeholder="********"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-myColor-3"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
               onChange={(e) =>
                 setUserFormData({ ...userFormData, password: e.target.value })
               }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  if (userFormData.name === "" || userFormData.username === "" || userFormData.email === "" || userFormData.phone === "" || userFormData.password === "") {
+                    handleOpen();
+                  } else {
+                    handleRegister();
+                  }
+                }
+              }}
             />
           </div>
           <Button
             className="mt-6 text-myColor-3 bg-neutral-600 hover:bg-neutral-200 hover:text-myColor-4"
             fullWidth
+            
             onClick={() => {
               if (userFormData.name === "" || userFormData.username === "" || userFormData.email === "" || userFormData.phone === "" || userFormData.password === "") {
                 handleOpen();

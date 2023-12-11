@@ -37,7 +37,6 @@ export const loginUser = (userData) => {
 };
 
 export const updateUser = (userID, userData) => {
-    console.log('here is the client api call', userID, userData)
     return fetch(`/api/users/${userID}`, {
         method: 'PUT',
         headers: {
@@ -49,7 +48,6 @@ export const updateUser = (userID, userData) => {
 };
 
 export const saveListing = (userId, listingID) => {
-    console.log('here is the client api call', userId, listingID)
     return fetch(`/api/users/${userId}/listings/${listingID}`, {
         method: 'PUT',
         headers: {
@@ -68,7 +66,6 @@ export const deleteListing = (listingID) => {
 };
 
 export const addUserResume = (userID, userData) => {
-    console.log('here is the client api call', userID, userData)
     return fetch(`/api/users/${userID}/resume`, {
         method: 'PUT',
         headers: {
@@ -104,7 +101,6 @@ const search = {
     fetchListings: async () => {
         try {
             const response = await axios.get(`${apiURL}/listings`);
-            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -117,7 +113,26 @@ const search = {
     fetchListingById: async (id) => {
         try {
             const response = await axios.get(`${apiURL}/listings/${id}`);
-            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
+    fetchCategories: async () => {
+        try {
+            const response = await axios.get(`${apiURL}/categories`);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
+    fetchListingsByCategory: async (category) => {
+        try {
+            const response = await axios.get(`${apiURL}/categories/${category}`);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -128,7 +143,16 @@ const search = {
     fetchListingByTitle: async (title) => {
         try {
             const response = await axios.get(`${apiURL}/listings/title/${title}`);
-            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
+    fetchListingByCategory: async (category) => {
+        try {
+            const response = await axios.get(`${apiURL}/listings/category/${category}`);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -139,7 +163,16 @@ const search = {
     fetchListingByLocation: async (location) => {
         try {
             const response = await axios.get(`${apiURL}/listings/location/${location}`);
-            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
+    fetchListingBySalary: async (salary) => {
+        try {
+            const response = await axios.get(`${apiURL}/listings/salary/${salary}`);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -152,7 +185,6 @@ const search = {
     fetchUsers: async () => {
         try {
             const response = await axios.get(`${apiURL}/users`);
-            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -165,13 +197,12 @@ const search = {
     fetchUser: async (id) => {
         try {
             const response = await axios.get(`${apiURL}/users/${id}`);
-            console.log(response.data);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error);
             throw error;
         }
-    },
+    },  
 };
 
 export default search;

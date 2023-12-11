@@ -40,7 +40,7 @@ export default function Header() {
           >
            <img 
            style={{
-            width:"5rem"
+            width:"15rem"
           }}
            src={logo} />
           </Link>
@@ -261,19 +261,6 @@ export default function Header() {
                     ripple="light"
                   >
                     Home
-                  </Button>
-                </Link>
-                <Link to="/register">
-                  <Button
-                    color="blue-gray"
-                    buttonType="link"
-                    size="sm"
-                    rounded={false}
-                    block={false}
-                    iconOnly={false}
-                    ripple="light"
-                  >
-                    Sign Up
                   </Button>
                 </Link>
                 <Link to="/login">

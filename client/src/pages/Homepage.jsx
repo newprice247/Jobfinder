@@ -17,65 +17,98 @@ import { Button } from "@material-tailwind/react";
 
 // Exporting the Homepage, located at '/'
 export default function Homepage() {
-  // Using useState to set the listings and listingContact to an empty array, is used by the map function to display the listings and pull the contact information for each listing from the user models in the database
   const [listings, setListings] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [searchStarted, setSearchStarted] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [listingContact, setListingContact] = useState([]);
+  const [currentListing, setCurrentListing] = useState(null);
+  const [uniqueSalaries, setUniqueSalaries] = useState([]);
+  const [uniqueLocations, setUniqueLocations] = useState([]);
+  // Using useState to set the listings and listingContact to an empty array, is used by the map function to display the listings and pull the contact information for each listing from the user models in the database
+
   useEffect(() => {
     search
       .fetchListings()
       .then((data) => setListings(data))
       .catch((error) => console.error("Error fetching data:", error));
-  }, []);
 
-  const [searchStarted, setSearchStarted] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+    search
+      .fetchCategories()
+      .then((data) => setCategories(data))
+      .catch((error) => console.error("Error fetching data:", error));
 
-  function handleSearch(event) {
-    setSearchTerm(event.target.value);
-    setSearchStarted(true);
-    setSearchResults(
-      listings.filter((listing) =>
-        listing.title.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    console.log(searchTerm);
-    console.log(searchResults);
-  }
-
-  function handleLocationFilter(event) {
-    setSearchTerm(event.target.name);
-    setSearchResults(
-      listings.filter((listing) =>
-        listing.location.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    console.log(searchTerm);
-    console.log(searchResults);
-    setSearchStarted(true);
-  }
-
-  function handleSalaryFilter(event) {
-    setSearchTerm(event.target.name);
-    setSearchResults(
-      listings.filter((listing) =>
-        listing.salary.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    console.log(searchTerm);
-    console.log(searchResults);
-    setSearchStarted(true);
-  }
-
-  // Handles the current Contact information for each listing
-  const [listingContact, setListingContact] = useState([]);
-  useEffect(() => {
     search
       .fetchUsers()
       .then((data) => setListingContact(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  // Using useState to set the currentListing to null, is used to display the current listing when a user clicks on a listing
-  const [currentListing, setCurrentListing] = useState(null);
+
+  useEffect(() => {
+    if (searchTerm !== "") {
+      listings.filter((listing) => {
+        if (listing.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+          setSearchResults((searchResults) => [...searchResults, listing]);
+        }
+        if (listing.location.toLowerCase().includes(searchTerm.toLowerCase())) {
+          setSearchResults((searchResults) => [...searchResults, listing]);
+        }
+        if (listing.category.includes(searchTerm)) {
+          setSearchResults((searchResults) => [...searchResults, listing]);
+        }
+        if (listing.salary.includes(searchTerm)) {
+          setSearchResults((searchResults) => [...searchResults, listing]);
+        }
+      });
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchTerm]);
+
+  function handleSearch(event) {
+    setSearchResults([]);
+    setSearchTerm(event.target.value);
+    setSearchStarted(true);
+  }
+  function handleCategoryFilter(event) {
+    setSearchResults([]);
+    setSearchTerm(event.target.id);
+    setSearchStarted(true);
+  }
+
+  function handleLocationFilter(event) {
+    setSearchResults([]);
+    setSearchTerm(event.target.name);
+    setSearchStarted(true);
+  }
+
+  function handleSalaryFilter(event) {
+    setSearchResults([]);
+    setSearchTerm(event.target.name);
+    setSearchStarted(true);
+  }
+
+  useEffect(() => {
+    let uniqueSalaries = [];
+    listings.map((listing) => {
+      if (!uniqueSalaries.includes(listing.salary)) {
+        uniqueSalaries.push(listing.salary);
+      }
+    });
+    setUniqueSalaries(uniqueSalaries);
+  }, [listings]);
+
+  useEffect(() => {
+    let uniqueLocations = [];
+    listings.map((listing) => {
+      if (!uniqueLocations.includes(listing.location)) {
+        uniqueLocations.push(listing.location);
+      }
+    });
+    setUniqueLocations(uniqueLocations);
+  }, [listings]);
+
   // if the currentListing is not null and is not an object, fetch the listing by id and set the currentListing to the data
   useEffect(() => {
     if (currentListing !== null && typeof currentListing !== "object") {
@@ -127,7 +160,7 @@ export default function Homepage() {
           </div>
 
           {/* BUTTONS FOR FILTER CATEGORY - These will display after user types in search bar */}
-          <div className="flex justify-center gap-3 mb-4">
+          <div className="flex justify-center gap-3 mb-0">
             <Button onClick={() => toggleOpen(1)}>Job Category</Button>
 
             <Button onClick={() => toggleOpen(2)}>Location</Button>
@@ -137,28 +170,36 @@ export default function Homepage() {
 
           <div className="mb-4">
             <Collapse open={openSection === 1}>
-              <Card className="my-4 mx-auto w-8/12">
+              <Card className="flex items-center justify-center bg-myColor-1/50 my-4 mx-auto  w-7/12 md:w-8/12">
                 <CardBody>
-                  <Typography>
-                    Job category 1 listings: food/beverage, retail, healthcare,
-                    technology, etc.
-                  </Typography>
+                  {categories.map((category) => (
+                    <button
+                      key={category._id}
+                      name={category.name}
+                      id={category._id}
+                      className="w-44 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
+                      onClick={(e) => {
+                        handleCategoryFilter(e);
+                      }}>
+                      {category.name}
+                    </button>
+                  ))}
                 </CardBody>
               </Card>
             </Collapse>
 
             <Collapse open={openSection === 2}>
-              <Card className="my-4 mx-auto w-8/12">
+              <Card className="flex items-center justify-center bg-myColor-1/50 my-4 mx-auto w-7/12 md:w-8/12">
                 <CardBody>
-                  {listings.map((listing) => (
+                  {uniqueLocations.map((location) => (
                     <button
-                      key={listing._id}
-                      name={listing.location}
-                      className="text-myColor-2 hover:text-myColor-1"
+                      key={location}
+                      name={location}
+                      className="w-44 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:ring-2 ring-white hover:text-myColor-1 hover:shadow-xl"
                       onClick={(e) => {
                         handleLocationFilter(e);
                       }}>
-                      {listing.location}
+                      {location}
                     </button>
                   ))}
                 </CardBody>
@@ -166,17 +207,17 @@ export default function Homepage() {
             </Collapse>
 
             <Collapse open={openSection === 3}>
-              <Card className="my-4 mx-auto w-8/12">
+              <Card className="flex items-center justify-center bg-myColor-1/50 my-4 mx-auto  w-8/12 md:w-8/12">
                 <CardBody>
-                  {listings.map((listing) => (
+                  {uniqueSalaries.map((salary) => (
                     <button
-                      key={listing._id}
-                      name={listing.salary}
-                      className="text-myColor-2 hover:text-myColor-1"
+                      key={salary}
+                      name={salary}
+                      className="w-56 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
                       onClick={(e) => {
                         handleSalaryFilter(e);
                       }}>
-                      {listing.salary}
+                      {salary}
                     </button>
                   ))}
                 </CardBody>
@@ -193,18 +234,16 @@ export default function Homepage() {
         viewport={{ once: true }}
         animate={{ y: 20 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap mt-20 justify-center items-center">
+        className="flex flex-wrap justify-evenly items-center mt-12">
         {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
-          <div>
-            <h1 className="overflow-y-auto mb-24 h-[90vh]">
-              Log in to create a listing!
-            </h1>
+          <div className="justify-center items-center mt-30 mb-10 mx-5 md:h-[95vh]">
+            <h1 className="tracking-wider">Log in to create a listing!</h1>
           </div>
         )}
         {/* container for the job listings, current listing, and search bar */}
-        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-10 overflow-y-auto  h-[95vh] no-scrollbar">
+        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-20 overflow-y-auto h-[95vh] no-scrollbar">
           {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
           {searchStarted ? (
             <div>
@@ -245,6 +284,12 @@ export default function Homepage() {
                 <JobListing
                   id={listing._id}
                   title={listing.title}
+                  category={categories.map((category) => {
+                    if (listing.category === category._id) {
+                      return category.name;
+                    }
+                    return null;
+                  })}
                   location={listing.location}
                   description={listing.description}
                   requirements={listing.requirements}
@@ -277,13 +322,19 @@ export default function Homepage() {
 
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
         <div
-          className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-24 h-[90vh] no-scrollbar"
+          className=" sm:w-full md:w-full lg:w-1/3 xl:w-5/12 justify-center items-center mb-20 overflow-y-auto  h-[90vh] no-scrollbar"
           style={{ zIndex: 1 }}>
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
 
           {currentListing !== null ? (
             <CurrentListing
               title={currentListing.title}
+              category={categories.map((category) => {
+                if (currentListing.category === category._id) {
+                  return category.name;
+                }
+                return null;
+              })}
               location={currentListing.location}
               description={currentListing.description}
               requirements={currentListing.requirements}
@@ -308,7 +359,9 @@ export default function Homepage() {
           ) : (
             // if the current listing is null, display a message prompting the user to click on a listing
             <div>
-              <h1>Click on a job listing to see more details!</h1>
+              <h1 className="tracking-wider">
+                Click on a job listing to see more details!
+              </h1>
             </div>
           )}
         </div>

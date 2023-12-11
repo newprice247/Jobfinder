@@ -13,15 +13,28 @@ import {
 } from "@material-tailwind/react";
 
 import Auth from "../../utils/auth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { newListing } from "../../utils/API";
+import search from "../../utils/API";
+
 export default function CollapseDefault() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const toggleOpen = () => setOpen((cur) => !cur);
+  const [possibleCategories, setPossibleCategories] = useState([]);
+  useEffect(() => {
+    search
+      .fetchCategories()
+      .then((data) => {
+        setPossibleCategories(data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   const [newJobListing, setNewJobListing] = useState({
     contact: Auth.getProfile().data._id,
     title: "",
+    category: "",
     description: "",
     requirements: "",
     location: "",
@@ -44,24 +57,28 @@ export default function CollapseDefault() {
 
   return (
     <>
-      <Button onClick={toggleOpen}>New Listing</Button>
+      <Button onClick={toggleOpen} className="mb-4">
+        New Listing
+      </Button>
       <Collapse open={open}>
-        <Card className="mx-auto w-full">
-          <CardBody className="flex flex-col gap-4">
-            <Typography variant="h4" color="blue-gray">
-              New Listing
-            </Typography>
-            <Typography
-              className="mb-3 font-normal"
-              variant="paragraph"
-              color="gray"
-            >
-              Give us some details about the job:
-            </Typography>
+        <Card className="mx-auto w-[80vw] overflow-x-auto bg-myColor-6 mb-20">
+          <CardBody className="flex flex-col flex-wrap gap-4 w-[70vw] h-4/5 my-4 mx-auto">
+            <div className="text-center">
+              <Typography variant="h4" color="blue-gray">
+                New Listing
+              </Typography>
+              <Typography
+                className="mb-3 font-normal"
+                variant="paragraph"
+                color="gray">
+                Give us some details about the job:
+              </Typography>
+            </div>
             <Typography className="-mb-2" variant="h6">
               Title
             </Typography>
             <Input
+              className="!bg-myColor-3"
               label="Title"
               id="title"
               size="lg"
@@ -71,9 +88,34 @@ export default function CollapseDefault() {
               }}
             />
             <Typography className="-mb-2" variant="h6">
+              Category
+            </Typography>
+            {possibleCategories ? (
+              <select
+                id="category"
+                className="border-2 border-gray-300 rounded-md bg-myColor-3 w-full p-2"
+                onChange={(event) => {
+                  const { id, value } = event.target;
+                  setNewJobListing({ ...newJobListing, [id]: value });
+                }}>
+                <option value="">Select a category</option>
+                {possibleCategories.map((category) => (
+                  <option key={category._id} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <select>
+                <option>Loading...</option>
+              </select>
+            )}
+
+            <Typography className="-mb-2" variant="h6">
               Description
             </Typography>
             <Input
+              className="!bg-myColor-3"
               label="Description"
               id="description"
               size="lg"
@@ -86,6 +128,7 @@ export default function CollapseDefault() {
               Location
             </Typography>
             <Input
+              className="!bg-myColor-3"
               label="Location"
               id="location"
               size="lg"
@@ -98,6 +141,7 @@ export default function CollapseDefault() {
               Salary
             </Typography>
             <Input
+              className="!bg-myColor-3"
               label="Salary"
               id="salary"
               size="lg"
@@ -110,6 +154,7 @@ export default function CollapseDefault() {
               Benefits
             </Typography>
             <Input
+              className="!bg-myColor-3"
               label="Benefits"
               id="benefits"
               size="lg"
@@ -122,6 +167,7 @@ export default function CollapseDefault() {
               Company Name
             </Typography>
             <Input
+              className="!bg-myColor-3"
               label="Company Name"
               id="company"
               size="lg"
@@ -134,6 +180,7 @@ export default function CollapseDefault() {
               Company Website
             </Typography>
             <Input
+              className="!bg-myColor-3"
               label="Company Website"
               id="website"
               size="lg"
@@ -146,6 +193,7 @@ export default function CollapseDefault() {
               Requirements
             </Typography>
             <Input
+              className="!bg-myColor-3"
               label="Requirements"
               id="requirements"
               size="lg"
@@ -163,8 +211,7 @@ export default function CollapseDefault() {
                 toggleOpen();
                 window.location.reload();
               }}
-              fullWidth
-            >
+              fullWidth>
               Post New Listing
             </Button>
           </CardFooter>

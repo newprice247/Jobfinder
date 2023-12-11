@@ -45,9 +45,10 @@ export default function UserSavedListings() {
       .catch((error) => console.error("Error fetching data:", error));
   }, [savedListings]);
   return (
+    
     <div className="bg-myColor-3">
       {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
-
+      
       {savedListingsInfo.map((listing) => (
         <div key={listing._id}>
           <Accordion open={open === listing._id}>
@@ -55,6 +56,8 @@ export default function UserSavedListings() {
               {listing.title}
             </AccordionHeader>
             <AccordionBody>
+              <h2 className="text-myColor-2 text-xl">Job Category:</h2>
+              <p className="text-myColor-2">{listing.category}</p>
               <h2 className="text-myColor-2 text-xl">Job Description:</h2>
               <p className="text-myColor-2">{listing.description}</p>
               <h2 className="text-myColor-2 text-xl">Salary:</h2>
@@ -73,6 +76,13 @@ export default function UserSavedListings() {
           </Accordion>
         </div>
       ))}
+      {savedListingsInfo.length === 0 && (
+        <>
+          <h3 className="text-myColor-2">
+            You haven't saved any listings yet!
+          </h3>
+        </>
+      )}
     </div>
   );
 }
