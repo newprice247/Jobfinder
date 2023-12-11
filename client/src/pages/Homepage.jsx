@@ -234,11 +234,11 @@ export default function Homepage() {
         viewport={{ once: true }}
         animate={{ y: 20 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap justify-center items-center mt-20">
+        className="flex flex-wrap justify-evenly items-center mt-20">
         {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
-          <div className="justify-center items-center mb-10 mr-0 md:mr-10 h-[20vh] md:h-[90vh]">
+          <div className="justify-center items-center mb-10 h-[20vh] md:h-[90vh]">
             <h1 className="tracking-wider">Log in to create a listing!</h1>
           </div>
         )}
