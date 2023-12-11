@@ -17,7 +17,7 @@ import {
 export default function CurrentListing(props) {
   return (
     <>
-      <div className="border-2 p-8 rounded-lg bg-myColor-1/70 opacity-85  text-myColor-2 font-sans whitespace-pre-line">
+      <div className="border-2 p-8 rounded-lg bg-myColor-1/50 opacity-85  text-myColor-2 font-sans whitespace-pre-line">
         <div className="bg-myColor-3 border-8 border-white rounded-md p-4 shadow-xl overflow-auto no-scrollbar">
           <h1 className="font-bold tracking-wide text-center underline uppercase">
             {props.title}
