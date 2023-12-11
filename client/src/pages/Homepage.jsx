@@ -160,7 +160,7 @@ export default function Homepage() {
           </div>
 
           {/* BUTTONS FOR FILTER CATEGORY - These will display after user types in search bar */}
-          <div className="flex justify-center gap-3 mb-4">
+          <div className="flex justify-center gap-3 mb-0">
             <Button onClick={() => toggleOpen(1)}>Job Category</Button>
 
             <Button onClick={() => toggleOpen(2)}>Location</Button>
@@ -170,7 +170,7 @@ export default function Homepage() {
 
           <div className="mb-4">
             <Collapse open={openSection === 1}>
-              <Card className="flex items-center justify-center bg-myColor-1/60 my-4 mx-auto  w-7/12 md:w-8/12">
+              <Card className="flex items-center justify-center bg-myColor-1/50 my-4 mx-auto  w-7/12 md:w-8/12">
                 <CardBody>
                   {categories.map((category) => (
                     <button
@@ -189,7 +189,7 @@ export default function Homepage() {
             </Collapse>
 
             <Collapse open={openSection === 2}>
-              <Card className="flex items-center justify-center bg-myColor-1/60 my-4 mx-auto w-7/12 md:w-8/12">
+              <Card className="flex items-center justify-center bg-myColor-1/50 my-4 mx-auto w-7/12 md:w-8/12">
                 <CardBody>
                   {uniqueLocations.map((location) => (
                     <button
@@ -207,7 +207,7 @@ export default function Homepage() {
             </Collapse>
 
             <Collapse open={openSection === 3}>
-              <Card className="flex items-center justify-center bg-myColor-1/60 my-4 mx-auto  w-8/12 md:w-8/12">
+              <Card className="flex items-center justify-center bg-myColor-1/50 my-4 mx-auto  w-8/12 md:w-8/12">
                 <CardBody>
                   {uniqueSalaries.map((salary) => (
                     <button
@@ -238,7 +238,7 @@ export default function Homepage() {
         {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
-          <div className="justify-center items-center mb-10 h-[20vh] md:h-[90vh]">
+          <div className="justify-center items-center mt-30 mb-10 md:h-[95vh]">
             <h1 className="tracking-wider">Log in to create a listing!</h1>
           </div>
         )}
