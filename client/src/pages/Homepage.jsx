@@ -17,77 +17,73 @@ import { Button } from "@material-tailwind/react";
 
 // Exporting the Homepage, located at '/'
 export default function Homepage() {
-  // Using useState to set the listings and listingContact to an empty array, is used by the map function to display the listings and pull the contact information for each listing from the user models in the database
   const [listings, setListings] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [searchStarted, setSearchStarted] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [listingContact, setListingContact] = useState([]);
+  const [currentListing, setCurrentListing] = useState(null);
+  // Using useState to set the listings and listingContact to an empty array, is used by the map function to display the listings and pull the contact information for each listing from the user models in the database
+
   useEffect(() => {
     search
       .fetchListings()
       .then((data) => setListings(data))
       .catch((error) => console.error("Error fetching data:", error));
-  }, []);
 
-  const [searchStarted, setSearchStarted] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+    search
+      .fetchCategories()
+      .then((data) => setCategories(data))
+      .catch((error) => console.error("Error fetching data:", error));
 
-  function handleSearch(event) {
-    setSearchTerm(event.target.value);
-    setSearchStarted(true);
-    setSearchResults(
-      listings.filter((listing) =>
-        listing.title.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    console.log(searchTerm);
-    console.log(searchResults);
-  }
-
-  function handleCategoryFilter(event) {
-    setSearchTerm(event.target.name);
-    setSearchResults(
-      listings.filter((listing) =>
-        listing.category.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    console.log(searchTerm);
-    console.log(searchResults);
-    setSearchStarted(true);
-  }
-
-  function handleLocationFilter(event) {
-    setSearchTerm(event.target.name);
-    setSearchResults(
-      listings.filter((listing) =>
-        listing.location.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    console.log(searchTerm);
-    console.log(searchResults);
-    setSearchStarted(true);
-  }
-
-  function handleSalaryFilter(event) {
-    setSearchTerm(event.target.name);
-    setSearchResults(
-      listings.filter((listing) =>
-        listing.salary.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    console.log(searchTerm);
-    console.log(searchResults);
-    setSearchStarted(true);
-  }
-
-  // Handles the current Contact information for each listing
-  const [listingContact, setListingContact] = useState([]);
-  useEffect(() => {
     search
       .fetchUsers()
       .then((data) => setListingContact(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  // Using useState to set the currentListing to null, is used to display the current listing when a user clicks on a listing
-  const [currentListing, setCurrentListing] = useState(null);
+
+  useEffect(() => {
+    if (searchTerm !== "") {
+
+      listings.filter((listing) => {
+        if (listing.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+          setSearchResults((searchResults) => [...searchResults, listing]);
+        }
+        if (listing.location.toLowerCase().includes(searchTerm.toLowerCase())) {
+          setSearchResults((searchResults) => [...searchResults, listing]);
+        }
+        if (listing.category.includes(searchTerm)) {
+          setSearchResults((searchResults) => [...searchResults, listing]);
+        }
+        if (listing.salary.includes(searchTerm)) {
+          setSearchResults((searchResults) => [...searchResults, listing]);
+        }
+      });
+    }
+  }, [searchTerm]);
+
+  function handleSearch(event) {
+    setSearchTerm(event.target.value);
+  }
+  function handleCategoryFilter(event) {
+    setSearchResults([]);
+    setSearchTerm(event.target.id);
+    setSearchStarted(true);
+  }
+
+  function handleLocationFilter(event) {
+    setSearchResults([]);
+    setSearchTerm(event.target.name);
+    setSearchStarted(true);
+  }
+
+  function handleSalaryFilter(event) {
+    setSearchResults([]);
+    setSearchTerm(event.target.name);
+    setSearchStarted(true);
+  }
+  
   // if the currentListing is not null and is not an object, fetch the listing by id and set the currentListing to the data
   useEffect(() => {
     if (currentListing !== null && typeof currentListing !== "object") {
@@ -105,6 +101,8 @@ export default function Homepage() {
     setOpenSection((prevOpenSection) =>
       prevOpenSection === section ? null : section
     );
+
+
 
   // Returning the homepage as html
   return (
@@ -151,15 +149,16 @@ export default function Homepage() {
             <Collapse open={openSection === 1}>
               <Card className="flex items-center justify-center my-4 mx-auto w-6/12">
                 <CardBody>
-                  {listings.map((listing) => (
+                  {categories.map((category) => (
                     <button
-                      key={listing._id}
-                      name={listing.category}
+                      key={category._id}
+                      name={category.name}
+                      id={category._id}
                       className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
                       onClick={(e) => {
                         handleCategoryFilter(e);
                       }}>
-                      {listing.category}
+                      {category.name}
                     </button>
                   ))}
                 </CardBody>
@@ -264,7 +263,12 @@ export default function Homepage() {
                 <JobListing
                   id={listing._id}
                   title={listing.title}
-                  category={listing.category}
+                  category={categories.map((category) => {
+                    if (listing.category === category._id) {
+                      return category.name;
+                    }
+                    return null;
+                  })}
                   location={listing.location}
                   description={listing.description}
                   requirements={listing.requirements}

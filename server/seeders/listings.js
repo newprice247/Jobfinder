@@ -1,7 +1,7 @@
 const listings = [
     {
       title: "Full Stack Developer",
-      category: "Information Technology",
+      category: "Technology",
       description:
         "Full Stack Developer needed for a full-time position. Must have at least 2 years of experience.",
       requirements:
@@ -42,7 +42,7 @@ const listings = [
     },
     {
       title: "Data Scientist",
-      category: "Information Technology",
+      category: "Technology",
       description:
         "Exciting opportunity for a Data Scientist to join our innovative team. Analyze large datasets and develop predictive models.",
       requirements:
@@ -222,7 +222,7 @@ const listings = [
     },
     {
       title: "Software Engineer",
-      category: "Information Technology",
+      category: "Technology",
       description:
         "We are hiring a Software Engineer to join our engineering team. Develop and implement software solutions.",
       requirements:
@@ -267,7 +267,7 @@ const listings = [
     },
     {
       title: "Web Developer",
-      category: "Information Technology",
+      category: "Technology",
       description:
         "We are hiring a Web Developer to join our engineering team. Develop and maintain websites and web applications.",
       requirements:

@@ -2,7 +2,7 @@ const { Listing } = require("../models/");
 
 module.exports = {
   async getListing(req, res) {
-    const listings = await Listing.find({});
+    const listings = await Listing.find({})
     res.json(listings);
   },
   async getSingleListing(req, res) {

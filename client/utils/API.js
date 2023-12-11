@@ -125,6 +125,28 @@ const search = {
         }
     },
 
+    fetchCategories: async () => {
+        try {
+            const response = await axios.get(`${apiURL}/categories`);
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
+    fetchListingsByCategory: async (category) => {
+        try {
+            const response = await axios.get(`${apiURL}/categories/${category}`);
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+    },
+
     fetchListingByTitle: async (title) => {
         try {
             const response = await axios.get(`${apiURL}/listings/title/${title}`);

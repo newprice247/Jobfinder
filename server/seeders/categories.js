@@ -1,6 +1,6 @@
 const categories = [
     {
-      name: "Information Technology",
+      name: "Technology",
     },
     {
       name: "Sales",
