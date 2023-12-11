@@ -243,7 +243,7 @@ export default function Homepage() {
           </div>
         )}
         {/* container for the job listings, current listing, and search bar */}
-        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-20 overflow-y-auto h-[95vh] no-scrollbar">
+        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-20 overflow-y-auto h-[95vh] no-scrollbar ">
           {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
           {searchStarted ? (
             <div>

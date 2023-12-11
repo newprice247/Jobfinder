@@ -11,10 +11,7 @@ import {
 
 import Auth from "../../utils/auth";
 import { useState, useEffect } from "react";
-import { 
-  saveListing,
-  updateListing
-} from "../../utils/API";
+import { saveListing, updateListing } from "../../utils/API";
 import search from "../../utils/API";
 
 // JobListing prototype, will be used to display job listings on home page by mapping through the database and displaying each listing as a card
@@ -37,13 +34,13 @@ export default function JobListing(props) {
   }, []);
 
   return (
-    <Card className="w-full max-w-[26rem] shadow-lg my-5">
+    <Card className="w-full max-w-[30rem] shadow-2xl my-5 border-myColor-2/50 border-8 bg-myColor-1/50 p-4">
       <CardHeader floated={false} color="blue-gray">
         <IconButton
           size="sm"
           color="red"
           variant="text"
-          className="!absolute top-4 right-4 rounded-full">
+          className="!absolute top-4 right-4 rounded-full ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -53,7 +50,7 @@ export default function JobListing(props) {
           </svg>
         </IconButton>
       </CardHeader>
-      <CardBody>
+      <CardBody className="bg-myColor-3 rounded-md">
         <div className="mb-4 flex flex-col items-start justify-between">
           <Typography variant="h5" color="blue-gray" className="font-medium">
             {props.title}
@@ -88,6 +85,7 @@ export default function JobListing(props) {
           <div className="font-bold">Requirements:</div>
           {props.requirements}
         </Typography>
+
         <div className="group mt-8 flex flex-row flex-wrap items-start justify-center gap-3">
           <Tooltip content={props.location}>
             <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-60">
