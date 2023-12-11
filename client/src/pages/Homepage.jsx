@@ -47,7 +47,6 @@ export default function Homepage() {
 
   useEffect(() => {
     if (searchTerm !== "") {
-
       listings.filter((listing) => {
         if (listing.title.toLowerCase().includes(searchTerm.toLowerCase())) {
           setSearchResults((searchResults) => [...searchResults, listing]);
@@ -110,8 +109,6 @@ export default function Homepage() {
     setUniqueLocations(uniqueLocations);
   }, [listings]);
 
-
-
   // if the currentListing is not null and is not an object, fetch the listing by id and set the currentListing to the data
   useEffect(() => {
     if (currentListing !== null && typeof currentListing !== "object") {
@@ -129,8 +126,6 @@ export default function Homepage() {
     setOpenSection((prevOpenSection) =>
       prevOpenSection === section ? null : section
     );
-
-
 
   // Returning the homepage as html
   return (
@@ -216,7 +211,6 @@ export default function Homepage() {
                 <CardBody>
                   {uniqueSalaries.map((salary) => (
                     <button
-
                       key={salary}
                       name={salary}
                       className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
@@ -226,7 +220,6 @@ export default function Homepage() {
                       {salary}
                     </button>
                   ))}
-
                 </CardBody>
               </Card>
             </Collapse>
@@ -246,7 +239,7 @@ export default function Homepage() {
           <CreateListingModal />
         ) : (
           <div>
-            <h1 className="overflow-y-auto mb-24 h-[90vh]">
+            <h1 className="overflow-y-auto mb-24">
               Log in to create a listing!
             </h1>
           </div>
@@ -331,7 +324,7 @@ export default function Homepage() {
 
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
         <div
-          className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-24 h-[90vh] no-scrollbar"
+          className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-20"
           style={{ zIndex: 1 }}>
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
 
@@ -343,8 +336,7 @@ export default function Homepage() {
                   return category.name;
                 }
                 return null;
-                })
-              }
+              })}
               location={currentListing.location}
               description={currentListing.description}
               requirements={currentListing.requirements}
