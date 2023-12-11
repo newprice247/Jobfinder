@@ -234,7 +234,6 @@ export default function JobListing(props) {
               const userId = Auth.getProfile().data._id;
               const listingId = props.id;
               saveListing(userId, listingId);
-              setSavedBy([...savedBy, userId]);
               updateListing(listingId, { savedBy: userId });
               setJobSaved(true);
               setSavedListings([...savedListings, listingId]);

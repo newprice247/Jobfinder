@@ -63,7 +63,23 @@ export default function UserCreatedListings() {
     }
   }, [categories, user._id]);
 
-
+  useEffect(() => {
+    if (listings.length) {
+      for (let i = 0; i < listings.length; i++) {
+        const saveByUserIDs = listings[i].savedBy;
+        const saveByUsers = [];
+        for (let j = 0; j < saveByUserIDs.length; j++) {
+          search
+            .fetchUser(saveByUserIDs[j])
+            .then((data) => {
+              saveByUsers.push(data);
+              setSavedByUsers(saveByUsers);
+            })
+            .catch((error) => console.error("Error fetching data:", error));
+        }
+      }
+    }
+  }, [listings]);
 
   useEffect(() => {
     if (categories.length) {
@@ -74,6 +90,7 @@ export default function UserCreatedListings() {
       }
     }
   }, [categories, updatedListing]);
+
 
   if (!listings.length) {
     return (
@@ -190,6 +207,15 @@ export default function UserCreatedListings() {
                         className="border border-gray-300 rounded-md p-2"
                         onChange={handleInputChange}
                       />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <ul className="flex flex-col gap-2">
+                        <label htmlFor="savedBy">Saved By:</label>
+                        {savedByUsers.map((user) => (
+                          <li key={user._id}>{user.username}</li>
+                        ))
+                        }
+                      </ul>
                     </div>
                   </div>
                   <div className="flex justify-end gap-2 mt-2">
