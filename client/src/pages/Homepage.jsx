@@ -160,7 +160,7 @@ export default function Homepage() {
           </div>
 
           {/* BUTTONS FOR FILTER CATEGORY - These will display after user types in search bar */}
-          <div className="flex justify-center gap-3 mb-4">
+          <div className="flex justify-center gap-3 mb-0">
             <Button onClick={() => toggleOpen(1)}>Job Category</Button>
 
             <Button onClick={() => toggleOpen(2)}>Location</Button>
@@ -170,7 +170,7 @@ export default function Homepage() {
 
           <div className="mb-4">
             <Collapse open={openSection === 1}>
-              <Card className="flex items-center justify-center bg-myColor-1/60 my-4 mx-auto  w-7/12 md:w-8/12">
+              <Card className="flex items-center justify-center bg-myColor-1/50 my-4 mx-auto  w-7/12 md:w-8/12">
                 <CardBody>
                   {categories.map((category) => (
                     <button
@@ -189,7 +189,7 @@ export default function Homepage() {
             </Collapse>
 
             <Collapse open={openSection === 2}>
-              <Card className="flex items-center justify-center bg-myColor-1/60 my-4 mx-auto w-7/12 md:w-8/12">
+              <Card className="flex items-center justify-center bg-myColor-1/50 my-4 mx-auto w-7/12 md:w-8/12">
                 <CardBody>
                   {uniqueLocations.map((location) => (
                     <button
@@ -207,7 +207,7 @@ export default function Homepage() {
             </Collapse>
 
             <Collapse open={openSection === 3}>
-              <Card className="flex items-center justify-center bg-myColor-1/60 my-4 mx-auto  w-8/12 md:w-8/12">
+              <Card className="flex items-center justify-center bg-myColor-1/50 my-4 mx-auto  w-8/12 md:w-8/12">
                 <CardBody>
                   {uniqueSalaries.map((salary) => (
                     <button
@@ -234,11 +234,11 @@ export default function Homepage() {
         viewport={{ once: true }}
         animate={{ y: 20 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap justify-evenly items-center mt-16">
+        className="flex flex-wrap justify-evenly items-center mt-12">
         {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
-          <div className="justify-center items-center mb-10 h-[20vh] md:h-[90vh]">
+          <div className="justify-center items-center mt-30 mb-10 mx-5 md:h-[95vh]">
             <h1 className="tracking-wider">Log in to create a listing!</h1>
           </div>
         )}
@@ -322,7 +322,7 @@ export default function Homepage() {
 
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
         <div
-          className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-20 overflow-y-auto  h-[90vh] no-scrollbar"
+          className=" sm:w-full md:w-full lg:w-1/3 xl:w-5/12 justify-center items-center mb-20 overflow-y-auto  h-[90vh] no-scrollbar"
           style={{ zIndex: 1 }}>
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
 
