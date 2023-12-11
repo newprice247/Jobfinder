@@ -24,6 +24,7 @@ export default function Homepage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [listingContact, setListingContact] = useState([]);
   const [currentListing, setCurrentListing] = useState(null);
+  const [uniqueSalaries, setUniqueSalaries] = useState([]);
   // Using useState to set the listings and listingContact to an empty array, is used by the map function to display the listings and pull the contact information for each listing from the user models in the database
 
   useEffect(() => {
@@ -83,6 +84,16 @@ export default function Homepage() {
     setSearchTerm(event.target.name);
     setSearchStarted(true);
   }
+
+  useEffect(() => {
+    let uniqueSalaries = [];
+    listings.map((listing) => {
+      if (!uniqueSalaries.includes(listing.salary)) {
+        uniqueSalaries.push(listing.salary);
+      }
+    });
+    setUniqueSalaries(uniqueSalaries);
+  }, [listings]);
   
   // if the currentListing is not null and is not an object, fetch the listing by id and set the currentListing to the data
   useEffect(() => {
@@ -186,17 +197,19 @@ export default function Homepage() {
             <Collapse open={openSection === 3}>
               <Card className="flex items-center justify-center my-4 mx-auto w-6/12">
                 <CardBody>
-                  {listings.map((listing) => (
+                  {uniqueSalaries.map((salary) => (
                     <button
-                      key={listing._id}
-                      name={listing.salary}
+
+                      key={salary}
+                      name={salary}
                       className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
                       onClick={(e) => {
                         handleSalaryFilter(e);
                       }}>
-                      {listing.salary}
+                      {salary}
                     </button>
                   ))}
+                  
                 </CardBody>
               </Card>
             </Collapse>
