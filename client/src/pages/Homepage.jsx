@@ -170,14 +170,14 @@ export default function Homepage() {
 
           <div className="mb-4">
             <Collapse open={openSection === 1}>
-              <Card className="flex items-center justify-center my-4 mx-auto w-6/12">
+              <Card className="flex items-center justify-center bg-myColor-1/60 my-4 mx-auto  w-7/12 md:w-8/12">
                 <CardBody>
                   {categories.map((category) => (
                     <button
                       key={category._id}
                       name={category.name}
                       id={category._id}
-                      className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
+                      className="w-44 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
                       onClick={(e) => {
                         handleCategoryFilter(e);
                       }}>
@@ -189,13 +189,13 @@ export default function Homepage() {
             </Collapse>
 
             <Collapse open={openSection === 2}>
-              <Card className="flex items-center justify-center my-4 mx-auto w-6/12">
+              <Card className="flex items-center justify-center bg-myColor-1/60 my-4 mx-auto w-7/12 md:w-8/12">
                 <CardBody>
                   {uniqueLocations.map((location) => (
                     <button
                       key={location}
                       name={location}
-                      className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
+                      className="w-44 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:ring-2 ring-white hover:text-myColor-1 hover:shadow-xl"
                       onClick={(e) => {
                         handleLocationFilter(e);
                       }}>
@@ -207,13 +207,13 @@ export default function Homepage() {
             </Collapse>
 
             <Collapse open={openSection === 3}>
-              <Card className="flex items-center justify-center my-4 mx-auto w-6/12">
+              <Card className="flex items-center justify-center bg-myColor-1/60 my-4 mx-auto  w-8/12 md:w-8/12">
                 <CardBody>
                   {uniqueSalaries.map((salary) => (
                     <button
                       key={salary}
                       name={salary}
-                      className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
+                      className="w-56 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
                       onClick={(e) => {
                         handleSalaryFilter(e);
                       }}>
@@ -234,18 +234,16 @@ export default function Homepage() {
         viewport={{ once: true }}
         animate={{ y: 20 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap mt-20 justify-center items-center">
+        className="flex flex-wrap justify-evenly items-center mt-16">
         {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
-          <div>
-            <h1 className="overflow-y-auto mb-24">
-              Log in to create a listing!
-            </h1>
+          <div className="justify-center items-center mb-10 h-[20vh] md:h-[90vh]">
+            <h1 className="tracking-wider">Log in to create a listing!</h1>
           </div>
         )}
         {/* container for the job listings, current listing, and search bar */}
-        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-10 overflow-y-auto  h-[95vh] no-scrollbar">
+        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-20 overflow-y-auto h-[95vh] no-scrollbar">
           {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
           {searchStarted ? (
             <div>
@@ -324,7 +322,7 @@ export default function Homepage() {
 
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
         <div
-          className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 ml-10 justify-center items-center mb-20"
+          className=" sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-20 overflow-y-auto  h-[90vh] no-scrollbar"
           style={{ zIndex: 1 }}>
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
 
@@ -361,7 +359,9 @@ export default function Homepage() {
           ) : (
             // if the current listing is null, display a message prompting the user to click on a listing
             <div>
-              <h1>Click on a job listing to see more details!</h1>
+              <h1 className="tracking-wider">
+                Click on a job listing to see more details!
+              </h1>
             </div>
           )}
         </div>
