@@ -65,8 +65,8 @@ export default function Header() {
           )
           }
              {/* The following code is for the nav bar links, which are dynamically rendered based on whether the user is logged in or not */}
-            <div className="flex-row gap-4 justify-center">
-            <div className="mr-4 hidden lg:block">
+            <div className="flex-row gap-2 justify-center">
+            <div className="y-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-2">
               {Auth.loggedIn() ? (
                 <>
                   <Link to="/user-profile">
