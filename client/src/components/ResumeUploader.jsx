@@ -3,10 +3,24 @@ import { storage, db } from "../../utils/gsBucket";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { push, onValue, ref as dbRef } from "firebase/database";
+import { addUserResume } from "../../utils/API";
+import search from "../../utils/API";
+import Auth from "../../utils/auth";
 
 const ResumeUploader = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
-
+  const [user, setUser] = useState({});
+  const [resumeUrl, setResumeUrl] = useState("");
+  const userId = Auth.getProfile().data._id;
+  useEffect(() => {
+    search
+      .fetchUser(userId)
+      .then((data) => {
+        setUser(data);
+        setResumeUrl(data.resumeUrl);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, [userId]);
   // Handle file selection
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -16,8 +30,11 @@ const ResumeUploader = () => {
       console.log(snapshot);
       getDownloadURL(snapshot.ref).then((url) => {
         const newFile = { name: file.name, url: url };
+
         setUploadedFiles((prevFiles) => [...prevFiles, newFile]);
 
+        const userId = Auth.getProfile().data._id;
+        addUserResume(userId, {resumeUrl : url});
         push(dbRef(db, "uploadedFiles"), newFile);
       });
     });
@@ -39,6 +56,8 @@ const ResumeUploader = () => {
       // filesRef.off("value");
     };
   }, []);
+
+
 
   return (
     <div className="">
@@ -81,16 +100,13 @@ const ResumeUploader = () => {
       </div>
       {/* Display the list of uploaded files */}
       <div>
-        <h2>Uploaded Files:</h2>
-        <ul>
-          {uploadedFiles.map((file, index) => (
-            <li key={index}>
-              <a href={file.url} target="_blank" rel="noopener noreferrer">
-                {file.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <h2>{user.name}'s Resume</h2>
+        <a 
+        href={resumeUrl} 
+        target="_blank" 
+        rel="noreferrer"
+        className="text-myColor-2 p-2 mt-3 rounded-md bg-myColor-1 text-lg"
+        >Resume</a>
       </div>
     </div>
   );

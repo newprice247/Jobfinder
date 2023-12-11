@@ -52,7 +52,7 @@ module.exports = {
     async updateUserResume ({ params, body }, res) {
         const updatedUser = await User.findOneAndUpdate(
             { _id: params.userId },
-            { $set: { resume: body } },
+            { $set:  body },
             { new: true, runValidators: true }
         );
         if (!updatedUser) {
