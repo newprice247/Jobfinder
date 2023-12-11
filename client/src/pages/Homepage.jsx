@@ -25,6 +25,7 @@ export default function Homepage() {
   const [listingContact, setListingContact] = useState([]);
   const [currentListing, setCurrentListing] = useState(null);
   const [uniqueSalaries, setUniqueSalaries] = useState([]);
+  const [uniqueLocations, setUniqueLocations] = useState([]);
   // Using useState to set the listings and listingContact to an empty array, is used by the map function to display the listings and pull the contact information for each listing from the user models in the database
 
   useEffect(() => {
@@ -98,6 +99,18 @@ export default function Homepage() {
     });
     setUniqueSalaries(uniqueSalaries);
   }, [listings]);
+
+  useEffect(() => {
+    let uniqueLocations = [];
+    listings.map((listing) => {
+      if (!uniqueLocations.includes(listing.location)) {
+        uniqueLocations.push(listing.location);
+      }
+    });
+    setUniqueLocations(uniqueLocations);
+  }, [listings]);
+
+
 
   // if the currentListing is not null and is not an object, fetch the listing by id and set the currentListing to the data
   useEffect(() => {
@@ -183,15 +196,15 @@ export default function Homepage() {
             <Collapse open={openSection === 2}>
               <Card className="flex items-center justify-center my-4 mx-auto w-6/12">
                 <CardBody>
-                  {listings.map((listing) => (
+                  {uniqueLocations.map((location) => (
                     <button
-                      key={listing._id}
-                      name={listing.location}
+                      key={location}
+                      name={location}
                       className="w-80 h-auto border-solid border-2 bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-lg"
                       onClick={(e) => {
                         handleLocationFilter(e);
                       }}>
-                      {listing.location}
+                      {location}
                     </button>
                   ))}
                 </CardBody>

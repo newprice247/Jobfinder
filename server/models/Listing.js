@@ -128,7 +128,7 @@ listingSchema.pre("remove", async function (next) {
 listingSchema.pre("save", async function (next) {
     try {
         await this.model("category").updateOne(
-            { name: this.category },
+            { _id: this.category },
             { $addToSet: { listings: this._id } },
             { new: true, runValidators: true }
         );
