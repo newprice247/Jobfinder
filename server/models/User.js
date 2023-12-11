@@ -84,9 +84,9 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.post('updateOne', async function (result, next) {
-    const { savedListings } = this._update;
+    const savedListings = this._update.savedListings;
 
-    if (savedListings) {
+    if (Array.isArray(savedListings) && savedListings.length > 0) {
         const listingModel = this.model('listing');
 
         // Update the corresponding listings
@@ -98,6 +98,7 @@ userSchema.post('updateOne', async function (result, next) {
 
     next();
 });
+
 
 
 userSchema.methods.isCorrectPassword = async function (password) {

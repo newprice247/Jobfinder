@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 
+
 const listingSchema = new Schema(
   {
     title: {
@@ -8,17 +9,15 @@ const listingSchema = new Schema(
       minLength: 1,
       maxLength: 280,
     },
-    category: {
-      type: String,
-      required: "A valid category is required",
-      minLength: 1,
-      maxLength: 280,
-    },
     description: {
       type: String,
       required: "A valid description is required",
       minLength: 1,
       maxLength: 280,
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: "category",
     },
     requirements: {
       type: String,
@@ -76,16 +75,68 @@ const listingSchema = new Schema(
   }
 );
 
+
+
+listingSchema.virtual("savedByCount").get(function () {
+    return this.savedBy.length;
+    });
+
+listingSchema.virtual("categoryCount").get(function () {
+    return this.category.length;
+    });
+
 listingSchema.pre("remove", async function (next) {
-  await this.model("user").updateMany(
-    { listings: this._id },
-    { $pull: { listings: this._id } }
-  );
-  await this.model("user").updateMany(
-    { savedListings: this._id },
-    { $pull: { savedListings: this._id } }
-  );
-  next();
+  try {
+    await this.model("user").updateOne(
+      { _id: this.contact },
+      { $pull: { contact: this._id } }
+    );
+    next();
+  } catch (error) {
+    console.error('Error in pre-remove middleware:', error);
+    next(error);
+  }
+});
+
+listingSchema.pre("remove", async function (next) {
+    try {
+        await this.model("user").updateMany(
+            { _id: { $in: this.savedBy } },
+            { $pull: { savedBy: this._id } }
+        );
+        next();
+    } catch (error) {
+        console.error('Error in pre-remove middleware:', error);
+        next(error);
+    }
+});
+
+listingSchema.pre("remove", async function (next) {
+    try {
+        await this.model("category").updateOne(
+            { name: this.category },
+            { $pull: { listings: this._id } }
+        );
+        next();
+    } catch (error) {
+        console.error('Error in pre-remove middleware:', error);
+        next(error);
+    }
+});
+
+
+listingSchema.pre("save", async function (next) {
+    try {
+        await this.model("category").updateOne(
+            { name: this.category },
+            { $addToSet: { listings: this._id } },
+            { new: true, runValidators: true }
+        );
+        next();
+    } catch (error) {
+        console.error('Error in pre-save middleware:', error);
+        next(error);
+    }
 });
 
 listingSchema.virtual("contactCount").get(function () {
