@@ -103,11 +103,20 @@ export default function UserCreatedListings() {
     );
   } else {
     return (
-      <div className="bg-myColor-3">
+      <div 
+      className="bg-myColor-3 rounded-md shadow-md p-4 border border-gray-300"
+      >
         {listings.map((listing) => (
           <div key={listing._id}>
-            <Accordion open={open === listing._id}>
-              <AccordionHeader onClick={() => handleOpen(listing._id)}>
+            <Accordion 
+            open={open === listing._id}
+            >
+              <AccordionHeader 
+              onClick={() => 
+              handleOpen(listing._id)
+              }
+              className="bg-myColor-2 text-myColor-1 rounded-md p-2"
+              >
                 {listing.title}
               </AccordionHeader>
               <AccordionBody>
@@ -126,13 +135,17 @@ export default function UserCreatedListings() {
                     </div>
                     <div className="flex flex-col gap-2">
                       <label htmlFor="category">Category</label>
-                      <textarea
-                        name="category"
-                        id="category"
-                        placeholder={listing.category}
-                        className="border border-gray-300 rounded-md p-2"
-                        onChange={handleInputChange}
-                      />
+                      <select 
+                      name="category" 
+                      id="category" 
+                      className="border border-gray-300 rounded-md p-2"
+                      onChange={handleInputChange}>
+                        {categories.map((category) => (
+                          <option value={category.name} key={category._id}>
+                            {category.name}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                     <div className="flex flex-col gap-2">
                       <label htmlFor="description">Description</label>

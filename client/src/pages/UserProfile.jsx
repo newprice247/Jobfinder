@@ -51,7 +51,7 @@ export default function UserProfile() {
           <Tab value="jobListing" className="place-items-start">
             <div className="flex items-center gap-2">
               {React.createElement(UserCircleIcon, { className: "w-5 h-5" })}
-              Job Listing
+              Job Listings
             </div>
           </Tab>
           <Tab value="savedJobs" className="place-items-start">
@@ -75,8 +75,8 @@ export default function UserProfile() {
 
             />
           </TabPanel>
-          <TabPanel value="jobListing" className="py-0">
-            <h2 className="text-myColor-2 text-xl">My Job Listings:</h2>
+          <TabPanel value="jobListing" className="py-5">
+            <h2 className="text-myColor-2 text-xl">View or Manage your job listings:</h2>
             <UserCreatedListings />
           </TabPanel>
           <TabPanel value="savedJobs" className="py-0">
