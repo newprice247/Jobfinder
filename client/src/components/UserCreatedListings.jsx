@@ -14,8 +14,10 @@ export default function UserCreatedListings() {
   const [open, setOpen] = React.useState(1);
 
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
+
   const [listings, setListings] = useState([]);
   const [updatedListing, setUpdatedListing] = useState({});
+  const [categories, setCategories] = useState([]);
   const [user, setUser] = useState({});
   const userId = Auth.getProfile().data._id;
   const handleInputChange = (event) => {
@@ -30,15 +32,40 @@ export default function UserCreatedListings() {
   }, [userId]);
   useEffect(() => {
     search
+      .fetchCategories()
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+
+    search
       .fetchListings()
       .then((data) => {
         const userCreatedListings = data.filter(
           (listing) => listing.contact === user._id
         );
         setListings(userCreatedListings);
+        const updatedCategory = userCreatedListings.map((listing) => {
+          return {
+            ...listing,
+            category: categories.find(
+              (category) => category._id === listing.category
+            ).name,
+          };
+        });
+        setListings(updatedCategory);
       })
       .catch((error) => console.error("Error fetching data:", error));
-  }, [user]);
+  }, [categories, user]);
+  useEffect(() => {
+    if (categories.length) {
+      for (let i = 0; i < categories.length; i++) {
+        if (categories[i].name === updatedListing.category) {
+          setUpdatedListing({ ...updatedListing, category: categories[i]._id });
+        }
+      }
+    }
+  }, [categories, updatedListing]);
 
   if (!listings.length) {
     return (
