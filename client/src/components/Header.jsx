@@ -65,7 +65,7 @@ export default function Header() {
           )
           }
              {/* The following code is for the nav bar links, which are dynamically rendered based on whether the user is logged in or not */}
-            <div className="flex-items-center gap-4 justify-between">
+            <div className="flex-items-center gap-2 justify-center]]]">
             <div className="mr-4 hidden lg:block">
               {Auth.loggedIn() ? (
                 <>
