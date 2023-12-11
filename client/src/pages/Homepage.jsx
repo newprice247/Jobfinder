@@ -177,7 +177,7 @@ export default function Homepage() {
                       key={category._id}
                       name={category.name}
                       id={category._id}
-                      className="w-44 h-auto border-solid border-2 border-white bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
+                      className="w-44 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
                       onClick={(e) => {
                         handleCategoryFilter(e);
                       }}>
@@ -213,7 +213,7 @@ export default function Homepage() {
                     <button
                       key={salary}
                       name={salary}
-                      className="w-56 h-auto border-solid border-2 border-white bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
+                      className="w-56 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
                       onClick={(e) => {
                         handleSalaryFilter(e);
                       }}>
