@@ -57,7 +57,9 @@ export default function CollapseDefault() {
 
   return (
     <>
-      <Button onClick={toggleOpen} className="mb-4">
+      <Button
+        onClick={toggleOpen}
+        className="flex justify-center items-center mb-10 mx-5">
         New Listing
       </Button>
       <Collapse open={open}>

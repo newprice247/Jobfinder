@@ -227,6 +227,22 @@ export default function Homepage() {
         </motion.div>
       </div>
 
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        animate={{ y: 50 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+        className="flex  justify-center items-center">
+        {Auth.loggedIn() ? (
+          <CreateListingModal />
+        ) : (
+          <div className="mt-10 mb-10 mx-5">
+            <h1 className="tracking-wider">Log in to create a listing!</h1>
+          </div>
+        )}
+      </motion.div>
+
       {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -234,16 +250,16 @@ export default function Homepage() {
         viewport={{ once: true }}
         animate={{ y: 20 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap justify-evenly items-center mt-12">
-        {Auth.loggedIn() ? (
+        className="flex flex-wrap flex-row-reverse justify-evenly items-start mt-8">
+        {/* {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
           <div className="justify-center items-center mt-30 mb-10 mx-5 md:h-[95vh]">
             <h1 className="tracking-wider">Log in to create a listing!</h1>
           </div>
-        )}
+        )} */}
         {/* container for the job listings, current listing, and search bar */}
-        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-20 overflow-y-auto h-[95vh] no-scrollbar ">
+        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center overflow-y-auto no-scrollbar ">
           {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
           {searchStarted ? (
             <div>
@@ -319,10 +335,12 @@ export default function Homepage() {
             </div>
           )}
         </div>
-
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
+
         <div
-          className=" sm:w-full md:w-full lg:w-1/3 xl:w-5/12 justify-center items-center mb-20 overflow-y-auto  h-[90vh] no-scrollbar"
+          id="currentlisting"
+          className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3"
+          // className=" sm:w-full md:w-full lg:w-1/3 xl:w-5/12 justify-center items-center mb-96 overflow-y-auto no-scrollbar"
           style={{ zIndex: 1 }}>
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
 
