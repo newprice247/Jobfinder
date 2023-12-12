@@ -136,6 +136,15 @@ export default function Homepage() {
     }
   };
 
+  const scrollToAllCards = () => {
+    const allCardsElement = document.getElementById("allcards");
+    if (allCardsElement) {
+      allCardsElement.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+
   // Returning the homepage as html
   return (
     <div className="bg-myColor-3">
@@ -189,6 +198,7 @@ export default function Homepage() {
                       className="w-44 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
                       onClick={(e) => {
                         handleCategoryFilter(e);
+                        scrollToAllCards();
                       }}>
                       {category.name}
                     </button>
@@ -207,6 +217,7 @@ export default function Homepage() {
                       className="w-44 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:ring-2 ring-white hover:text-myColor-1 hover:shadow-xl"
                       onClick={(e) => {
                         handleLocationFilter(e);
+                        scrollToAllCards();
                       }}>
                       {location}
                     </button>
@@ -225,6 +236,7 @@ export default function Homepage() {
                       className="w-56 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
                       onClick={(e) => {
                         handleSalaryFilter(e);
+                        scrollToAllCards();
                       }}>
                       {salary}
                     </button>
@@ -262,7 +274,9 @@ export default function Homepage() {
           </div>
         )} */}
         {/* container for the job listings, current listing, and search bar */}
-        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center z-10 mb-12 overflow-y-auto h-[260vh] scroll-smooth no-scrollbar ">
+        <div
+          id="allcards"
+          className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center z-10 mb-12 overflow-y-auto h-[260vh] scroll-smooth no-scrollbar ">
           {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
           {searchStarted ? (
             <div>
