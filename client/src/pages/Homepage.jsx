@@ -145,6 +145,12 @@ export default function Homepage() {
     }
   };
 
+  const handleResetFilters = () => {
+    setSearchResults([]);
+    setSearchTerm("");
+    setSearchStarted(false);
+  };
+
   // Returning the homepage as html
   return (
     <div className="bg-myColor-3">
@@ -178,12 +184,15 @@ export default function Homepage() {
           </div>
 
           {/* BUTTONS FOR FILTER CATEGORY - These will display after user types in search bar */}
-          <div className="flex justify-center gap-3 mb-0">
+          <div className="flex justify-center gap-3">
             <Button onClick={() => toggleOpen(1)}>Job Category</Button>
 
             <Button onClick={() => toggleOpen(2)}>Location</Button>
 
             <Button onClick={() => toggleOpen(3)}>Pay</Button>
+
+            {/* Reset Filter Button */}
+            <Button onClick={handleResetFilters}>Reset Filters</Button>
           </div>
 
           <div className="mb-4">
