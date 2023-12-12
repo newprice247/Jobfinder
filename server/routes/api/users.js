@@ -13,8 +13,6 @@ const {
 
 const { authMiddleware } = require('../../utils/auth');
 
-
-
 // GET  /api/users
 
 router.route('/').get(getUsers).post(createUser);
@@ -30,8 +28,5 @@ router.route('/:userId').get(getSingleUser).put(updateUser)
 router.route('/:userId/resume').put(updateUserResume)
 
 router.route('/:userId/listings/:listingId').put(saveListing);
-
-
-
 
 module.exports = router;
