@@ -1,26 +1,26 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
-  Dialog,
   Card,
   Collapse,
-  CardHeader,
   CardBody,
   CardFooter,
   Typography,
   Input,
-  Checkbox,
 } from "@material-tailwind/react";
 
+// imports the search function from the API.js file, used to fetch the listings and user models from the database
 import Auth from "../../utils/auth";
-import { useState, useEffect } from "react";
+// imports the api functions from the API.js file, used to fetch the listings and user models from the database, as well as add new listings to the database
 import { newListing } from "../../utils/API";
 import search from "../../utils/API";
 
 export default function CollapseDefault() {
+  // handles the state of the open variable, used to determine whether the modal is open or closed
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen((cur) => !cur);
   const toggleOpen = () => setOpen((cur) => !cur);
+  // Using useState to set the possibleCategories to an empty array, is used by the map function to display the categories fetched from the database in the dropdown menu
   const [possibleCategories, setPossibleCategories] = useState([]);
   useEffect(() => {
     search
@@ -30,7 +30,7 @@ export default function CollapseDefault() {
       })
       .catch((err) => console.error(err));
   }, []);
-
+  // Using useState to set the newJobListing to an empty object, is used to store the information entered into the form by the user
   const [newJobListing, setNewJobListing] = useState({
     contact: Auth.getProfile().data._id,
     title: "",
@@ -43,10 +43,9 @@ export default function CollapseDefault() {
     company: "",
     website: "",
   });
-
+  // handles the form submit event, used to add the new listing to the database
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(newJobListing);
     try {
       const response = await newListing(newJobListing);
       console.log(response);
@@ -82,6 +81,7 @@ export default function CollapseDefault() {
               label="Title"
               id="title"
               size="lg"
+              // onChange event handler, used to update the newJobListing object with the information entered into the form by the user
               onChange={(event) => {
                 const { id, value } = event.target;
                 setNewJobListing({ ...newJobListing, [id]: value });
@@ -90,6 +90,7 @@ export default function CollapseDefault() {
             <Typography className="-mb-2" variant="h6">
               Category
             </Typography>
+            {/* if the possibleCategories array is not empty, displays the dropdown menu, otherwise displays a loading message */}
             {possibleCategories ? (
               <select
                 id="category"
@@ -98,6 +99,7 @@ export default function CollapseDefault() {
                   const { id, value } = event.target;
                   setNewJobListing({ ...newJobListing, [id]: value });
                 }}>
+                  {/* maps through the possibleCategories array, used to display the categories fetched from the database in the dropdown menu */}
                 <option value="">Select a category</option>
                 {possibleCategories.map((category) => (
                   <option key={category._id} value={category._id}>
@@ -220,23 +222,3 @@ export default function CollapseDefault() {
     </>
   );
 }
-// export default function DialogWithForm() {
-//     const [open, setOpen] = React.useState(false);
-//     const handleOpen = () => setOpen((cur) => !cur);
-
-//     return (
-//         <>
-//             <Button
-//                 className="text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
-//                 onClick={handleOpen}>Create New Job Listing</Button>
-//             <Dialog
-//                 size="xs"
-//                 open={open}
-//                 handler={handleOpen}
-//                 className="bg-transparent shadow-none overflow-y-auto no-scrollbar"
-//             >
-
-//             </Dialog>
-//         </>
-//     );
-// }
