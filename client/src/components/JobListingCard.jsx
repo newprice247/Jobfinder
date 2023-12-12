@@ -34,7 +34,7 @@ export default function JobListing(props) {
   }, []);
 
   return (
-    <Card className="w-full max-w-[30rem] shadow-2xl my-5 border-myColor-2/50 border-8 bg-myColor-1/50 p-4">
+    <Card className="w-full max-w-[56rem] shadow-xl my-5 border-myColor-2/50 border-8 bg-myColor-1/50 p-4">
       <CardHeader floated={false} color="blue-gray">
         <IconButton
           size="sm"
