@@ -1,15 +1,13 @@
 import { PaperClipIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
-import ProfilePicture from "./profile-pic"; // Adjust the import path based on your project structure
-const defaultUserImage = "../../client/src/assets/images/Screenshot(384).png"; // Replace with the path to your default image
-//need correct pathing
 import { Button } from "@material-tailwind/react";
-// import Auth from "../../utils/auth";
 import { updateUser } from "../../utils/API";
+// imports the resume uploader component from the components folder, used to upload resumes to the database
 import ResumeUploader from "./ResumeUploader";
 
 export default function Bio(props) {
   const UserProfile = () => {
+    // sets the user state to an empty object, is used to store the user information from the database
     const [user, setUser] = useState({
       _id: "",
       bio: "",
@@ -18,13 +16,11 @@ export default function Bio(props) {
       email: "",
       phone: "",
       salaryExpectation: "",
-      profilePictureUrl: "",
     });
-    const [newProfilePicture, setNewProfilePicture] = useState(null); //allows me to update the state of new profile pic using setnewprofilepicture function
-
+    // sets the editMode state to false, is used to switch between view mode and edit mode
     const [editMode, setEditMode] = useState(false);
     const [editedUser, setEditedUser] = useState({});
-
+    // handles the user information from the database and sets it to the user state
     useEffect(() => {
       setUser({
         _id: props.id,
@@ -34,44 +30,36 @@ export default function Bio(props) {
         email: props.email,
         phone: props.phone,
         salaryExpectation: props.salaryExpectation,
-        profilePictureUrl: props.profilePictureUrl,
       });
     }, [props]);
-
-    const handleImageChange = (imageUrl) => {
-      setNewProfilePicture(imageUrl);
-    };
-
+    // when the user clicks the update button, the user information is copied to the editedUser state and the editMode state is set to true
     const handleUpdateClick = () => {
       // Copy the user information to the editedUser state
-      console.log(user);
       setEditedUser({
         ...user,
       });
-      console.log(editedUser);
       setEditMode(true);
     };
-
+    // when the user clicks the cancel button, exit edit mode and set the editMode state to false
     const handleCancelClick = () => {
       // Cancel the edit and switch back to view mode
       setEditMode(false);
     };
-
+    // when the user clicks the save button, the editedUser state is saved to the database and the editMode state is set to false
     const handleSaveClick = () => {
       // Save the changes
-      console.log(editedUser);
       updateUser(editedUser._id, editedUser)
         .then((data) => {
           // Update the user state
           setUser(data);
           // Switch back to view mode
           setEditMode(false);
-
+          // Reload the page to show the updated information
           window.location.reload();
         })
         .catch((err) => console.error(err));
     };
-
+    // when the user types in the form, the editedUser state is updated
     const handleInputChange = (e) => {
       // Update the editedUser state as the user types in the form
       setEditedUser({ ...editedUser, [e.target.name]: e.target.value });
@@ -89,13 +77,7 @@ export default function Bio(props) {
         </div>
         <div className="mt-6 border-t border-gray-100">
           {" "}
-          {/*we need profilePicUrl in user model user.profilePictureUrl */}
-          <ProfilePicture
-            imageUrl={newProfilePicture || defaultUserImage}
-            alt="Profile Picture"
-            className="rounded-full"
-            onImageChange={handleImageChange}
-          />
+          {/* When the user is in edit mode, the form is displayed, otherwise the user information is displayed */}
           {editMode ? (
             <form>
               <label
@@ -110,7 +92,6 @@ export default function Bio(props) {
                   onChange={handleInputChange}
                 />
               </label>
-
               <label
                 for="fullname"
                 class="block mb-2 text-sm font-medium text-black">
@@ -123,7 +104,6 @@ export default function Bio(props) {
                   onChange={handleInputChange}
                 />
               </label>
-
               <label
                 for="username"
                 class="block mb-2 text-sm font-medium text-black">
@@ -136,7 +116,6 @@ export default function Bio(props) {
                   onChange={handleInputChange}
                 />
               </label>
-
               <label class="block mb-2 text-sm font-medium text-black">
                 Email address:
                 <input
@@ -147,7 +126,6 @@ export default function Bio(props) {
                   onChange={handleInputChange}
                 />
               </label>
-
               <label class="block mb-2 text-sm font-medium text-black">
                 Phone number:
                 <input
@@ -158,7 +136,6 @@ export default function Bio(props) {
                   onChange={handleInputChange}
                 />
               </label>
-
               <label class="block mb-2 text-sm font-medium text-black">
                 Salary expectation:
                 <input
@@ -208,7 +185,6 @@ export default function Bio(props) {
                   {props.username}
                 </dd>
               </div>
-
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                 <dt className="text-sm font-medium leading-6 text-gray-900">
                   Phone number
@@ -239,49 +215,13 @@ export default function Bio(props) {
                 onClick={handleUpdateClick}>
                 Update profile
               </button>
-
+              {/* Resume uploader component, used to upload resumes to the database */}
               <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                 <dt className="text-sm font-medium leading-6 text-gray-900">
                   Resume
                 </dt>
                 <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  {/* <ul
-                    role="list"
-                    className="divide-y divide-gray-100 rounded-md border border-gray-200"
-                  >
-                    <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6"> */}
-                    
                       <ResumeUploader/>
-                     
-
-                      {/* <div className="flex w-0 flex-1 items-center">
-                        <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                        <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                          <span className="truncate font-medium">resume_back_end_developer.pdf</span>
-                          <span className="flex-shrink-0 text-gray-400">2.4mb</span>
-                        </div>
-                      </div>
-                      <div className="ml-4 flex-shrink-0">
-                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                          Download
-                        </a>
-                      </div>
-                    </li>
-                    <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                      <div className="flex w-0 flex-1 items-center">
-                        <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                        <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                          <span className="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                          <span className="flex-shrink-0 text-gray-400">4.5mb</span>
-                        </div>
-                      </div>
-                      <div className="ml-4 flex-shrink-0">
-                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                          Download
-                        </a>
-                      </div> */}
-                    {/* </li>
-                  </ul> */}
                 </dd>
               </div>
             </dl>
@@ -290,5 +230,6 @@ export default function Bio(props) {
       </div>
     );
   };
+  {/* When the user is logged in, the UserProfile component is displayed, otherwise the user is redirected to the login page */}
   return <UserProfile />;
 }

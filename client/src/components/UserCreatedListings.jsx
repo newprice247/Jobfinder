@@ -79,9 +79,6 @@ export default function UserCreatedListings() {
     }
   }, [categories, user._id]);
 
-
-
-
   useEffect(() => {
     if (categories.length) {
       for (let i = 0; i < categories.length; i++) {
@@ -92,7 +89,7 @@ export default function UserCreatedListings() {
     }
   }, [categories, updatedListing]);
 
-
+  
   if (!listings.length) {
     return (
       <>
