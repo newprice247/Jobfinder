@@ -127,6 +127,31 @@ export default function Homepage() {
       prevOpenSection === section ? null : section
     );
 
+  const scrollToCurrentListing = () => {
+    const currentListingElement = document.getElementById("currentlisting");
+    if (currentListingElement) {
+      currentListingElement.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollToAllCards = () => {
+    const allCardsElement = document.getElementById("allcards");
+    if (allCardsElement) {
+      allCardsElement.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handleResetFilters = () => {
+    setSearchResults([]);
+    setSearchTerm("");
+    setSearchStarted(false);
+    scrollToAllCards();
+  };
+
   // Returning the homepage as html
   return (
     <div className="bg-myColor-3">
@@ -136,8 +161,8 @@ export default function Homepage() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          animate={{ y: 70 }}
-          transition={{ delay: 0.5, duration: 0.5 }}>
+          animate={{ y: 80 }}
+          transition={{ delay: 0.5, duration: 1.0 }}>
           <div className="w-full">
             <div className="w-[80%] mx-auto text-black">
               <div className="w-full">
@@ -160,12 +185,15 @@ export default function Homepage() {
           </div>
 
           {/* BUTTONS FOR FILTER CATEGORY - These will display after user types in search bar */}
-          <div className="flex justify-center gap-3 mb-0">
+          <div className="flex justify-center gap-3">
             <Button onClick={() => toggleOpen(1)}>Job Category</Button>
 
             <Button onClick={() => toggleOpen(2)}>Location</Button>
 
             <Button onClick={() => toggleOpen(3)}>Pay</Button>
+
+            {/* Reset Filter Button */}
+            <Button onClick={handleResetFilters}>Reset Filters</Button>
           </div>
 
           <div className="mb-4">
@@ -180,6 +208,7 @@ export default function Homepage() {
                       className="w-44 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
                       onClick={(e) => {
                         handleCategoryFilter(e);
+                        scrollToAllCards();
                       }}>
                       {category.name}
                     </button>
@@ -198,6 +227,7 @@ export default function Homepage() {
                       className="w-44 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:ring-2 ring-white hover:text-myColor-1 hover:shadow-xl"
                       onClick={(e) => {
                         handleLocationFilter(e);
+                        scrollToAllCards();
                       }}>
                       {location}
                     </button>
@@ -216,6 +246,7 @@ export default function Homepage() {
                       className="w-56 h-auto bg-myColor-3/90 p-2 m-2 rounded-lg text-myColor-2 text-sm hover:text-myColor-1 hover:shadow-xl hover:ring-2 ring-white"
                       onClick={(e) => {
                         handleSalaryFilter(e);
+                        scrollToAllCards();
                       }}>
                       {salary}
                     </button>
@@ -242,9 +273,9 @@ export default function Homepage() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        animate={{ y: 20 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap flex-row-reverse justify-evenly items-start mt-10">
+        animate={{ y: 50 }}
+        transition={{ delay: 0.5, duration: 1.0 }}
+        className="flex flex-wrap flex-col-reverse lg:flex-row-reverse justify-evenly items-start mt-10">
         {/* {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
@@ -253,7 +284,9 @@ export default function Homepage() {
           </div>
         )} */}
         {/* container for the job listings, current listing, and search bar */}
-        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center overflow-y-auto no-scrollbar ">
+        <div
+          id="allcards"
+          className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center z-10 mb-12 overflow-y-auto h-[260vh] scroll-smooth no-scrollbar ">
           {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
           {searchStarted ? (
             <div>
@@ -284,6 +317,7 @@ export default function Homepage() {
                   // Sets the current listing to the listing id when a user clicks on a listing
                   onClick={() => {
                     setCurrentListing(listing._id);
+                    scrollToCurrentListing();
                   }}
                 />
               ))}
@@ -323,19 +357,19 @@ export default function Homepage() {
                   // Sets the current listing to the listing id when a user clicks on a listing
                   onClick={() => {
                     setCurrentListing(listing._id);
+                    scrollToCurrentListing();
                   }}
                 />
               ))}
             </div>
           )}
         </div>
+
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
 
         <div
           id="currentlisting"
-          className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3"
-          // className=" sm:w-full md:w-full lg:w-1/3 xl:w-5/12 justify-center items-center mb-96 overflow-y-auto no-scrollbar"
-          style={{ zIndex: 1 }}>
+          className="xs:w-full sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-10">
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
 
           {currentListing !== null ? (
@@ -371,7 +405,7 @@ export default function Homepage() {
           ) : (
             // if the current listing is null, display a message prompting the user to click on a listing
             <div>
-              <h1 className="tracking-wider">
+              <h1 className="items-center lg:items-start tracking-wider text-center">
                 Click on a job listing to see more details!
               </h1>
             </div>
