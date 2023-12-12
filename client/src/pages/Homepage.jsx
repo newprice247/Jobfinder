@@ -149,6 +149,7 @@ export default function Homepage() {
     setSearchResults([]);
     setSearchTerm("");
     setSearchStarted(false);
+    scrollToAllCards();
   };
 
   // Returning the homepage as html
