@@ -182,7 +182,7 @@ export default function Header() {
 
         {/* The following code is for the mobile nav bar, which is only displayed when the window size is less than 960px */}
         <MobileNav open={openNav}>
-          <div className="flex flex-row justify-evenly items-center mx-5 p-2">
+          <div className="flex flex-row justify-evenly items-center my-3 mx-5 p-2">
             {/* The following code is for the nav bar links, which are dynamically rendered based on whether the user is logged in or not */}
             {Auth.loggedIn() ? (
               // If the user is logged in, display the following nav bar links

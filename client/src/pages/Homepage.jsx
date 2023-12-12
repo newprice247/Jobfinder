@@ -224,24 +224,18 @@ export default function Homepage() {
               </Card>
             </Collapse>
           </div>
+
+          <div className="flex flex-wrap flex-row-reverse justify-evenly items-start mt-4 mb-4">
+            {Auth.loggedIn() ? (
+              <CreateListingModal />
+            ) : (
+              <div className="mt-10 mb-10 mx-5">
+                <h1 className="tracking-wider">Log in to create a listing!</h1>
+              </div>
+            )}
+          </div>
         </motion.div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        animate={{ y: 50 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex  justify-center items-center">
-        {Auth.loggedIn() ? (
-          <CreateListingModal />
-        ) : (
-          <div className="mt-10 mb-10 mx-5">
-            <h1 className="tracking-wider">Log in to create a listing!</h1>
-          </div>
-        )}
-      </motion.div>
 
       {/* Using 'motion' to animate the homepage, set as a div container with opening and closing motion.div tags */}
       <motion.div
@@ -250,7 +244,7 @@ export default function Homepage() {
         viewport={{ once: true }}
         animate={{ y: 20 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap flex-row-reverse justify-evenly items-start mt-8">
+        className="flex flex-wrap flex-row-reverse justify-evenly items-start mt-10">
         {/* {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
