@@ -185,7 +185,7 @@ export default function Homepage() {
           </div>
 
           {/* BUTTONS FOR FILTER CATEGORY - These will display after user types in search bar */}
-          <div className="flex justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             <Button onClick={() => toggleOpen(1)}>Job Category</Button>
 
             <Button onClick={() => toggleOpen(2)}>Location</Button>

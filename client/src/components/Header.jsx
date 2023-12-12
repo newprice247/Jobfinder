@@ -41,7 +41,7 @@ export default function Header() {
               <Typography
                 as="a"
                 href="#"
-                className="cursor-pointer py-1.5 tracking-wide text-md lg:text-2xl font-mono hover:italic">
+                className="cursor-pointer text-center ml-6 py-1.5 tracking-wide text-md lg:text-2xl font-mono hover:italic">
                 Welcome, {Auth.getProfile().data.username}!
               </Typography>
             </Link>
@@ -50,7 +50,7 @@ export default function Header() {
               <Typography
                 as="a"
                 href="#"
-                className="cursor-pointer py-1.5 tracking-wide text-md lg:text-2xl font-mono hover:italic">
+                className="cursor-pointer text-center ml-6 py-1.5 tracking-wide text-md lg:text-2xl font-mono hover:italic">
                 Welcome, Guest!
               </Typography>
             </Link>
@@ -182,7 +182,7 @@ export default function Header() {
 
         {/* The following code is for the mobile nav bar, which is only displayed when the window size is less than 960px */}
         <MobileNav open={openNav}>
-          <div className="flex flex-row justify-evenly items-center my-3 mx-5 p-2">
+          <div className="flex flex-row justify-evenly items-center gap-3 mx-3 p-2">
             {/* The following code is for the nav bar links, which are dynamically rendered based on whether the user is logged in or not */}
             {Auth.loggedIn() ? (
               // If the user is logged in, display the following nav bar links
