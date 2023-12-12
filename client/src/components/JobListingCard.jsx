@@ -50,7 +50,7 @@ export default function JobListing(props) {
           </svg>
         </IconButton>
       </CardHeader>
-      <CardBody className="bg-myColor-3 rounded-md">
+      <CardBody className="bg-myColor-7 rounded-md">
         <div className="mb-4 flex flex-col items-start justify-between">
           <Typography variant="h5" color="blue-gray" className="font-medium">
             {props.title}
