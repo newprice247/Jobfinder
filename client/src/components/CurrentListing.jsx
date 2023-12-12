@@ -1,17 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Divider,
-  Grid,
-  TextField,
-  Typography,
-  IconButton,
-  Tooltip,
-} from "@material-tailwind/react";
+
 
 // prototype for current listing, will be used to display current listing on home page
 export default function CurrentListing(props) {
