@@ -127,6 +127,15 @@ export default function Homepage() {
       prevOpenSection === section ? null : section
     );
 
+  const scrollToCurrentListing = () => {
+    const currentListingElement = document.getElementById("currentlisting");
+    if (currentListingElement) {
+      currentListingElement.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+
   // Returning the homepage as html
   return (
     <div className="bg-myColor-3">
@@ -253,7 +262,7 @@ export default function Homepage() {
           </div>
         )} */}
         {/* container for the job listings, current listing, and search bar */}
-        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center z-10 mb-12 overflow-y-auto h-[175vh] scroll-smooth no-scrollbar ">
+        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center z-10 mb-12 overflow-y-auto h-[260vh] scroll-smooth no-scrollbar ">
           {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
           {searchStarted ? (
             <div>
@@ -284,6 +293,7 @@ export default function Homepage() {
                   // Sets the current listing to the listing id when a user clicks on a listing
                   onClick={() => {
                     setCurrentListing(listing._id);
+                    scrollToCurrentListing();
                   }}
                 />
               ))}
@@ -323,6 +333,7 @@ export default function Homepage() {
                   // Sets the current listing to the listing id when a user clicks on a listing
                   onClick={() => {
                     setCurrentListing(listing._id);
+                    scrollToCurrentListing();
                   }}
                 />
               ))}
