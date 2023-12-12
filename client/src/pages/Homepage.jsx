@@ -136,8 +136,8 @@ export default function Homepage() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          animate={{ y: 70 }}
-          transition={{ delay: 0.5, duration: 0.5 }}>
+          animate={{ y: 80 }}
+          transition={{ delay: 0.5, duration: 1.0 }}>
           <div className="w-full">
             <div className="w-[80%] mx-auto text-black">
               <div className="w-full">
@@ -242,9 +242,9 @@ export default function Homepage() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        animate={{ y: 20 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-wrap flex-row-reverse justify-evenly items-start mt-10">
+        animate={{ y: 50 }}
+        transition={{ delay: 0.5, duration: 1.0 }}
+        className="flex flex-wrap flex-col-reverse lg:flex-row-reverse justify-evenly items-start mt-10">
         {/* {Auth.loggedIn() ? (
           <CreateListingModal />
         ) : (
@@ -253,7 +253,7 @@ export default function Homepage() {
           </div>
         )} */}
         {/* container for the job listings, current listing, and search bar */}
-        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center overflow-y-auto no-scrollbar ">
+        <div className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center z-10 mb-12 overflow-y-auto h-[175vh] scroll-smooth no-scrollbar ">
           {/* Maps through the listings array and displays each listing as a card, passing in the listing information as props to the JobListing prototype */}
           {searchStarted ? (
             <div>
@@ -329,13 +329,12 @@ export default function Homepage() {
             </div>
           )}
         </div>
+
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
 
         <div
           id="currentlisting"
-          className="sm:w-full md:w-full lg:w-1/3 xl:w-1/3"
-          // className=" sm:w-full md:w-full lg:w-1/3 xl:w-5/12 justify-center items-center mb-96 overflow-y-auto no-scrollbar"
-          style={{ zIndex: 1 }}>
+          className="xs:w-full sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-10">
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
 
           {currentListing !== null ? (
@@ -371,7 +370,7 @@ export default function Homepage() {
           ) : (
             // if the current listing is null, display a message prompting the user to click on a listing
             <div>
-              <h1 className="tracking-wider">
+              <h1 className="items-center lg:items-start tracking-wider text-center">
                 Click on a job listing to see more details!
               </h1>
             </div>
