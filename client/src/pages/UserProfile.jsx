@@ -61,7 +61,9 @@ export default function UserProfile() {
             </div>
           </Tab>
         </TabsHeader>
-        <TabsBody>
+        <TabsBody
+        className="h-[200vh] mb-4"
+        >
           <TabPanel value="bio" className="py-0">
             <Bio 
             id={user._id}
@@ -85,23 +87,6 @@ export default function UserProfile() {
           </TabPanel>
         </TabsBody>
       </Tabs>
-      <div>
-        <a href="https://www.youtube.com/c/jamesqquick"
-          className="youtube social">
-          <FontAwesomeIcon icon={faYoutube} size="2x" />
-        </a>
-        <a href="https://www.facebook.com/learnbuildteach/"
-          className="facebook social">
-          <FontAwesomeIcon icon={faFacebook} size="2x" />
-        </a>
-        <a href="https://www.twitter.com/jamesqquick" className="twitter social">
-          <FontAwesomeIcon icon={faTwitter} size="2x" />
-        </a>
-        <a href="https://www.instagram.com/learnbuildteach"
-          className="instagram social">
-          <FontAwesomeIcon icon={faInstagram} size="2x" />
-        </a>
-      </div>
     </>
     
   );
