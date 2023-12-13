@@ -31,7 +31,7 @@ export default function Header() {
       <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-myColor-1">
         {/* The following code is for the logo and the nav bar links */}
         <div className="flex items-center justify-between text-blue-gray-900">
-          <Link to={"/"} className="text-lg">
+          <Link to="/" className="text-lg">
             <img className="h-auto w-32 lg:w-60" src={logo} />
           </Link>
 
