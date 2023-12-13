@@ -1,7 +1,8 @@
+import React from "react";
+import { useState } from "react";
 import {
   Card,
   Input,
-  Checkbox,
   Button,
   Typography,
   Dialog,
@@ -9,14 +10,13 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
-import { useState } from "react";
+// imports the authentification function from the auth.js file, used to register the user and log them in using json web tokens
 import Auth from "../../utils/auth";
+// imports the clientside api function from the API.js file, used to add the user to the database
 import { createUser } from "../../utils/API";
-import React from "react";
-
 
 export default function RegisterBox() {
-  // hooks for user registration
+  // sets the userFormData to an empty object, is used to store the information entered into the form by the user
   const [userFormData, setUserFormData] = useState({
     name: "",
     username: "",
@@ -24,21 +24,22 @@ export default function RegisterBox() {
     phone: "",
     password: "",
   });
-  // function to handle user registration
+  // handles the form submit event, used to add the user to the database
   const handleRegister = async () => {
     try {
       const response = await createUser(userFormData);
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
+      // destructure token and user properties from the response object
       const { token, user } = await response.json();
-      console.log(user);
+      // pass token and user data to Auth.login() method
       Auth.register(token);
     } catch (err) {
       console.error(err);
     }
   };
-  // dialog state for register button
+  // handles the state of the open variable, used to determine whether the dialog is open or closed
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
 
@@ -151,6 +152,7 @@ export default function RegisterBox() {
               onChange={(e) =>
                 setUserFormData({ ...userFormData, password: e.target.value })
               }
+              // allows user to submit form by pressing enter
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   if (userFormData.name === "" || userFormData.username === "" || userFormData.email === "" || userFormData.phone === "" || userFormData.password === "") {
@@ -165,7 +167,7 @@ export default function RegisterBox() {
           <Button
             className="mt-6 text-myColor-3 bg-neutral-600 hover:bg-neutral-200 hover:text-myColor-4"
             fullWidth
-            
+            // calls the handleRegister function when the button is clicked
             onClick={() => {
               if (userFormData.name === "" || userFormData.username === "" || userFormData.email === "" || userFormData.phone === "" || userFormData.password === "") {
                 handleOpen();

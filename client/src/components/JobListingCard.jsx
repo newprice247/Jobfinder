@@ -8,16 +8,21 @@ import {
   Tooltip,
   IconButton,
 } from "@material-tailwind/react";
-
-import Auth from "../../utils/auth";
 import { useState, useEffect } from "react";
+
+// imports the authentification utility from the utils folder, used to handle the current user's json web token and user information
+import Auth from "../../utils/auth";
+// imports the api functions from the API.js file, used to fetch the listings and user models from the database
 import { saveListing, updateListing } from "../../utils/API";
 import search from "../../utils/API";
 
 // JobListing prototype, will be used to display job listings on home page by mapping through the database and displaying each listing as a card
 export default function JobListing(props) {
+  // Using useState to set the jobSaved to false, is used to determine whether the job has been saved by the current user
   const [jobSaved, setJobSaved] = useState(false);
+  // Using useState to set the savedListings to an empty array, is used to store the current user's saved listings
   const [savedListings, setSavedListings] = useState([]);
+  // Using useEffect to fetch the current user's saved listings from the database
   const findUserSavedListings = () => {
     const userId = Auth.getProfile().data._id;
     search
@@ -27,6 +32,7 @@ export default function JobListing(props) {
       })
       .catch((error) => console.error("Error fetching data:", error));
   };
+  // if there is a user logged in, fetch the user's saved listings so that the save button can be disabled if the user has already saved the listing
   useEffect(() => {
     if (Auth.loggedIn()) {
       findUserSavedListings();
@@ -58,34 +64,14 @@ export default function JobListing(props) {
           <Typography variant="small" color="gray">
             {props.category}
           </Typography>
-          <Typography
-            color="blue-gray"
-            className="flex items-center gap-1.5 font-normal">
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="-mt-0.5 h-5 w-5 text-yellow-700"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                clipRule="evenodd"
-              />
-            </svg>
-            5.0 */}
-          </Typography>
         </div>
-
         <Typography className="mb-2" color="gray">
           {props.description}
         </Typography>
-
         <Typography>
           <div className="font-bold">Requirements:</div>
           {props.requirements}
         </Typography>
-
         <div className="group mt-8 flex flex-row flex-wrap items-start justify-center gap-3">
           <Tooltip content={props.location}>
             <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-60">
@@ -222,6 +208,7 @@ export default function JobListing(props) {
           onClick={props.onClick}>
           Find out more!
         </Button>
+        {/* if the user is logged in, display the save button, then set the onclick functionality to save the listing to the user's saved listings, as well as update the listing in the database to include the user's id in the savedBy array */}
         {Auth.loggedIn() && (
           <Button
             size="lg"
@@ -231,9 +218,13 @@ export default function JobListing(props) {
               event.preventDefault();
               const userId = Auth.getProfile().data._id;
               const listingId = props.id;
+              // save the listing to the user's saved listings
               saveListing(userId, listingId);
+              // update the listing in the database to include the user's id in the savedBy array
               updateListing(listingId, { savedBy: userId });
+              // set the jobSaved to true, so that the save button is disabled
               setJobSaved(true);
+              // fetch the user's saved listings from the database
               setSavedListings([...savedListings, listingId]);
             }}
             disabled={savedListings.includes(props.id)}>

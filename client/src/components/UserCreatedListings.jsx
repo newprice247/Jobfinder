@@ -1,37 +1,47 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import {
   Accordion,
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-import { useState, useEffect } from "react";
-import search from "../../utils/API";
+// imports the authentification function from the auth.js file, handles the logged in user's token and information
 import Auth from "../../utils/auth";
+// imports the api functions from the API.js file, used to fetch the listings and user models from the database, as well as update and delete listings
+import search from "../../utils/API";
 import { updateListing, deleteListing } from "../../utils/API";
+// imports the create listing modal from the components folder
 import CreateListingModal from "../components/CreateListingModal";
 
 export default function UserCreatedListings() {
+  // handles the state of the open variable, used to determine whether the accordion is open or closed
   const [open, setOpen] = React.useState(1);
-
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
-
+  // sets the listings to an empty array, is used by the map function to display the listings fetched from the database
   const [listings, setListings] = useState([]);
+  // Using useState to set the updatedListing to an empty object, is used to store the information entered into the form by the user
   const [updatedListing, setUpdatedListing] = useState({});
+  // Using useState to set the categories to an empty array, is used by the map function to display the categories fetched from the database in the dropdown menu
   const [categories, setCategories] = useState([]);
+  // sets the user to an empty object, is used to store the logged in user's information
   const [user, setUser] = useState({});
+  // sets the savedByUsers to an empty array, is used by the map function to display the users who have saved the listing
   const [savedByUsers, setSavedByUsers] = useState([]);
-
+  // fetches the logged in user's id from the auth.js file
   const userId = Auth.getProfile().data._id;
+  // handles the form submit event, used to update the listing in the database
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUpdatedListing({ ...updatedListing, [name]: value });
   };
+  // searches the database for the logged in user's information and sets the user state to the response
   useEffect(() => {
     search
       .fetchUser(userId)
       .then((data) => setUser(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, [userId]);
+  // searches the database for the categories and sets the categories state to the response
   useEffect(() => {
     search
       .fetchCategories()
@@ -40,23 +50,25 @@ export default function UserCreatedListings() {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-
+  // searches the database for the listings and sets the listings state to the response, then filters the listings to only display the listings created by the logged in user, then fetches the user models for each user who has saved the listing and sets the savedByUsers state to the response, then maps through the listings and sets the category to the category name instead of the category id
   useEffect(() => {
     if (categories.length && user._id) {
       search
         .fetchListings()
         .then((data) => {
+          // filters the listings to only display the listings created by the logged in user
           const userCreatedListings = data.filter(
             (listing) => listing.contact === user._id
           );
+          // sets the listings state to the response
           setListings(userCreatedListings);
-
+          // fetches the user models for each user who has saved the listing and sets the savedByUsers state to the response
           const savedByUsersPromises = userCreatedListings.map((listing) => {
             return Promise.all(
               listing.savedBy.map((userId) => search.fetchUser(userId))
             );
           });
-
+          // maps through the listings and sets the category to the category name instead of the category id
           Promise.all(savedByUsersPromises)
             .then((savedByUsers) => {
               setSavedByUsers(savedByUsers);
@@ -64,7 +76,7 @@ export default function UserCreatedListings() {
             .catch((error) =>
               console.error("Error fetching saved by users:", error)
             );
-
+            // maps through the listings and sets the category to the category name instead of the category id
           const updatedCategory = userCreatedListings.map((listing) => {
             return {
               ...listing,
@@ -73,15 +85,13 @@ export default function UserCreatedListings() {
               ).name,
             };
           });
+          // sets the listings state to the updatedCategory, which is the listings with the category name instead of the category id
           setListings(updatedCategory);
         })
         .catch((error) => console.error("Error fetching data:", error));
     }
   }, [categories, user._id]);
-
-
-
-
+  // maps through the listings and sets the category to the category id instead of the category name
   useEffect(() => {
     if (categories.length) {
       for (let i = 0; i < categories.length; i++) {
@@ -92,7 +102,7 @@ export default function UserCreatedListings() {
     }
   }, [categories, updatedListing]);
 
-
+  // if there are no listings, displays a message to the user to create a listing, otherwise maps through the listings and displays the listings in an accordion, with the option to update or delete the listing
   if (!listings.length) {
     return (
       <>
@@ -228,6 +238,7 @@ export default function UserCreatedListings() {
                         htmlFor="savedBy">
                         Saved By:
                       </label>
+                      {/* maps through the savedByUsers and displays the users who have saved the listing */}
                       {savedByUsers[index]?.map((sbUser) => (
                         <ol className="flex flex-col gap-4 border-2 border-gray-300 rounded-md p-4 bg-white">
                           <li className="text-myColor-1 text-lg" key={sbUser._id}>
@@ -261,6 +272,7 @@ export default function UserCreatedListings() {
                           </li>
                         </ol>
                       ))}
+                      {/* if no one has saved the listing, displays a message to the user */}
                       {savedByUsers[index]?.length === 0 && (
                         <h3 className="text-myColor-2">
                           No one has saved this listing yet!

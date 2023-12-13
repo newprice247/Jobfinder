@@ -32,9 +32,10 @@ const ResumeUploader = () => {
         const newFile = { name: file.name, url: url };
 
         setUploadedFiles((prevFiles) => [...prevFiles, newFile]);
-
+        // grabs the user id from the auth.js file and adds the resume url to the user model in the database
         const userId = Auth.getProfile().data._id;
         addUserResume(userId, {resumeUrl : url});
+        
         push(dbRef(db, "uploadedFiles"), newFile);
       });
     });

@@ -32,38 +32,37 @@ export default function Header() {
         {/* The following code is for the logo and the nav bar links */}
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link to={"/"} className="text-lg">
-            <img
-              style={{
-                width: "15rem",
-              }}
-              src={logo}
-            />
+            <img className="h-auto w-32 lg:w-60" src={logo} />
           </Link>
 
           {/* Checks if the user is logged in or not and displays the appropriate welcome message */}
           {Auth.loggedIn() ? (
-            <Typography
-              as="a"
-              href="#"
-              className="ml-4 cursor-pointer py-1.5 font-medium">
-              Welcome, {Auth.getProfile().data.username}!
-            </Typography>
+            <Link to="/user-profile">
+              <Typography
+                as="a"
+                href="#"
+                className="cursor-pointer text-center ml-6 py-1.5 tracking-wide text-md lg:text-2xl font-mono hover:italic">
+                Welcome, {Auth.getProfile().data.username}!
+              </Typography>
+            </Link>
           ) : (
-            <Typography
-              as="a"
-              href="#"
-              className="ml-4 cursor-pointer py-1.5 font-medium">
-              Welcome, Guest!
-            </Typography>
+            <Link to="/login">
+              <Typography
+                as="a"
+                href="#"
+                className="cursor-pointer text-center ml-6 py-1.5 tracking-wide text-md lg:text-2xl font-mono hover:italic">
+                Welcome, Guest!
+              </Typography>
+            </Link>
           )}
           {/* The following code is for the nav bar links, which are dynamically rendered based on whether the user is logged in or not */}
-          <div className="flex-row gap-2 justify-center">
-            <div className="y-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-2">
+          <div className="flex flex-wrap items-center gap-4 justify-center">
+            <div className="hidden lg:flex items-center">
               {Auth.loggedIn() ? (
                 <>
                   <Link to="/user-profile">
                     <Button
-                      className="bg-black"
+                      className="bg-black mr-4 !hover:shadow-lg"
                       color="blue-gray"
                       buttonType="link"
                       size="sm"
@@ -76,7 +75,7 @@ export default function Header() {
                   </Link>
                   <Link to="/">
                     <Button
-                      className="bg-black"
+                      className="bg-black !hover:shadow-lg"
                       color="blue-gray"
                       buttonType="link"
                       size="sm"
@@ -91,7 +90,7 @@ export default function Header() {
               ) : (
                 <Link to="/">
                   <Button
-                    className="bg-black"
+                    className="bg-black !hover:shadow-lg"
                     color="blue-gray"
                     buttonType="link"
                     size="sm"
@@ -110,7 +109,7 @@ export default function Header() {
                   {Auth.loggedIn() ? (
                     <>
                       <Button
-                        className="bg-black"
+                        className="bg-black !hover:shadow-none"
                         color="blue-gray"
                         buttonType="link"
                         size="sm"
@@ -126,7 +125,7 @@ export default function Header() {
                     <>
                       <Link to="/login">
                         <Button
-                          className="bg-black"
+                          className="bg-black !hover:shadow-none"
                           color="blue-gray"
                           buttonType="link"
                           size="sm"
@@ -183,14 +182,14 @@ export default function Header() {
 
         {/* The following code is for the mobile nav bar, which is only displayed when the window size is less than 960px */}
         <MobileNav open={openNav}>
-          <div className="grid-cols-1 items-center gap-x-1">
+          <div className="flex flex-row justify-evenly items-center gap-3 mx-3 p-2">
             {/* The following code is for the nav bar links, which are dynamically rendered based on whether the user is logged in or not */}
             {Auth.loggedIn() ? (
               // If the user is logged in, display the following nav bar links
               <>
                 <Link to="/">
                   <Button
-                    className="bg-black"
+                    className="bg-black !hover:shadow-lg"
                     color="blue-gray"
                     buttonType="link"
                     size="sm"
@@ -203,7 +202,7 @@ export default function Header() {
                 </Link>
                 <Link to="/user-profile">
                   <Button
-                    className="bg-black"
+                    className="bg-black !hover:shadow-lg"
                     color="blue-gray"
                     buttonType="link"
                     size="sm"
@@ -215,7 +214,7 @@ export default function Header() {
                   </Button>
                 </Link>
                 <Button
-                  className="bg-black"
+                  className="bg-black !hover:shadow-lg"
                   color="blue-gray"
                   buttonType="link"
                   size="sm"
@@ -232,7 +231,7 @@ export default function Header() {
               <>
                 <Link to="/">
                   <Button
-                    className="bg-black"
+                    className="bg-black !hover:shadow-lg"
                     color="blue-gray"
                     buttonType="link"
                     size="sm"
@@ -245,7 +244,7 @@ export default function Header() {
                 </Link>
                 <Link to="/login">
                   <Button
-                    className="bg-black"
+                    className="bg-black !hover:shadow-lg"
                     color="blue-gray"
                     buttonType="link"
                     size="sm"
