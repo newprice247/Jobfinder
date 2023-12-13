@@ -261,7 +261,9 @@ export default function Homepage() {
               <CreateListingModal />
             ) : (
               <div className="mt-10 mb-10 mx-5">
-                <h1 className="tracking-wider">Log in to create a listing!</h1>
+                <h1 className="tracking-wider font-mono">
+                  Log in to create a listing!
+                </h1>
               </div>
             )}
           </div>
