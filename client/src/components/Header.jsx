@@ -32,7 +32,9 @@ export default function Header() {
         {/* The following code is for the logo and the nav bar links */}
         <div className="flex items-center justify-between text-blue-gray-900">
           <Link to="/" className="text-lg">
-            <img className="h-auto w-32 lg:w-60" src={logo} />
+            <img 
+            className="h-auto w-32 lg:w-60 border-2 rounded-half border-myColor-1"
+            src={logo} />
           </Link>
 
           {/* Checks if the user is logged in or not and displays the appropriate welcome message */}

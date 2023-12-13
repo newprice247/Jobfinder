@@ -122,7 +122,6 @@ export default function Homepage() {
         .catch((error) => console.error("Error fetching data:", error));
     }
   }, [currentListing]);
-
   // Using useState to set the openSection to null, is used to determine whether the dropdown menus are open or closed
   const [openSection, setOpenSection] = useState(null);
   // toggles the dropdown menus open and closed when a user clicks on a button
@@ -392,6 +391,12 @@ export default function Homepage() {
               salary={currentListing.salary}
               benefits={currentListing.benefits}
               company={currentListing.company}
+              contact={listingContact.map((contact) => {
+                if (currentListing.contact === contact._id) {
+                  return contact.name;
+                }
+                return null;
+              })}
               // Maps through the listingContact array and displays the contact information for each listing as props to the CurrentListing prototype
               email={listingContact.map((contact) => {
                 if (currentListing.contact === contact._id) {

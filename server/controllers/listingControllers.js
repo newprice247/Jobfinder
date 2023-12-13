@@ -9,7 +9,7 @@ module.exports = {
     try {
       const listing = await Listing.findOne({
         _id: req.params.listingId,
-      }).populate("contact");
+      })
       if (listing) {
         res.json(listing);
       } else {

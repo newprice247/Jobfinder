@@ -21,12 +21,24 @@ export default function UserSavedListings() {
   const userId = Auth.getProfile().data._id;
   const [savedListings, setSavedListings] = useState([]);
   const [savedListingsInfo, setSavedListingsInfo] = useState([]);
+  // Using useState to set the categories to an empty array, is used by the map function to display the category name for each listing
+  const [categories, setCategories] = useState([]);
+
+  const [users, setUsers] = useState([]);
+
+  // Using useEffect to fetch the user model from the database, then set the savedListings state to the savedListings array from the user model
   useEffect(() => {
     search
       .fetchUser(userId)
       .then((data) => setSavedListings(data.savedListings))
       .catch((error) => console.error("Error fetching data:", error));
+    // Using useEffect to fetch the user models from the database, then set the users state to the users array from the database
+    search
+      .fetchUsers()
+      .then((data) => setUsers(data))
+      .catch((error) => console.error("Error fetching data:", error));
   }, [userId]);
+
   // Using useEffect to fetch the listings and user models from the database, then filter the listings to only display the listings that the user has saved
   useEffect(() => {
     search
@@ -39,6 +51,15 @@ export default function UserSavedListings() {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, [savedListings]);
+  // Using useEffect to fetch the categories from the database, then set the categories state to the categories array from the database
+  useEffect(() => {
+    search
+      .fetchCategories()
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
   return (
     <div className="bg-myColor-3">
       {/* Using the map function to display the listings that the user has saved */}
@@ -48,23 +69,58 @@ export default function UserSavedListings() {
             <AccordionHeader onClick={() => handleOpen(listing._id)}>
               {listing.title}
             </AccordionHeader>
-            <AccordionBody>
-              <h2 className="text-myColor-2 text-xl">Job Category:</h2>
-              <p className="text-myColor-2">{listing.category}</p>
-              <h2 className="text-myColor-2 text-xl">Job Description:</h2>
-              <p className="text-myColor-2">{listing.description}</p>
-              <h2 className="text-myColor-2 text-xl">Salary:</h2>
-              <p className="text-myColor-2">{listing.salary}</p>
-              <h2 className="text-myColor-2 text-xl">Location:</h2>
-              <p className="text-myColor-2">{listing.location}</p>
-              <h2 className="text-myColor-2 text-xl">Requirements:</h2>
-              <p className="text-myColor-2">{listing.requirements}</p>
-              <h2 className="text-myColor-2 text-xl">Benefits:</h2>
-              <p className="text-myColor-2">{listing.benefits}</p>
-              <h2 className="text-myColor-2 text-xl">Company:</h2>
-              <p className="text-myColor-2">{listing.company}</p>
-              <h2 className="text-myColor-2 text-xl">Website:</h2>
-              <p className="text-myColor-2">{listing.website}</p>
+            <AccordionBody
+              className="bg-neutral-100 p-4"
+            >
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Job Category:</h2>
+              {/* Using the map function to display the category name for each listing */}
+              <p className="text-myColor-2 text-lg">{categories.map((category) => {
+                if (category._id === listing.category) {
+                  return category.name
+                }
+              })}</p>
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Job Description:</h2>
+              <p className="text-myColor-2 text-lg">{listing.description}</p>
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Salary:</h2>
+              <p className="text-myColor-2 text-lg">{listing.salary}</p>
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Location:</h2>
+              <p className="text-myColor-2 text-lg">{listing.location}</p>
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Requirements:</h2>
+              <p className="text-myColor-2 text-lg">{listing.requirements}</p>
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Benefits:</h2>
+              <p className="text-myColor-2 text-lg">{listing.benefits}</p>
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Company:</h2>
+              <p className="text-myColor-2 text-lg">{listing.company}</p>
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Contact:</h2>
+              {/* Using the map function to display the contact information for each listing */}
+              <p className="text-myColor-2 text-lg">{users.map((user) => {
+                if (user._id === listing.contact) {
+                  return user.name
+                }
+              })}</p>
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Email:</h2>
+              {users.map((user) => {
+                if (user._id === listing.contact) {
+                  return (
+                    <a className="text-blue-500 text-lg hover:text-myColor-1 "
+                    href={`mailto:${user.email}`}>{user.email}</a>
+                  )
+                }
+              })}
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Phone:</h2>
+              {users.map((user) => {
+                if (user._id === listing.contact) {
+                  return (
+                    <a className="text-blue-500 text-lg hover:text-myColor-1"
+                    href={`tel:${user.phone}`}
+                    >{user.phone}</a>
+                  )
+                }
+              })}
+              <h2 className="text-myColor-2 text-xl mt-2 mb-1 font-bold ">Website:</h2>
+              <a className="text-blue-500 text-lg hover:text-myColor-1 underline"
+              href={listing.website}
+              >{listing.website}</a>
             </AccordionBody>
           </Accordion>
         </div>
