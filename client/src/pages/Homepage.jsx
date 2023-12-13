@@ -195,7 +195,7 @@ export default function Homepage() {
             <Button onClick={() => toggleOpen(3)}>Pay</Button>
 
             {/* Reset Filter Button */}
-            <Link to={"/"} className="text-lg">
+            <Link to="/">
               <Button onClick={handleResetFilters}>Reset Filters</Button>
             </Link>
           </div>
