@@ -14,6 +14,8 @@ import Auth from "../../utils/auth";
 import { Collapse, Card, Typography, CardBody } from "@material-tailwind/react";
 import { FaSearch } from "react-icons/fa";
 import { Button } from "@material-tailwind/react";
+import logo from "../assets/images/logo2.png";
+import { Link } from "react-router-dom";
 
 // Exporting the Homepage, located at '/'
 export default function Homepage() {
@@ -193,7 +195,9 @@ export default function Homepage() {
             <Button onClick={() => toggleOpen(3)}>Pay</Button>
 
             {/* Reset Filter Button */}
-            <Button onClick={handleResetFilters}>Reset Filters</Button>
+            <Link to={"/"} className="text-lg">
+              <Button onClick={handleResetFilters}>Reset Filters</Button>
+            </Link>
           </div>
 
           <div className="mb-4">
@@ -407,9 +411,13 @@ export default function Homepage() {
           ) : (
             // if the current listing is null, display a message prompting the user to click on a listing
             <div>
-              <h1 className="items-center lg:items-start tracking-wider text-center">
+              <img
+                className="rounded mt-5 lg:mt-44 ml-16 lg:ml-20 h-auto w-64 lg:w-80"
+                src={logo}
+              />
+              {/* <h1 className="items-center lg:items-start tracking-wider text-center">
                 Click on a job listing to see more details!
-              </h1>
+              </h1> */}
             </div>
           )}
         </div>
