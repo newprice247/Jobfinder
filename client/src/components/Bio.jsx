@@ -154,7 +154,7 @@ export default function Bio(props) {
                   onClick={handleCancelClick}>
                   Cancel
                 </Button>
-                <Button type="button" size="sm" onClick={handleSaveClick}>
+                <Button type="button" size="sm" className="bg-black" onClick={handleSaveClick}>
                   Save
                 </Button>
               </div>
