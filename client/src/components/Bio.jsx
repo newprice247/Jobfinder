@@ -1,4 +1,4 @@
-import { PaperClipIcon } from "@heroicons/react/20/solid";
+import { PencilIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
 import { updateUser } from "../../utils/API";
@@ -154,7 +154,7 @@ export default function Bio(props) {
                   onClick={handleCancelClick}>
                   Cancel
                 </Button>
-                <Button type="button" size="sm" onClick={handleSaveClick}>
+                <Button type="button" size="sm" className="bg-black" onClick={handleSaveClick}>
                   Save
                 </Button>
               </div>
@@ -209,20 +209,26 @@ export default function Bio(props) {
                   {props.salaryExpectation}
                 </dd>
               </div>
-              <button
-                type="button"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                onClick={handleUpdateClick}>
-                Update profile
-              </button>
+              
+              <div className="px-4 py-6 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-0">
+                <div className="text-sm font-medium leading-6 text-gray-900 border-b border-gray-300">
+                  <dt>Add your resume below:</dt>
+                </div>
+              </div>
+              <div className="mt-2 text-sm text-gray-900 sm:flex sm:flex-col sm:block">
+                  <ResumeUploader />
+                </div>
               {/* Resume uploader component, used to upload resumes to the database */}
-              <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-medium leading-6 text-gray-900">
-                  Resume
-                </dt>
-                <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                      <ResumeUploader/>
-                </dd>
+
+              <div class="flex items-center justify-center mt-24 space-y-4">
+                <button
+                  type="button"
+                  class="bg-black hover:bg-365314 text-white font-bold py-2 px-4 rounded"
+                  onClick={handleUpdateClick}
+                >
+                  
+                  Edit profile
+                </button>
               </div>
             </dl>
           )}
@@ -230,6 +236,6 @@ export default function Bio(props) {
       </div>
     );
   };
-  {/* When the user is logged in, the UserProfile component is displayed, otherwise the user is redirected to the login page */}
+  {/* When the user is logged in, the UserProfile component is displayed, otherwise the user is redirected to the login page */ }
   return <UserProfile />;
 }

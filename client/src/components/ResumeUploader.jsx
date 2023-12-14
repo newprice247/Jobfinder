@@ -105,10 +105,16 @@ const ResumeUploader = () => {
         href={resumeUrl} 
         target="_blank" 
         rel="noreferrer"
-        className="text-myColor-2 p-5 m-5 rounded-md bg-myColor-1 text-lg font-bold"
+        className="text-myColor-2 p-5 m-5 rounded-md bg-myColor-1 text-lg font-bold sm:flex sm:flex-col sm:block h-15"
         >
-          {user.name}'s Resume
+          {user.name}'s Resumes:
         </a>
+         {/* Conditionally render the message if no resumes are uploaded */}
+      {uploadedFiles.length === 0 && (
+        <p className="text-sm text-gray-500 dark:text-gray-400 ml-10">
+          No resumes uploaded yet.
+        </p>
+      )}
       </div>
     </div>
   );

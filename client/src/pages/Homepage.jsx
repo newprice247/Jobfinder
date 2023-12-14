@@ -1,33 +1,40 @@
 import React, { useState, useEffect } from "react";
-
+// imports link from react-router-dom, used to link to other pages
+import { Link } from "react-router-dom";
 // imports the search function from the API.js file, used to fetch the listings and user models from the database
 import search from "../../utils/API";
-
+// imports the authentification features from the auth.js file, which manages the json web tokens
+import Auth from "../../utils/auth";
 // imports the motion library for animations
 import { motion } from "framer-motion";
-
-// imports the current listing and job listing prototypes from the components folder
+// imports the current listing, job listing, and create listing modal components
 import CurrentListing from "../components/CurrentListing";
 import JobListing from "../components/JobListingCard";
 import CreateListingModal from "../components/CreateListingModal";
-import Auth from "../../utils/auth";
+// imports the styling for the homepage
 import { Collapse, Card, Typography, CardBody } from "@material-tailwind/react";
 import { FaSearch } from "react-icons/fa";
 import { Button } from "@material-tailwind/react";
+import logo from "../assets/images/logo2.png";
+
 
 // Exporting the Homepage, located at '/'
 export default function Homepage() {
+  // sets the listings and categories to an empty array, is used to store the listings and categories fetched from the database
   const [listings, setListings] = useState([]);
   const [categories, setCategories] = useState([]);
+  // manages the state of the search bar, is used to determine whether the user has typed in the search bar or filtered the listings by category, location, or salary
   const [searchStarted, setSearchStarted] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  // sets the users and listingContact to an empty array, is used to store the users and listingContact fetched from the database in order to display the contact information for each listing as props to the JobListing prototype
   const [listingContact, setListingContact] = useState([]);
+  // used to store the current listing, is used to display the current listing when a user clicks on a listing
   const [currentListing, setCurrentListing] = useState(null);
+  // Using useState to set the uniqueSalaries and uniqueLocations to an empty array, is used by the map function to display the unique salaries and locations fetched from the database in the dropdown menu
   const [uniqueSalaries, setUniqueSalaries] = useState([]);
   const [uniqueLocations, setUniqueLocations] = useState([]);
-  // Using useState to set the listings and listingContact to an empty array, is used by the map function to display the listings and pull the contact information for each listing from the user models in the database
-
+  // Using useEffect to fetch the listings, categories, and users from the database
   useEffect(() => {
     search
       .fetchListings()
@@ -44,7 +51,7 @@ export default function Homepage() {
       .then((data) => setListingContact(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-
+  // Using useEffect to filter the listings based on the user's search term in real time, then set the listing field to the search results
   useEffect(() => {
     if (searchTerm !== "") {
       listings.filter((listing) => {
@@ -65,30 +72,29 @@ export default function Homepage() {
       setSearchResults([]);
     }
   }, [searchTerm]);
-
+  // used by the search bar to filter the listings in real time
   function handleSearch(event) {
     setSearchResults([]);
     setSearchTerm(event.target.value);
     setSearchStarted(true);
   }
+  // filters the listings by category, location, or salary when a user clicks on a button
   function handleCategoryFilter(event) {
     setSearchResults([]);
     setSearchTerm(event.target.id);
     setSearchStarted(true);
   }
-
   function handleLocationFilter(event) {
     setSearchResults([]);
     setSearchTerm(event.target.name);
     setSearchStarted(true);
   }
-
   function handleSalaryFilter(event) {
     setSearchResults([]);
     setSearchTerm(event.target.name);
     setSearchStarted(true);
   }
-
+  // sets the uniqueSalaries and uniqueLocations to an empty array, is used by the map function to display the unique salaries and locations fetched from the database in the dropdown menu
   useEffect(() => {
     let uniqueSalaries = [];
     listings.map((listing) => {
@@ -98,7 +104,6 @@ export default function Homepage() {
     });
     setUniqueSalaries(uniqueSalaries);
   }, [listings]);
-
   useEffect(() => {
     let uniqueLocations = [];
     listings.map((listing) => {
@@ -108,7 +113,6 @@ export default function Homepage() {
     });
     setUniqueLocations(uniqueLocations);
   }, [listings]);
-
   // if the currentListing is not null and is not an object, fetch the listing by id and set the currentListing to the data
   useEffect(() => {
     if (currentListing !== null && typeof currentListing !== "object") {
@@ -118,15 +122,14 @@ export default function Homepage() {
         .catch((error) => console.error("Error fetching data:", error));
     }
   }, [currentListing]);
-
-  // Searchbar
+  // Using useState to set the openSection to null, is used to determine whether the dropdown menus are open or closed
   const [openSection, setOpenSection] = useState(null);
-
+  // toggles the dropdown menus open and closed when a user clicks on a button
   const toggleOpen = (section) =>
     setOpenSection((prevOpenSection) =>
       prevOpenSection === section ? null : section
     );
-
+  // scrolls to the current listing when a user clicks on a listing
   const scrollToCurrentListing = () => {
     const currentListingElement = document.getElementById("currentlisting");
     if (currentListingElement) {
@@ -135,7 +138,7 @@ export default function Homepage() {
       });
     }
   };
-
+  // scrolls to the all cards section when a user clicks on a button
   const scrollToAllCards = () => {
     const allCardsElement = document.getElementById("allcards");
     if (allCardsElement) {
@@ -144,7 +147,7 @@ export default function Homepage() {
       });
     }
   };
-
+  // resets the filters when a user clicks on the reset filters button
   const handleResetFilters = () => {
     setSearchResults([]);
     setSearchTerm("");
@@ -193,7 +196,9 @@ export default function Homepage() {
             <Button onClick={() => toggleOpen(3)}>Pay</Button>
 
             {/* Reset Filter Button */}
-            <Button onClick={handleResetFilters}>Reset Filters</Button>
+            <Link to="/">
+              <Button onClick={handleResetFilters}>Reset Filters</Button>
+            </Link>
           </div>
 
           <div className="mb-4">
@@ -261,7 +266,9 @@ export default function Homepage() {
               <CreateListingModal />
             ) : (
               <div className="mt-10 mb-10 mx-5">
-                <h1 className="tracking-wider">Log in to create a listing!</h1>
+                <h1 className="tracking-wider font-mono">
+                  Log in to create a listing!
+                </h1>
               </div>
             )}
           </div>
@@ -364,14 +371,11 @@ export default function Homepage() {
             </div>
           )}
         </div>
-
         {/* container for the current listing, displays the current listing when a user clicks on a listing */}
-
         <div
           id="currentlisting"
           className="xs:w-full sm:w-full md:w-full lg:w-1/3 xl:w-1/3 justify-center items-center mb-10">
           {/* if the current listing is not null, display the current listing, otherwise display a message prompting the user to click on a listing */}
-
           {currentListing !== null ? (
             <CurrentListing
               title={currentListing.title}
@@ -387,6 +391,12 @@ export default function Homepage() {
               salary={currentListing.salary}
               benefits={currentListing.benefits}
               company={currentListing.company}
+              contact={listingContact.map((contact) => {
+                if (currentListing.contact === contact._id) {
+                  return contact.name;
+                }
+                return null;
+              })}
               // Maps through the listingContact array and displays the contact information for each listing as props to the CurrentListing prototype
               email={listingContact.map((contact) => {
                 if (currentListing.contact === contact._id) {
@@ -405,9 +415,13 @@ export default function Homepage() {
           ) : (
             // if the current listing is null, display a message prompting the user to click on a listing
             <div>
-              <h1 className="items-center lg:items-start tracking-wider text-center">
+              <img
+                className="rounded mt-5 lg:mt-44 ml-16 lg:ml-20 h-auto w-64 lg:w-80"
+                src={logo}
+              />
+              {/* <h1 className="items-center lg:items-start tracking-wider text-center">
                 Click on a job listing to see more details!
-              </h1>
+              </h1> */}
             </div>
           )}
         </div>

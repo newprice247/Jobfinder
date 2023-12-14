@@ -22,12 +22,14 @@ export default function CurrentListing(props) {
           <p className="indent-8 mb-3">{props.benefits}</p>
           <h2 className="font-bold">Company:</h2>
           <p className="indent-8 mb-3">{props.company}</p>
+          <h2 className="font-bold">Contact:</h2>
+          <p className="indent-8 mb-3">{props.contact}</p>
           <h2 className="font-bold">Email:</h2>
-          <p className="indent-8 mb-3">{props.email}</p>
+          <a className="indent-8 mb-3 text-blue-500 hover:text-myColor-1" href={`mailto:${props.email}`}>{props.email}</a>
           <h2 className="font-bold">Phone:</h2>
-          <p className="indent-8 mb-3">{props.phone}</p>
+          <a className="indent-8 mb-3 text-blue-500 hover:text-myColor-1" href={`tel:${props.phone}`}>{props.phone}</a>
           <h2 className="font-bold">Website:</h2>
-          <p className="indent-8 mb-3">{props.website}</p>
+          <a className="indent-8 mb-3 text-blue-500 hover:text-myColor-1 underline" href={props.website}>{props.website}</a>
         </div>
       </div>
     </>

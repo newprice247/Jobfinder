@@ -109,6 +109,7 @@ export default function UserCreatedListings() {
         <h3 className="text-myColor-2">
           You haven't created any listings yet!
         </h3>
+        {/* displays the imported create listing component */}
         <CreateListingModal />
       </>
     );
@@ -117,6 +118,7 @@ export default function UserCreatedListings() {
       <div
         className="bg-myColor-3 rounded-md shadow-md p-4 border border-gray-300"
       >
+        {/* maps through the listings and displays the listings in an accordion, with the option to update or delete the listing */}
         {listings.map((listing, index) => (
           <div key={listing._id}>
             <Accordion
