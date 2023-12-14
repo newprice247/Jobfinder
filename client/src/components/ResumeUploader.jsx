@@ -111,7 +111,7 @@ const ResumeUploader = () => {
         </a>
          {/* Conditionally render the message if no resumes are uploaded */}
       {uploadedFiles.length === 0 && (
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className="text-sm text-gray-500 dark:text-gray-400 ml-10">
           No resumes uploaded yet.
         </p>
       )}
