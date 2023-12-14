@@ -223,7 +223,7 @@ export default function Bio(props) {
               <div class="flex items-center justify-center mt-4">
                 <button
                   type="button"
-                  class="bg-black hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  class="bg-black hover:bg-365314 text-white font-bold py-2 px-4 rounded"
                   onClick={handleUpdateClick}
                 >
                   Update profile
