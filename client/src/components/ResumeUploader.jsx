@@ -105,7 +105,7 @@ const ResumeUploader = () => {
         href={resumeUrl} 
         target="_blank" 
         rel="noreferrer"
-        className="text-myColor-2 p-5 m-5 rounded-md bg-myColor-1 text-lg font-bold sm:flex sm:flex-col sm:block"
+        className="text-myColor-2 p-5 m-5 rounded-md bg-myColor-1 text-lg font-bold sm:flex sm:flex-col sm:block h-15"
         >
           {user.name}'s Resumes:
         </a>
