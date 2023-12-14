@@ -1,4 +1,4 @@
-import { PaperClipIcon } from "@heroicons/react/20/solid";
+import { PencilIcon } from "@heroicons/react/20/solid";
 import React, { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
 import { updateUser } from "../../utils/API";
@@ -226,7 +226,8 @@ export default function Bio(props) {
                   class="bg-black hover:bg-365314 text-white font-bold py-2 px-4 rounded"
                   onClick={handleUpdateClick}
                 >
-                  Update profile
+                  
+                  Edit profile
                 </button>
               </div>
             </dl>
