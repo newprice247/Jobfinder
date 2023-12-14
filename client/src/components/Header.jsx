@@ -106,7 +106,7 @@ export default function Header() {
               )}
 
               {/* The following code is for the login and sign up buttons, which are dynamically rendered based on whether the user is logged in or not */}
-              <Link to={"/login"} className="">
+              <Link to={"/"} className="">
                 <Button fullWidth variant="text" size="sm" className="">
                   {Auth.loggedIn() ? (
                     <>

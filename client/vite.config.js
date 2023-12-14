@@ -20,7 +20,7 @@ export default defineConfig({
   },
   build: {
     // rollupOptions: {
-    //   external: ['@heroicons/react','fortawesome/react-fontawesome', 'fortawesome/free-brands-svg-icons', '@material-tailwind/react'],
+    //   external: ['@heroicons/react'],
     // },
   },
 });
