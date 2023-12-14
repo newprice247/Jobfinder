@@ -209,6 +209,17 @@ export default function Bio(props) {
                   {props.salaryExpectation}
                 </dd>
               </div>
+              
+              <div className="px-4 py-6 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-0">
+                <div className="text-sm font-medium leading-6 text-gray-900 border-b border-gray-300">
+                  <dt>Add your resume below:</dt>
+                </div>
+              </div>
+              <div className="mt-2 text-sm text-gray-900 sm:flex sm:flex-col sm:block">
+                  <ResumeUploader />
+                </div>
+              {/* Resume uploader component, used to upload resumes to the database */}
+
               <div class="flex items-center justify-center mt-4">
                 <button
                   type="button"
@@ -218,16 +229,6 @@ export default function Bio(props) {
                   Update profile
                 </button>
               </div>
-              {/* Resume uploader component, used to upload resumes to the database */}
-              <div className="px-4 py-6 sm:grid sm:grid-cols-1 sm:gap-4 sm:px-0">
-                <div className="text-sm font-medium leading-6 text-gray-900">
-                  <dt>Resume</dt>
-                </div>
-                <div className="mt-2 text-sm text-gray-900">
-                  <ResumeUploader />
-                </div>
-              </div>
-
             </dl>
           )}
         </div>
