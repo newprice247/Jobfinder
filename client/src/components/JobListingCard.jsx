@@ -37,7 +37,7 @@ export default function JobListing(props) {
   }, []);
 
   return (
-    <Card className="w-full max-w-[26rem] shadow-lg my-5">
+    <Card className="w-full max-w-[26rem] shadow-lg my-5"npm run >
       <CardHeader floated={false} color="blue-gray">
         <IconButton
           size="sm"
