@@ -1,20 +1,10 @@
 // imports axios to make requests to the server
-import { list } from '@material-tailwind/react';
 import axios from 'axios';
 
 const PORT = process.env.PORT;
 
 // sets the base URL for API calls depending on the environment
 const apiURL = process.env.NODE_ENV === 'production' ? '/api' : `http://localhost:${PORT}/api`;
-
-export const getMe = (token) => {
-    return fetch('/api/users/me', {
-        headers: {
-            'Content-Type': 'application/json',
-            authorization: `Bearer ${token}`,
-        },
-    });
-};
 
 export const createUser = (userData) => {
     return fetch('/api/users', {
